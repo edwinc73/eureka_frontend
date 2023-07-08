@@ -1,14 +1,20 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "custom-tab-bar/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "Eureka!",
     "navigationBarTextStyle":"black"
   },
+
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "SearchBox": "/components/search-box/search-box",
+    "BottomMask": "/components/bottom-mask/bottom-mask"
+  }
 }
