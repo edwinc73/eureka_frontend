@@ -3,7 +3,7 @@
     <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ bgEc }}" class="nutrient-bg"></ec-canvas>
     <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" class="nutrient-chart"></ec-canvas>
   </view>
-  <view class="nutrient-label p">Protein</view>
-  <view class="nutrient-value h3">60g</view>
+  <view class="nutrient-label small text-light">Protein</view>
+  <view class="nutrient-value h3 text-light">60g</view>
 </view>
 
