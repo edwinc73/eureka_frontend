@@ -23,5 +23,8 @@
     <view class="h1 bold">Suggestions</view>
     <view class="small cta-text">MORE</view>
   </view>
+  <view>
+  
+  </view>
 </view>  
 <BottomMask />
