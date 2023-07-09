@@ -10,7 +10,7 @@ page{
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 30px;
+  padding: 0 15px;
   box-sizing: border-box;
 } 
 
@@ -49,6 +49,10 @@ page{
   font-weight: 500;
   font-size: 14px;
   color: #191011
+}
+
+.cta-text{
+  color: #52BE8C
 }
 
 .text-light{
