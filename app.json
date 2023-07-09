@@ -5,7 +5,9 @@
     "custom-tab-bar/index",
     "pages/homepage/homepage",
     "pages/favourite/favourite",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "components/pie-chart/pie-chart",
+    "components/nutrient-chart/nutrient-chart"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -36,6 +38,8 @@
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "SearchBox": "./components/search-box/search-box",
-    "BottomMask": "./components/bottom-mask/bottom-mask"
+    "BottomMask": "./components/bottom-mask/bottom-mask",
+    "PieChart": "./components/pie-chart/pie-chart",
+    "NutrientChart": "./components/nutrient-chart/nutrient-chart"
   }
 }

@@ -1,0 +1,40 @@
+.chart-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.nutrient-chart, .nutrient-bg{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: -22px;
+  width: 130px;
+  height: 130px;
+}
+
+.nutrient{
+  width: 85px;
+  height: 85px;
+  display: block;
+}
+
+.nutrient-container{
+  width: 85px;
+  height: 85px;
+  padding: 0;
+  position: relative;
+}
+
+.nutrient-label{
+  text-align: center;
+  margin: -5px;
+}
+
+.nutrient-value{
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: calc(85px / 2 - 9px);
+}

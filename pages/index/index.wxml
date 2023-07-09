@@ -1,5 +1,10 @@
 <SearchBox />
-<view class="container">
-  <view class="h1">hello</view>
+<view class="goal-chart">
+  <PieChart class="pie-chart" />
+  <view class="flex justify-between nutrient-charts">
+    <NutrientChart class="pie-chart" />
+    <NutrientChart class="pie-chart" />
+    <NutrientChart class="pie-chart" />
+  </view>
 </view>
 <BottomMask />
