@@ -1,2 +1,10 @@
 <!--pages/homepage/homepage.wxml-->
-<text>pages/homepage/homepage.wxml</text>
+<view class="container">
+<PieChart class="pie-chart" />
+<view class="flex justify-between nutrient-charts">
+<NutrientChart class="pie-chart" />
+<NutrientChart class="pie-chart" />
+<NutrientChart class="pie-chart" />
+</view>
+</view>
+<BottomMask />

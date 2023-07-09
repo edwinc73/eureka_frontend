@@ -1,4 +1,5 @@
 /* pages/homepage/homepage.wxss */
 page{
   font-family: "quicksand";
-}
+  background: #fff;
+} 

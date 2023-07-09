@@ -1,0 +1,11 @@
+<view class="chart-container">
+  <view class="calorie">
+    <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ bgEc }}" class="bg-chart"></ec-canvas>
+    <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" class="current-calories"></ec-canvas>
+  </view>
+  <view class="calorie-value">
+    <text class="h3">1100</text>
+    <text class="p">kcal</text>
+    <view class="p">out of 1800kcal</view>
+  </view>
+</view>

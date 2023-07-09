@@ -1,19 +1,18 @@
 /**index.wxss**/
-.userinfo {
+.nutrient-charts{
+  width: 250px;
+  box-sizing: border-box;
+  margin: 0 auto 15px;
+}
+
+.goal-chart{
+  height: 275px;
+  background: #E3F0E6;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #aaa;
-}
-
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.usermotto {
-  margin-top: 200px;
+  margin: 0 20px;
+  border-radius: 15px;
+  justify-content: center;
 }
