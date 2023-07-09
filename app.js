@@ -26,7 +26,7 @@ App({
     wx.loadFontFace({
       family:"quicksand",
       global:true,
-      source: 'url("./Quicksand.ttf")',
+      source: 'url("/pages/index/Quicksand.ttf")',
       desc: {
         style: "normal",
         weight: "normal",

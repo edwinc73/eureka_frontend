@@ -2,7 +2,10 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "custom-tab-bar/index"
+    "custom-tab-bar/index",
+    "pages/homepage/homepage",
+    "pages/favourite/favourite",
+    "pages/profile/profile"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -10,11 +13,29 @@
     "navigationBarTitleText": "Eureka!",
     "navigationBarTextStyle":"black"
   },
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#1d1d1d",
+    "list": [
+      {
+      "pagePath": "pages/homepage/homepage",
+      "iconPath": "images/tab-bar-icons/home-inactive.png"
+    }, {
+      "pagePath": "pages/favourite/favourite",
+      "iconPath": "images/tab-bar-icons/fav-inactive.png"
+
+    }, {
+      "pagePath": "pages/profile/profile",
+      "iconPath": "images/tab-bar-icons/user-inactive.png"
+    }]
+  },
 
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "SearchBox": "/components/search-box/search-box",
-    "BottomMask": "/components/bottom-mask/bottom-mask"
+    "SearchBox": "./components/search-box/search-box",
+    "BottomMask": "./components/bottom-mask/bottom-mask"
   }
 }
