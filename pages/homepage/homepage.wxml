@@ -1,4 +1,3 @@
-<!--pages/homepage/homepage.wxml-->
 <view class="container">
 <PieChart class="pie-chart" />
 <view class="flex justify-between nutrient-charts">
