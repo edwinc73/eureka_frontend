@@ -12,6 +12,18 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
+    const page = this
+    const app = getApp()
+    wx.request({
+      url: `${app.globalData.baseUrl}/recipes`,
+      success(res){
+        const suggestions = res.data.recipes.slice(0, 3)
+        page.setData({
+          suggestions: suggestions
+        })
+        console.log(suggestions)
+      }
+    })
   },
 
   /**

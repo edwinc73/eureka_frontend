@@ -1,9 +1,34 @@
-<view class="container">
-<PieChart class="pie-chart" />
-<view class="flex justify-between nutrient-charts">
-<NutrientChart class="pie-chart" />
-<NutrientChart class="pie-chart" />
-<NutrientChart class="pie-chart" />
+<view class="banner-container">
+  <view class="banner">
+    <image src="../../images/icons/logo.png" mode="aspectFit" class="logo" />
+  </view>
 </view>
+<view class="container">
+  <view class="search-container w-100">
+    <SearchBox />
+  </view>
+  <view class="title-container flex justify-between w-100">
+    <view class="h1 bold">My Goal</view>
+    <view class="small cta-text">DETAILS</view>
+  </view>
+  <view class="goal-chart w-100">
+    <PieChart class="pie-chart" />
+    <view class="flex justify-between nutrient-charts">
+      <NutrientChart class="pie-chart" />
+      <NutrientChart class="pie-chart" />
+      <NutrientChart class="pie-chart" />
+    </view>
+  </view>
+  <view class="title-container flex justify-between w-100">
+    <view class="secondary-title">Suggestions</view>
+    <view class="small cta-text">MORE</view>
+  </view>
+  <view class="suggestions-container">
+    <view class="suggestion-container" wx:for="{{suggestions}}">
+      <SearchResult data="{{item}}"/>
+      <hr/>
+    </view>
+  </view>
+  <view class="spacer"></view>
 </view>
 <BottomMask />

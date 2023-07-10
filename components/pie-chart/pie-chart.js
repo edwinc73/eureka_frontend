@@ -79,7 +79,8 @@ function bgInitChart(canvas, width, height, dpr) {
       radius: ['50%', '40%'],
       startAngle: 180,
       itemStyle: {
-        color: '#A1D97E',
+        color: '#BFE3B2',
+        opacity: 0.4,
         borderRadius: 200,
       },
       data: [{
