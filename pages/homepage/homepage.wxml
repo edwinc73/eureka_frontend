@@ -20,11 +20,17 @@
     </view>
   </view>
   <view class="title-container flex justify-between w-100">
-    <view class="h1 bold">Suggestions</view>
+    <view class="secondary-title">Suggestions</view>
     <view class="small cta-text">MORE</view>
   </view>
-  <view>
-  
+  <view class="suggestions-container">
+    <SearchResult />
+    <hr/>
+    <SearchResult />
+    <hr/>
+    <SearchResult />
   </view>
-</view>  
+</view>
+<view class="spacer">
+</view>
 <BottomMask />

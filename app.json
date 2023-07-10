@@ -8,7 +8,8 @@
     "pages/profile/profile",
     "components/pie-chart/pie-chart",
     "components/nutrient-chart/nutrient-chart",
-    "components/custom-nav/custom-nav"
+    "components/custom-nav/custom-nav",
+    "components/search-result/search-result"
   ],
   "window":{
     "navigationStyle": "custom"
@@ -39,6 +40,7 @@
     "BottomMask": "./components/bottom-mask/bottom-mask",
     "PieChart": "./components/pie-chart/pie-chart",
     "NutrientChart": "./components/nutrient-chart/nutrient-chart",
-    "CustomNav": ".../../components/custom-nav/custom-nav"
+    "CustomNav": "../../components/custom-nav/custom-nav",
+    "SearchResult": "./components/search-result/search-result"
   }
 }

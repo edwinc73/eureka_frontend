@@ -61,10 +61,28 @@ page{
 .search-container{
   height: fit-content;
   display: block;
-  margin: 15px;
+  margin: 10px 0 10px;
 }
 
 .title-container{
   align-items: baseline;
-  margin: 15px 0 5px
+  margin: 20px 0 10px
+}
+
+.suggestions-container{
+  width: 100%;
+  border-radius: 15px;
+  padding: 17.5px 24px;
+  background: #E3F0E6;
+  box-sizing: border-box;
+}
+
+.spacer{
+  height: 110px;
+  display: block;
+}
+
+.secondary-title{
+  font-weight: 500;
+  font-size: 20px;
 }
