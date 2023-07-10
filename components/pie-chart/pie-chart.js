@@ -122,9 +122,15 @@ Page({
 
     bgEc: {
       onInit: bgInitChart
-    }
+    },
+    chartData:{}
   },
 
   onReady() {
+  },
+  onShow(){
+    console.log(this)
+    const data = [/* Your chart data */];
+    this.setData({ chartData: data });
   }
 });

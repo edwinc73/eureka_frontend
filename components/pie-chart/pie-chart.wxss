@@ -8,6 +8,14 @@
   height: 525px;
 }
 
+.current-calories{
+  z-index: 3;
+}
+
+.bg-chart{
+  z-index: 2;
+}
+
 .chart-container{
   width: 320px;
   height: 150px;

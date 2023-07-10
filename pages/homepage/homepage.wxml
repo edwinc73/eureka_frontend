@@ -11,8 +11,18 @@
     <view class="h1 bold">My Goal</view>
     <view class="small cta-text">DETAILS</view>
   </view>
-  <view class="goal-chart w-100">
-    <PieChart class="pie-chart" />
+  <view class="goal-chart w-100" >
+    <view class="chart-container">
+      <view class="calorie">
+        <ec-canvas id="myCanvasBg" canvas-id="myChart-bg" class="bg-chart"></ec-canvas>
+        <ec-canvas id="myCanvas" canvas-id="myChart" class="current-calories"></ec-canvas>
+      </view>
+      <view class="calorie-value">
+        <text class=".p-bold">{{goal.current_calorie}} </text>
+        <text class="small text-light">kcal</text>
+        <view class="small text-light">out of {{goal.calorie_goal}}</view>
+      </view>
+    </view>
     <view class="flex justify-between nutrient-charts">
       <NutrientChart class="pie-chart" />
       <NutrientChart class="pie-chart" />
