@@ -36,3 +36,23 @@ hr{
   box-sizing: border-box;
 }
 
+.p-bold{
+  font-weight: bold;
+  font-size: 16px;
+  color: #191011
+}
+
+.small{
+  font-weight: 500;
+  font-size: 14px;
+  color: #191011
+}
+
+.cta-text{
+  color: #52BE8C
+}
+
+.text-light{
+  color: #191011;
+  opacity: 60%;
+}
