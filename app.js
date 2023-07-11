@@ -26,13 +26,12 @@ App({
     // load user goal
     const app = this
     wx.request({
-      url: `${app.globalData.baseUrl}/users/29/goals`,
+      url: `${app.globalData.baseUrl}/goals/70`,
       success(res){
-        app.globalData.chartData = res.data.goals[0]
-        console.log(res.data.goals[0])
+        console.log(res.data)
+        app.globalData.chartData = res.data
       }
     })
-
 
     // load font
     wx.loadFontFace({
@@ -45,7 +44,7 @@ App({
         variant: "normal"
       },
       complete: (msg) => {
-        console.log(msg)
+        // console.log(msg)
       }
     })
   },
