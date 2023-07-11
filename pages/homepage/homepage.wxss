@@ -66,7 +66,8 @@ page{
 
 .title-container{
   align-items: baseline;
-  margin: 20px 0 10px
+  margin: 20px 0 10px;
+  z-index: 100;
 }
 
 .suggestions-container{
@@ -89,4 +90,80 @@ page{
 
 .suggestion-container:last-child hr{
   display: none;
+}
+
+.current-calories, .bg-chart{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: -120px -100px;
+  height: 525px;
+}
+
+.chart-container{
+  width: 320px;
+  height: 150px;
+  padding: 0;
+  position: relative;
+}
+
+.calorie{
+  width: 320px;
+  height: 150px;
+  display: block;
+}
+
+.calorie-label{
+  text-align: center;
+  margin: -5px;
+}
+
+.calorie-value{
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: calc(150px / 2 + 10px);
+}
+
+.chart-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.nutrient-chart, .nutrient-bg{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: -22px;
+  width: 130px;
+  height: 130px;
+}
+
+.nutrient{
+  width: 85px;
+  height: 85px;
+  display: block;
+}
+
+.nutrient-container{
+  width: 85px;
+  height: 85px;
+  padding: 0;
+  position: relative;
+}
+
+.nutrient-label{
+  text-align: center;
+  margin: -5px;
+}
+
+.nutrient-value{
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: calc(85px / 2 - 9px);
 }

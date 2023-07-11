@@ -7,21 +7,52 @@
   <view class="search-container w-100">
     <SearchBox />
   </view>
-  <view class="title-container flex justify-between w-100">
+  <view class="title-container flex justify-between w-100" bindtap="goToMyGoals">
     <view class="h1 bold">My Goal</view>
     <view class="small cta-text">DETAILS</view>
   </view>
-  <view class="goal-chart w-100">
-    <PieChart class="pie-chart" />
+  <view class="goal-chart w-100" >
+    <view class="chart-container">
+      <view class="calorie">
+        <ec-canvas id="myCanvasBg" canvas-id="myChart-bg" class="bg-chart"></ec-canvas>
+        <ec-canvas id="myCanvas" canvas-id="myChart" class="current-calories"></ec-canvas>
+      </view>
+      <view class="calorie-value">
+        <text class=".p-bold">{{goal.current_calorie}} </text>
+        <text class="small text-light">kcal</text>
+        <view class="small text-light">out of {{goal.calorie_goal}}</view>
+      </view>
+    </view>
     <view class="flex justify-between nutrient-charts">
-      <NutrientChart class="pie-chart" />
-      <NutrientChart class="pie-chart" />
-      <NutrientChart class="pie-chart" />
+      <view class="nutrient-container">
+        <view class="nutrient">
+          <ec-canvas id="protein" canvas-id="protein" class="nutrient-bg"></ec-canvas>
+          <ec-canvas id="protein_bg" canvas-id="protein_bg" class="nutrient-chart"></ec-canvas>
+        </view>
+        <view class="nutrient-label small text-light">Protein</view>
+        <view class="nutrient-value h3 text-light">{{goal.current_protein}}g</view>
+      </view>
+      <view class="nutrient-container">
+        <view class="nutrient">
+          <ec-canvas id="carbs" canvas-id="carbs" class="nutrient-bg"></ec-canvas>
+          <ec-canvas id="carbs_bg" canvas-id="carbs_bg" class="nutrient-chart"></ec-canvas>
+        </view>
+        <view class="nutrient-label small text-light">Carbs</view>
+        <view class="nutrient-value h3 text-light">{{goal.current_carb}}g</view>
+      </view>
+      <view class="nutrient-container">
+        <view class="nutrient">
+          <ec-canvas id="fat" canvas-id="fat" class="nutrient-bg"></ec-canvas>
+          <ec-canvas id="fat_bg" canvas-id="fat_bg" class="nutrient-chart"></ec-canvas>
+        </view>
+        <view class="nutrient-label small text-light">Fat</view>
+        <view class="nutrient-value h3 text-light">{{goal.current_fat}}g</view>
+      </view>
     </view>
   </view>
   <view class="title-container flex justify-between w-100">
     <view class="secondary-title">Suggestions</view>
-    <view class="small cta-text">MORE</view>
+    <view class="small cta-text" bindtap="goToSuggestions">MORE</view>
   </view>
   <view class="suggestions-container">
     <view class="suggestion-container" wx:for="{{suggestions}}">

@@ -6,7 +6,7 @@ Component({
   ready() {
     let app = getApp()
     if(getCurrentPages()[getCurrentPages().length - 1].route !== "pages/cars/homepage"){
-      if (getCurrentPages().length > 1) {
+      if (getCurrentPages().length >= 1) {
         this.setData({
           showBackButton: true,
         })

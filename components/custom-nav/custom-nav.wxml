@@ -1,7 +1,7 @@
 <view class="nav-bar-bg">
   <view class="outer-container" bindtap="goBack" wx:if="{{showBackButton}}">
     <view class="btn-container">
-      <image src="/images/icons/back.png" mode="aspectFit" class="back-icon"/>
+      <image src="/images/icons/back-btn.png" mode="aspectFit" class="back-icon" bindtap="goBack" />
     </view>
   </view>
   <view class="btn-container app-name" wx:if="{{showAppName}}">Eureka!</view>
