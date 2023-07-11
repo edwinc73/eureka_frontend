@@ -1,0 +1,37 @@
+<!--pages/search-result/search-result.wxml-->
+<CustomNav />
+<view class="container w-100">
+  <view class="search-box w-100">
+    <SearchBox bindinput="onSearchInput" />
+  </view>
+  <view class="filter w-100 flex">
+    <scroll-view scroll-x="true" class="filter-text flex">
+      <text class="small">Vegetarian</text>
+      <text class="small">Meatless</text>
+      <text class="small">Low calories</text>
+      <text class="small">High protein</text>
+      <text class="small">Quick recipes</text>
+    </scroll-view>
+  </view>
+  <view class="search-result w-100">
+    <view class="create-card flex justify-between">
+      <view class="create-recipe flex">
+        <button class="create-recipe-button">+</button>
+        <view class="text-container">
+          <text class="p-bold">Create your own Recipe</text>
+          <text class="small text-light">Save and share your recipe!</text>
+        </view>
+      </view>
+      <image src="../../images/icons/gotoarrow.png" mode="aspectFit" class="go-to-icon" />
+    </view>
+    
+    <view class="" wx:for="{{results}}">
+      <text>{{result}}</text>
+      <view class="search-result-card">
+        <SearchResult />
+      </view>
+    </view>
+  </view>
+</view>
+<BottomMask />
+

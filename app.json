@@ -6,6 +6,7 @@
     "pages/homepage/homepage",
     "pages/favourite/favourite",
     "pages/profile/profile",
+    "pages/search-result/search-result",
     "components/pie-chart/pie-chart",
     "components/nutrient-chart/nutrient-chart",
     "components/custom-nav/custom-nav",
