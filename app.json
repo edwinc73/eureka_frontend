@@ -6,8 +6,8 @@
     "pages/homepage/homepage",
     "pages/favourite/favourite",
     "pages/profile/profile",
-    "components/pie-chart/pie-chart",
-    "components/nutrient-chart/nutrient-chart",
+    "pages/homepage/goals",
+    "pages/homepage/suggestions",
     "components/custom-nav/custom-nav",
     "components/search-result/search-result"
   ],
@@ -38,9 +38,8 @@
   "usingComponents": {
     "SearchBox": "./components/search-box/search-box",
     "BottomMask": "./components/bottom-mask/bottom-mask",
-    "PieChart": "./components/pie-chart/pie-chart",
-    "NutrientChart": "./components/nutrient-chart/nutrient-chart",
     "CustomNav": "../../components/custom-nav/custom-nav",
-    "SearchResult": "./components/search-result/search-result"
+    "SearchResult": "./components/search-result/search-result",
+    "ec-canvas": "../../ec-canvas/ec-canvas"
   }
 }

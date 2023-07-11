@@ -23,6 +23,17 @@ App({
     //   }
     // })
 
+    // load user goal
+    const app = this
+    wx.request({
+      url: `${app.globalData.baseUrl}/goals/70`,
+      success(res){
+        console.log(res.data)
+        app.globalData.chartData = res.data
+      }
+    })
+
+    // load font
     wx.loadFontFace({
       family:"quicksand",
       global:true,
@@ -33,13 +44,14 @@ App({
         variant: "normal"
       },
       complete: (msg) => {
-        console.log(msg)
+        // console.log(msg)
       }
     })
   },
   globalData: {
     userInfo: null,
     baseUrl: 'http://127.0.0.1:3000/api/v1',
-    tabPages: ["pages/profile/profile","pages/favourite/favourite","pages/homepage/homepage"]
+    tabPages: ["pages/profile/profile","pages/favourite/favourite","pages/homepage/homepage"],
+    calorieGrace: 1.1
   }
 })
