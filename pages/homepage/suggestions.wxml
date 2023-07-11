@@ -1,2 +1,4 @@
-<!--pages/homepage/suggestions.wxml-->
-<text>pages/homepage/suggestions.wxml</text>
+
+
+<BottomMask />
+<CustomNav />
