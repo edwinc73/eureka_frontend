@@ -1,9 +1,9 @@
 {
   "pages":[
+    "pages/homepage/homepage",
     "pages/index/index",
     "pages/logs/logs",
     "custom-tab-bar/index",
-    "pages/homepage/homepage",
     "pages/favourite/favourite",
     "pages/profile/profile",
     "pages/homepage/goals",
