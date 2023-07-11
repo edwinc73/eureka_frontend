@@ -1,6 +1,6 @@
 /* components/custom-nav/custom-nav.wxss */
 .btn-container{
-  margin: 42px 0 0 20px;
+  margin: 42px 0 0 20rpx;
   width: 35px;
   height: 35px;
   display: block;
@@ -22,7 +22,7 @@
   height: 19px;
 }
 
-.btn-container .home-icon{
+.btn-container{
   height: 20px;
   width: 20px;
 }
