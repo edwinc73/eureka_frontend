@@ -113,6 +113,15 @@ page{
   justify-content: space-between;
 }
 
+.align-center{
+  align-items: center;
+}
+
 .center{
   align-items: center;
+}
+
+.spacer{
+  height: 110px;
+  display: block;
 }

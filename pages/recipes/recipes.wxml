@@ -1,0 +1,37 @@
+<view class="spacer"></view>
+<view class="container w-100">
+  <view class="recipe-general-info w-100 flex justify-between align-center">
+    <view class="left-container flex align-center">
+      <image src="{{photo}}" mode="aspectFill" class="recipe-image" />
+      <view>
+        <view class="h2">{{name}}</view>
+        <text wx:for="[1,2]" class="star">⭐</text>
+      </view>
+    </view>
+    <image src="../../images/icons/heart.png" mode="aspectFill" class="heart" />
+  </view>
+  <hr class="recipe-hr" />
+  <view class="tabs-container flex justify-between align-center w-100">
+    <view class="tab p" data-value="detail" bindtap="switchTab">Detail<view style="{{opacityDetail}}" class="tab-indicator"></view></view>
+    <view class="tab p" data-value="recipe" bindtap="switchTab">Recipe<view style="{{opacityRecipe}}" class="tab-indicator"></view></view>
+    <view class="tab p" data-value="review" bindtap="switchTab">Review<view style="{{opacityReview}}" class="tab-indicator"></view></view>
+  </view>
+  <view wx:if="{{showDetail}}" class="w-100">
+  <form bindsubmit="addToMeal" class="w-100">
+    <view class="portion flex justify-between">
+      <view class="bubble recipe-portion h1">{{portion}}g</view>
+      <view class="bubble recipe-calories h1 text-light">{{caloriesPerPortion * portion}}kcal</view>  
+    </view>
+      <slider bindchanging="portionChange" activeColor="#52BE8C" block-size="12" block-color="#52BE8C" value="100" step="10" min="10" max="1000" />
+    <view class="p">{{description}}</view>
+  </form>
+  </view>
+
+  <view wx:if="{{showRecipe}}">recipe</view>
+
+  <view wx:if="{{showReview}}">review</view>
+
+  
+</view>
+<CustomNav />
+<BottomMask />

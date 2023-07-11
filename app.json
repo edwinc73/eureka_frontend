@@ -8,6 +8,7 @@
     "pages/profile/profile",
     "pages/homepage/goals",
     "pages/homepage/suggestions",
+    "pages/recipes/recipes",
     "components/custom-nav/custom-nav",
     "components/search-result/search-result"
   ],
