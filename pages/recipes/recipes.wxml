@@ -104,11 +104,14 @@
       </view>
       <textarea type="text" placeholder="Enter review..." maxlength="300" bindinput="handleTextareaInput"></textarea>
     </view>
-    <view class="review-container">
-      <Review />
-    </view>
     <button form-type="submit" class="floating-review h2">Review</button>
     </form>
+    <view class="reviews-container">
+      <view class="review-container" wx:key="{{index}}" wx:for="{{reviews}}">
+        <Review data="{{item}}" />
+      </view>
+    </view>
+    <view class="spacer"></view>
   </view>
 </view>
 <CustomNav />

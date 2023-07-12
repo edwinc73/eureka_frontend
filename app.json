@@ -10,7 +10,9 @@
     "pages/homepage/suggestions",
     "pages/recipes/recipes",
     "components/custom-nav/custom-nav",
-    "components/search-result/search-result"
+    "components/search-result/search-result",
+    "components/review/review"
+
   ],
   "window":{
     "navigationStyle": "custom"
@@ -41,6 +43,7 @@
     "BottomMask": "./components/bottom-mask/bottom-mask",
     "CustomNav": "../../components/custom-nav/custom-nav",
     "SearchResult": "./components/search-result/search-result",
-    "ec-canvas": "../../ec-canvas/ec-canvas"
+    "ec-canvas": "../../ec-canvas/ec-canvas",
+    "Review": "./components/review/review"
   }
 }

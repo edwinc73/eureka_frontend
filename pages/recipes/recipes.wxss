@@ -157,6 +157,7 @@ slider{
 .instruction{
   margin-bottom: 5px;
 }
+
 .title{
   margin-bottom: 5px;
 }
@@ -178,10 +179,16 @@ slider{
   height: 60px;
   border-radius: 100px;
   color: white;
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   left: 0;
   right: 0;
   line-height: 45px;
   background: linear-gradient(153deg, #52BE8D 0%, #A1D97E 100%);
+  z-index: 1000;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.15);
+}
+
+.review-container{
+  margin: 30px 0;
 }

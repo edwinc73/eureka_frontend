@@ -35,7 +35,7 @@ Page({
           description: recipe.description,
           ingredients: recipe.ingredients,
           photo: recipe.photos[0],
-          review: recipe.reviews,
+          reviews: recipe.reviews,
           carbs: recipe.carbs,
           fat: recipe.fat,
           sodium: recipe.sodium,
