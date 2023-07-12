@@ -5,40 +5,32 @@ Page({
    * Page initial data
    */
   data: {
-    results: [],
-    searchValue: '', 
+    results:[],
+    allData:[]
   },
 
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad(options) {
-    const page = this
-    this.setData({
-      results: this.data.recipes
-    });
-  },
 
-  onSearchInput: function(e) {
-    const searchValue = e.detail.value;
-    this.setData({ searchValue });
+  onLoad(options) {
     wx.request({
       url: 'http://127.0.0.1:3000/api/v1/recipes', 
-      data: {
-        query: searchValue
-      },
+      method: 'GET',
       success: (res) => {
         console.log(res)
-        this.setData({ results: res.data });
+        this.setData({ allData: res.data.recipes });
+      },
+      fail: (err) => {
+        console.log(err);
       }
     });
   },
 
-  filterResults: function() {
-    const filteredResults = this.data.results.filter(item =>
-      item.includes(this.data.searchValue)
-    );
-    this.setData({ results: filteredResults });
+  handleInputChange(e) {
+    let value = e.detail.value;
+    let results = this.data.allData.filter(item => item.name.toLowerCase().includes(value));
+    this.setData({ results });
   },
 
   /**

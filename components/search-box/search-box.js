@@ -8,7 +8,12 @@ Component ({
       this.setData({
         keyword: e.detail.value
       });
-      console.log('User searched for: ' + this.data.keyword);
+      this.triggerEvent('inputChange', { value: e.detail.value });
+      console.log(this.data.keyword);
+      this.setData({
+        keyword: ''
+      });
     }
+
   }
 })

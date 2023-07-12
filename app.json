@@ -7,6 +7,7 @@
     "pages/favourite/favourite",
     "pages/profile/profile",
     "pages/homepage/goals",
+    "pages/search-result/search-result",
     "pages/homepage/suggestions",
     "components/custom-nav/custom-nav",
     "components/search-result/search-result"
