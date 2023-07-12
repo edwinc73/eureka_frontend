@@ -76,11 +76,7 @@ page{
   padding: 17.5px 24px;
   background: #E3F0E6;
   box-sizing: border-box;
-}
-
-.spacer{
-  height: 110px;
-  display: block;
+  z-index: 2;
 }
 
 .secondary-title{

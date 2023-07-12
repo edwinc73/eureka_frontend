@@ -18,10 +18,12 @@ Page({
     const page = this
     // load suggested recipe
     wx.request({
-      url: `${app.globalData.baseUrl}/recipes`,
+      url: `${app.globalData.baseUrl}/suggestion`,
       // header: app.globalData.header,
       success(res){
-        const suggestions = res.data.recipes.slice(0, 3)
+      console.log(res)
+        const suggestions = res.data.slice(0, 3)
+        // console.log(suggestions)
         page.setData({
           suggestions: suggestions
         })
@@ -879,6 +881,13 @@ Page({
   goToSuggestions(){
     wx.navigateTo({
       url: '/pages/homepage/suggestions',
+    })
+  },
+  goToRecipe(e){
+    // console.log("going")
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/recipes/recipes?id=${id}`,
     })
   }
 })

@@ -1,15 +1,18 @@
 {
   "pages":[
+    "pages/homepage/homepage",
     "pages/index/index",
     "pages/logs/logs",
     "custom-tab-bar/index",
-    "pages/homepage/homepage",
     "pages/favourite/favourite",
     "pages/profile/profile",
     "pages/homepage/goals",
     "pages/homepage/suggestions",
+    "pages/recipes/recipes",
     "components/custom-nav/custom-nav",
-    "components/search-result/search-result"
+    "components/search-result/search-result",
+    "components/review/review"
+
   ],
   "window":{
     "navigationStyle": "custom"
@@ -40,6 +43,7 @@
     "BottomMask": "./components/bottom-mask/bottom-mask",
     "CustomNav": "../../components/custom-nav/custom-nav",
     "SearchResult": "./components/search-result/search-result",
-    "ec-canvas": "../../ec-canvas/ec-canvas"
+    "ec-canvas": "../../ec-canvas/ec-canvas",
+    "Review": "./components/review/review"
   }
 }

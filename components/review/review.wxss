@@ -1,0 +1,10 @@
+.avatar image{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.avatar{
+  display: flex;
+  gap: 10px;
+}
