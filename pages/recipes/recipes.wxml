@@ -16,6 +16,9 @@
     <view class="tab p" data-value="recipe" bindtap="switchTab">Recipe<view style="{{opacityRecipe}}" class="tab-indicator"></view></view>
     <view class="tab p" data-value="review" bindtap="switchTab">Review<view style="{{opacityReview}}" class="tab-indicator"></view></view>
   </view>
+
+  <!-- show details tab -->
+
   <view wx:if="{{showDetail}}" class="w-100">
   <form bindsubmit="addToMeal" class="w-100">
     <view class="portion flex justify-between">
@@ -24,14 +27,89 @@
     </view>
       <slider bindchanging="portionChange" activeColor="#52BE8C" block-size="12" block-color="#52BE8C" value="100" step="10" min="10" max="1000" />
     <view class="p">{{description}}</view>
+    <view class="nutrition">
+      <view class="title-container w-100 flex justify-between">
+        <text class="p">Nutrition</text>
+        <text class="small text-light">per 100g</text>
+      </view>
+      <view class="nutrition-info flex justify-between">
+        <view class="nutrition-calories w-100">
+          <view class="large-text">
+          {{caloriesPerPortion * 100}}
+          </view>
+          <view class="p text-light">kcal</view>
+        </view>
+        <view class="divider"></view>
+        <view class="nutrition-macro w-100">
+          <view class="macro">
+            <ec-canvas id="protein" canvas-id="protein" class="nutrient-bar"></ec-canvas>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="table-container">
+      <view class="table-row">
+        <view class="table-header-main p">Nutrient</view>
+        <view class="table-header small text-light">Amount</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell small">Protein</view>
+        <view class="table-cell small text-right">{{protein}}g</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell small">Carbohydrate</view>
+        <view class="table-cell small text-right">{{carbs}}g</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell small">Fat</view>
+        <view class="table-cell small text-right">{{fat}}g</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell small">Sodium</view>
+        <view class="table-cell small text-right">{{sodium || 0 }}g</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell small">Fiber</view>
+        <view class="table-cell small text-right">{{fiber || 0 }}g</view>
+      </view>
+    </view>
   </form>
   </view>
-
-  <view wx:if="{{showRecipe}}">recipe</view>
-
-  <view wx:if="{{showReview}}">review</view>
-
   
+  <view wx:if="{{showRecipe}}" wx:for-index="index">
+    <view class="ingredients w-100">
+    <view class="h1 title">Ingredients</view>
+    <view class="ingredient p" wx:for="{{ingredients}}">
+    {{item.name}}
+    </view>
+  </view>
+  <view class="h1 title w-100">Instructions</view>
+    <view wx:for="{{instructions}}" class="instruction p">
+    {{index + 1}}.{{item}}
+    </view>
+  </view>
+
+  <view wx:if="{{showReview}}" class="w-100">
+    <form bindsubmit="submitReview">
+    <view class="review-inputs-container">
+      <view class="star-input flex justify-between">
+      <view class="star-container flex">
+        <view class="star" wx:for="{{stars}}" wx:key="{{index}}" data-index="{{index}}" bindtap="handleStarClick">
+        <image wx:if="{{selectedStars >= index + 1}}"src="../../images/icons/star_active.png" mode="aspectFill"/>
+
+        <image wx:else src="../../images/icons/star_inactive.png" mode="aspectFill"/>
+        </view>
+      </view>
+      <text class="small text-light">2/5</text>
+      </view>
+      <textarea type="text" placeholder="Enter review..." maxlength="300" bindinput="handleTextareaInput"></textarea>
+    </view>
+    <view class="review-container">
+      <Review />
+    </view>
+    <button form-type="submit" class="floating-review h2">Review</button>
+    </form>
+  </view>
 </view>
 <CustomNav />
 <BottomMask />

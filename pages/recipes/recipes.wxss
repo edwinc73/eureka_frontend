@@ -31,7 +31,7 @@
 
 slider{
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 0 auto 15px;
 }
 
 .tab-indicator{
@@ -70,4 +70,118 @@ slider{
 
 .portion{
   gap: 30px;
+}
+
+.nutrition{
+  background-color: #E3F0E6;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 15px 0;
+}
+
+.title-container{
+  align-items: baseline;
+}
+
+.divider{
+  margin-top: 15px;
+  height: 210rpx;
+  width: 1px;
+  display: block;
+  background: #fff;
+}
+
+.large-text{
+  font-size: 80rpx;
+}
+
+.nutrition-calories, .nutrition-macro{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.macro{
+  height: 90px;
+  width: 270rpx;
+}
+
+.nutrient-bar{
+  height: 100%;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #E3F0E6;
+}
+
+
+.table-header, .table-header-main{
+  flex: 1;
+  text-align: right;
+  padding: 8px;
+}
+
+.table-header-main{
+  flex: 1;
+  font-weight: bold;
+  text-align: left;
+  padding: 8px;
+}
+
+.table-cell {
+  flex: 1;
+  text-align: left;
+  padding: 8px;
+}
+
+.text-right{
+  text-align: right
+}
+
+.ingredients{
+  padding: 15px;
+  border-radius: 15px;
+  background-color: rgba(227, 240, 230, 1);
+  box-sizing: border-box;
+  margin: 15px 0;
+}
+
+.instruction{
+  margin-bottom: 5px;
+}
+.title{
+  margin-bottom: 5px;
+}
+
+.review-inputs-container{
+  background-color:rgba(227, 240, 230, 1);
+  border-radius: 15px;
+  width: 100%;
+  padding: 15px;
+  margin: 15px 0;
+  box-sizing: border-box;
+}
+
+.star-container{
+  gap: 10px
+}
+
+.floating-review{
+  height: 60px;
+  border-radius: 100px;
+  color: white;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  line-height: 45px;
+  background: linear-gradient(153deg, #52BE8D 0%, #A1D97E 100%);
 }
