@@ -1,4 +1,5 @@
 // pages/search-result/search-result.js
+const app = getApp();
 Page({
 
   /**
@@ -15,7 +16,7 @@ Page({
 
   onLoad(options) {
     wx.request({
-      url: 'http://127.0.0.1:3000/api/v1/recipes', 
+      url:  `${app.globalData.baseUrl}/recipes`, 
       method: 'GET',
       success: (res) => {
         console.log(res)

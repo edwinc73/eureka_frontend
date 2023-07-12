@@ -14,11 +14,9 @@
     </scroll-view>
   </view>
   <view class="search-result w-100">
-    <!-- <view class="" wx:for="{{results}}"> -->
-      <view class="search-result-card">
-        <SearchResult results="{{results}}"/>
-      </view>
-    <!-- </view> -->
+    <view class="search-result-card">
+      <SearchResult results="{{results}}"/>
+    </view>
   </view>
 
   <button class="create-button p">Create Recipe</button>
