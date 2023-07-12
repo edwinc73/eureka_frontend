@@ -175,7 +175,7 @@ slider{
   gap: 10px
 }
 
-.floating-review{
+.floating{
   height: 60px;
   border-radius: 100px;
   color: white;

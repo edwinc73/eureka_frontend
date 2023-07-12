@@ -34,22 +34,22 @@ Page({
           instructions: instructions,
           description: recipe.description,
           ingredients: recipe.ingredients,
-          photo: recipe.photos[0],
+          photo: recipe.photos,
           reviews: recipe.reviews,
-          carbs: recipe.carbs,
-          fat: recipe.fat,
-          sodium: recipe.sodium,
-          fiber: recipe.fiber,
+          carbs: Math.floor(recipe.nutritious.carbs),
+          fat: Math.floor(recipe.nutritious.fat),
+          sodium: Math.floor(recipe.nutritious.sodium),
+          fiber: Math.floor(recipe.nutritious.fiber),
+          protein: Math.floor(recipe.nutritious.protein),
           name: recipe.name,
-          protein: recipe.protein,
           calories: recipe.total_calories,
-          caloriesPerPortion: Math.ceil(recipe.total_calories / 300),
+          caloriesPerPortion: Math.ceil(recipe.total_calories / recipe.portion),
           nutrients: [
             {protein: recipe.protein},
-          {fat: recipe.fat},
-          {carbs: recipe.carbs},
-          {sodium: recipe.sodium},
-          {fiber: recipe.fiber}
+            {fat: recipe.fat},
+            {carbs: recipe.carbs},
+            {sodium: recipe.sodium},
+            {fiber: recipe.fiber}
           ]
 
         })
@@ -190,8 +190,25 @@ Page({
       opacityReview: state == "review" ? "opacity: 1" : "opacity: 0"
     })
   },
-  addToMeal(){
-    console.log("im adding my food")
+  addToMeal(e){
+    const portion = this.data.portion / 100;
+    let goal = app.globalData.chartData
+    const meal = {
+      calories: portion * this.data.caloriesPerPortion,
+      fat: portion * this.data.fat / 100,
+      protein: portion * this.data.protein / 100,
+      carbs: portion * this.data.carbs / 100
+    }
+    const updateGoal = {
+      current_carb: meal.carbs + goal.current_carb,
+      current_protein: meal.protein + goal.current_protein,
+      current_fat: meal.fat + goal.current_fat,
+      current_calorie: meal.calories + goal.current_calorie
+    }
+    console.log(updateGoal)
+    wx.request({
+      url: `${app.globalData.baseUrl}/api/v1/goals/:id`,
+    })
   },
   portionChange(e){
     this.setData({

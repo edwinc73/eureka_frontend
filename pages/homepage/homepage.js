@@ -21,7 +21,8 @@ Page({
       url: `${app.globalData.baseUrl}/suggestion`,
       // header: app.globalData.header,
       success(res){
-        const suggestions = res.data.suggestion_recipes.slice(0, 3)
+      console.log(res)
+        const suggestions = res.data.slice(0, 3)
         // console.log(suggestions)
         page.setData({
           suggestions: suggestions

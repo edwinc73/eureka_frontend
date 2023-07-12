@@ -23,9 +23,11 @@
   <form bindsubmit="addToMeal" class="w-100">
     <view class="portion flex justify-between">
       <view class="bubble recipe-portion h1">{{portion}}g</view>
-      <view class="bubble recipe-calories h1 text-light">{{caloriesPerPortion * portion}}kcal</view>  
+      <view class="bubble recipe-calories h1 text-light">{{caloriesPerPortion * portion / 100}}kcal</view>  
     </view>
       <slider bindchanging="portionChange" activeColor="#52BE8C" block-size="12" block-color="#52BE8C" value="100" step="10" min="10" max="1000" />
+      <button class="floating p" form-type="submit">Add to Goal</button>
+  </form>
     <view class="p">{{description}}</view>
     <view class="nutrition">
       <view class="title-container w-100 flex justify-between">
@@ -35,7 +37,7 @@
       <view class="nutrition-info flex justify-between">
         <view class="nutrition-calories w-100">
           <view class="large-text">
-          {{caloriesPerPortion * 100}}
+          {{caloriesPerPortion}}
           </view>
           <view class="p text-light">kcal</view>
         </view>
@@ -66,14 +68,13 @@
       </view>
       <view class="table-row">
         <view class="table-cell small">Sodium</view>
-        <view class="table-cell small text-right">{{sodium || 0 }}g</view>
+        <view class="table-cell small text-right">{{sodium || 0 }}mg</view>
       </view>
       <view class="table-row">
         <view class="table-cell small">Fiber</view>
         <view class="table-cell small text-right">{{fiber || 0 }}g</view>
       </view>
     </view>
-  </form>
   </view>
   
   <view wx:if="{{showRecipe}}" wx:for-index="index">
@@ -104,7 +105,7 @@
       </view>
       <textarea type="text" placeholder="Enter review..." maxlength="300" bindinput="handleTextareaInput"></textarea>
     </view>
-    <button form-type="submit" class="floating-review h2">Review</button>
+    <button form-type="submit" class="floating p">Review</button>
     </form>
     <view class="reviews-container">
       <view class="review-container" wx:key="{{index}}" wx:for="{{reviews}}">
