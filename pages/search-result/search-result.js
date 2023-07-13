@@ -16,26 +16,17 @@ Page({
   onLoad(options) {
     const keyword = options.keyword;
     wx.request({
-      url:  `${app.globalData.baseUrl}/recipes`, 
+      url:  `${app.globalData.baseUrl}/recipes?query=${keyword}`, 
       method: 'GET',
       success: (res) => {
         console.log(res)
-        this.setData({ results: [...res.data.recipes, ...res.data.ingredients] });
+        this.setData({ results: res.data.recipes });
       },
       fail: (err) => {
         console.log(err);
       }
     });
   },
-
-  // handleInputChange(e) {
-  //   let value = e.detail.value;
-  //   let results = this.data.allData.filter(item => 
-  //     (item.name && item.name.toLowerCase().includes(value)) || 
-  //     (item.ingredients && item.ingredients.some(ingredient => ingredient && ingredient.toLowerCase().includes(value)))
-  //   );
-  //   this.setData({ results });
-  // },
 
   /**
    * Lifecycle function--Called when page is initially rendered
