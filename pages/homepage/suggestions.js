@@ -1,4 +1,5 @@
 // pages/homepage/suggestions.js
+const app = getApp();
 Page({
 
   /**
@@ -12,7 +13,16 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-
+    wx.request({
+      url: `${app.globalData.baseUrl}/recipes/suggestion`,
+      // header: app.globalData.header,
+      success(res){
+        const suggestions = res.data.recipes
+        this.setData({
+          suggestions: suggestions
+        })
+      }
+    })
   },
 
   /**

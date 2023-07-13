@@ -1,4 +1,5 @@
 // pages/search-result/search-result.js
+const app = getApp();
 Page({
 
   /**
@@ -15,11 +16,11 @@ Page({
 
   onLoad(options) {
     wx.request({
-      url: 'http://127.0.0.1:3000/api/v1/recipes', 
+      url:  `${app.globalData.baseUrl}/recipes`, 
       method: 'GET',
       success: (res) => {
         console.log(res)
-        this.setData({ allData: res.data.recipes });
+        this.setData({ allData: [...res.data.recipes, ...res.data.ingredientss] });
       },
       fail: (err) => {
         console.log(err);
@@ -29,7 +30,10 @@ Page({
 
   handleInputChange(e) {
     let value = e.detail.value;
-    let results = this.data.allData.filter(item => item.name.toLowerCase().includes(value));
+    let results = this.data.allData.filter(item => 
+      (item.name && item.name.toLowerCase().includes(value)) || 
+      (item.ingredients && item.ingredients.some(ingredient => ingredient && ingredient.toLowerCase().includes(value)))
+    );
     this.setData({ results });
   },
 

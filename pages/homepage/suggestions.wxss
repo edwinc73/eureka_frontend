@@ -1,1 +1,52 @@
 /* pages/homepage/suggestions.wxss */
+.search-box{
+  margin-top: 208rpx;
+}
+
+.filter{
+  margin-top: 8px;
+  width: 100%;
+  justify-content: space-between;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.small{
+  margin-right: 12px;
+}
+
+.search-result{
+  margin: 8px auto;
+}
+
+.spacer{
+  height: 110px;
+  display: block;
+}
+
+.text-container{
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.create-recipe{
+  align-items: center;
+}
+
+.create-card{
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+.go-to-icon{
+  width: 14px;
+  height: 14px;
+  box-sizing: border-box;
+}
+
+.p-bold{
+  font-weight: bold;
+  font-size: 16px;
+  color: #191011
+}
