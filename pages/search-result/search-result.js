@@ -20,7 +20,7 @@ Page({
       method: 'GET',
       success: (res) => {
         console.log(res)
-        this.setData({ allData: res.data.recipes });
+        this.setData({ allData: [...res.data.recipes, ...res.data.ingredients] });
       },
       fail: (err) => {
         console.log(err);
@@ -30,7 +30,10 @@ Page({
 
   handleInputChange(e) {
     let value = e.detail.value;
-    let results = this.data.allData.filter(item => item.name.toLowerCase().includes(value));
+    let results = this.data.allData.filter(item => 
+      (item.name && item.name.toLowerCase().includes(value)) || 
+      (item.ingredients && item.ingredients.some(ingredient => ingredient && ingredient.toLowerCase().includes(value)))
+    );
     this.setData({ results });
   },
 
