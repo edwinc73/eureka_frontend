@@ -9,7 +9,10 @@ Page({
    * Page initial data
    */
   data: {
+    showDetail : true,
+    opacityDetail: "opacity: 1",
     opacityRecipe: "opacity: 0",
+    opacityReview: "opacity: 0",
     portion: 100,
     stars: [1, 2, 3, 4, 5],
     selectedStars: 0,
@@ -19,13 +22,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    console.log(options)
-    this.setData({
-      showDetail: options.showdetail == "true",
-      showReview: options.showreview == "true",
-      opacityDetail: options.showdetail == "true" && "opacity: 1",
-      opacityReview: options.showreview == "false" && "opacity: 0"
-    })
   },
 
   /**
@@ -209,9 +205,7 @@ Page({
       method: "POST",
       data: {
         id: id,
-        meal:{
-          portion: portion
-        }
+        portion: portion
       },
       success(res){
         console.log(res)
@@ -244,7 +238,13 @@ Page({
       success(res){
         console.log(res)
         wx.redirectTo({
-          url: '/pages/recipes/recipes?showdetail=false&showreview=true'
+          url: '/pages/recipes/recipes?showDetail=true&showreview=true'
+        })
+        page.setData({
+          showDetail: false,
+          showReview: true,
+          opacityDetail: "opacity: 0",
+          opacityRecipe: "opacity: 1"
         })
       }
     })
