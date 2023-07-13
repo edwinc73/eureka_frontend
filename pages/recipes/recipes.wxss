@@ -1,0 +1,194 @@
+.recipe-general-info{
+  flex-direction: row;
+}
+
+.recipe-image{
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.star{
+  font-size: 12px;
+}
+
+.heart{
+  width: 21px;
+  height: 17.7px;
+}
+
+
+.recipe-hr{
+  background-color: #E3F0E6 !important;
+}
+
+.tab{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+slider{
+  box-sizing: border-box;
+  margin: 0 auto 15px;
+}
+
+.tab-indicator{
+  margin-top: 5px;
+  display: block;
+  width: 45rpx;
+  height: 2px;
+  background-color: #E3F0E6;
+}
+
+.active{
+  opacity: 1;
+}
+
+.inactive{
+  opacity: 0;
+}
+
+.bubble{
+  margin: 15px 0 5px;
+  width: calc(100% - 30px - 30px);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+}
+
+.recipe-portion{
+  background-color: #E3F0E6;
+}
+
+.recipe-calories{
+  border: 1px solid #E3F0E6;
+}
+
+.portion{
+  gap: 30px;
+}
+
+.nutrition{
+  background-color: #E3F0E6;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 15px 0;
+}
+
+.title-container{
+  align-items: baseline;
+}
+
+.divider{
+  margin-top: 15px;
+  height: 210rpx;
+  width: 1px;
+  display: block;
+  background: #fff;
+}
+
+.large-text{
+  font-size: 80rpx;
+}
+
+.nutrition-calories, .nutrition-macro{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.macro{
+  height: 90px;
+  width: 270rpx;
+}
+
+.nutrient-bar{
+  height: 100%;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #E3F0E6;
+}
+
+
+.table-header, .table-header-main{
+  flex: 1;
+  text-align: right;
+  padding: 8px;
+}
+
+.table-header-main{
+  flex: 1;
+  font-weight: bold;
+  text-align: left;
+  padding: 8px;
+}
+
+.table-cell {
+  flex: 1;
+  text-align: left;
+  padding: 8px;
+}
+
+.text-right{
+  text-align: right
+}
+
+.ingredients{
+  padding: 15px;
+  border-radius: 15px;
+  background-color: rgba(227, 240, 230, 1);
+  box-sizing: border-box;
+  margin: 15px 0;
+}
+
+.instruction{
+  margin-bottom: 5px;
+}
+
+.title{
+  margin-bottom: 5px;
+}
+
+.review-inputs-container{
+  background-color:rgba(227, 240, 230, 1);
+  border-radius: 15px;
+  width: 100%;
+  padding: 15px;
+  margin: 15px 0;
+  box-sizing: border-box;
+}
+
+.star-container{
+  gap: 10px
+}
+
+.floating{
+  height: 60px;
+  border-radius: 100px;
+  color: white;
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  line-height: 45px;
+  background: linear-gradient(153deg, #52BE8D 0%, #A1D97E 100%);
+  z-index: 1000;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.15);
+}
+
+.review-container{
+  margin: 30px 0;
+}
