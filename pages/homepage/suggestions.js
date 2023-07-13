@@ -15,6 +15,7 @@ Page({
   onLoad(options) {
     wx.request({
       url: `${app.globalData.baseUrl}/suggestion`,
+      method: 'GET',
       // header: app.globalData.header,
       success(res){
         const suggestions = res.data.recipes
