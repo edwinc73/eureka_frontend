@@ -6,8 +6,7 @@ Page({
    * Page initial data
    */
   data: {
-    results:[],
-    allData:[]
+    results:[]
   },
 
   /**
@@ -15,28 +14,24 @@ Page({
    */
 
   onLoad(options) {
+    const page = this
+    const query = options.query;
+    console.log(query)
     wx.request({
       url:  `${app.globalData.baseUrl}/recipes`, 
       method: 'GET',
+      data :{
+        query: query
+      },
       success: (res) => {
         console.log(res)
-        this.setData({ allData: [...res.data.recipes, ...res.data.ingredientss] });
+        page.setData({ results: res.data });
       },
       fail: (err) => {
         console.log(err);
       }
     });
   },
-
-  handleInputChange(e) {
-    let value = e.detail.value;
-    let results = this.data.allData.filter(item => 
-      (item.name && item.name.toLowerCase().includes(value)) || 
-      (item.ingredients && item.ingredients.some(ingredient => ingredient && ingredient.toLowerCase().includes(value)))
-    );
-    this.setData({ results });
-  },
-
   /**
    * Lifecycle function--Called when page is initially rendered
    */

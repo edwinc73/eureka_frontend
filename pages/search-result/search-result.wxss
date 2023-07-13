@@ -30,15 +30,6 @@
   margin-left: 10px;
 }
 
-.create-recipe{
-  align-items: center;
-}
-
-.create-card{
-  align-items: center;
-  padding-bottom: 8px;
-}
-
 .go-to-icon{
   width: 14px;
   height: 14px;

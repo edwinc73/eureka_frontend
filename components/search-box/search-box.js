@@ -1,19 +1,18 @@
 Component ({
   data: {
-    keyword: ''
+    query: ''
   },
 
-  methods:{
-    search: function(e) {
-      this.setData({
-        keyword: e.detail.value
-      });
-      this.triggerEvent('inputChange', { value: e.detail.value });
-      console.log(this.data.keyword);
-      this.setData({
-        keyword: ''
+  methods:{ 
+    jumpPage(e) {
+      let query = e.detail.value
+      console.log(query)
+      wx.navigateTo({
+        url: `/pages/search-result/search-result?query=${query}`,
       });
     }
+
+
 
   }
 })
