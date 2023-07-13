@@ -1,44 +1,35 @@
 // pages/search-result/search-result.js
+const app = getApp();
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    results: [],
-    searchValue: '', 
+    results:[]
   },
 
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad(options) {
-    const page = this
-    this.setData({
-      results: this.data.recipes
-    });
-  },
 
-  onSearchInput: function(e) {
-    const searchValue = e.detail.value;
-    this.setData({ searchValue });
+  onLoad(options) {
+    const query = options.query;
+    console.log(query)
     wx.request({
-      url: 'http://127.0.0.1:3000/api/v1/recipes', 
-      data: {
-        query: searchValue
+      url:  `${app.globalData.baseUrl}/recipes`, 
+      method: 'GET',
+      data :{
+        query: query
       },
       success: (res) => {
         console.log(res)
         this.setData({ results: res.data });
+      },
+      fail: (err) => {
+        console.log(err);
       }
     });
-  },
-
-  filterResults: function() {
-    const filteredResults = this.data.results.filter(item =>
-      item.includes(this.data.searchValue)
-    );
-    this.setData({ results: filteredResults });
   },
 
   /**
