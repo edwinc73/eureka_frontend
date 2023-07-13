@@ -6,8 +6,7 @@ Page({
    * Page initial data
    */
   data: {
-    results:[],
-    allData:[]
+    results:[]
   },
 
   /**
@@ -15,12 +14,13 @@ Page({
    */
 
   onLoad(options) {
+    const keyword = options.keyword;
     wx.request({
       url:  `${app.globalData.baseUrl}/recipes`, 
       method: 'GET',
       success: (res) => {
         console.log(res)
-        this.setData({ allData: [...res.data.recipes, ...res.data.ingredients] });
+        this.setData({ results: [...res.data.recipes, ...res.data.ingredients] });
       },
       fail: (err) => {
         console.log(err);
@@ -28,14 +28,14 @@ Page({
     });
   },
 
-  handleInputChange(e) {
-    let value = e.detail.value;
-    let results = this.data.allData.filter(item => 
-      (item.name && item.name.toLowerCase().includes(value)) || 
-      (item.ingredients && item.ingredients.some(ingredient => ingredient && ingredient.toLowerCase().includes(value)))
-    );
-    this.setData({ results });
-  },
+  // handleInputChange(e) {
+  //   let value = e.detail.value;
+  //   let results = this.data.allData.filter(item => 
+  //     (item.name && item.name.toLowerCase().includes(value)) || 
+  //     (item.ingredients && item.ingredients.some(ingredient => ingredient && ingredient.toLowerCase().includes(value)))
+  //   );
+  //   this.setData({ results });
+  // },
 
   /**
    * Lifecycle function--Called when page is initially rendered
