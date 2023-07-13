@@ -1,10 +1,33 @@
 .avatar image{
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 }
 
 .avatar{
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.small-star image{
+  width: 15px;
+  height: 15px;
+}
+
+.star-container{
+  display: flex;
+  gap:5px;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content{
+  margin: 4px 0;
 }
