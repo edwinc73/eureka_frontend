@@ -1,4 +1,3 @@
-<CustomNav />
 <view class="container w-100">
   <view class="search-box w-100">
     <SearchBox bind:inputChange="handleInputChange" />
@@ -13,9 +12,10 @@
     </scroll-view>
   </view>
   <view class="search-result w-100">
-    <view class="search-result-card">
+      <view class="search-result-card">
       <SearchResult results="{{results}}"/>
     </view>
   </view>
 </view>
 <BottomMask />
+<CustomNav />

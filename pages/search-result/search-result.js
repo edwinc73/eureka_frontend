@@ -14,6 +14,7 @@ Page({
    */
 
   onLoad(options) {
+    const page = this
     const query = options.query;
     console.log(query)
     wx.request({
@@ -24,14 +25,13 @@ Page({
       },
       success: (res) => {
         console.log(res)
-        this.setData({ results: res.data });
+        page.setData({ results: res.data });
       },
       fail: (err) => {
         console.log(err);
       }
     });
   },
-
   /**
    * Lifecycle function--Called when page is initially rendered
    */
