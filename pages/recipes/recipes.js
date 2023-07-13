@@ -19,7 +19,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    console.log(options)
     this.setData({
       showDetail: options.showdetail == "true",
       showReview: options.showreview == "true",
@@ -64,8 +63,8 @@ Page({
             {carbs: recipe.carbs},
             {sodium: recipe.sodium},
             {fiber: recipe.fiber}
-          ]
-
+          ],
+          isFavourite: recipe.user_favourite
         })
       }
     })
@@ -227,10 +226,9 @@ Page({
     })
   },
   submitReview(e){
-    const page = this
     const selectedStars = this.data.selectedStars;
     const reviewText = this.data.reviewText;
-    let id = this.data.id
+    const id = this.data.id
 
     wx.request({
       url: `${app.globalData.baseUrl}/recipes/${id}/add_review`,
@@ -263,5 +261,38 @@ Page({
     this.setData({
       reviewText: reviewText,
     });
+  },
+  clickFavourite(){
+    const id = this.data.id
+    const page = this
+    
+    if(page.data.isFavourite){
+      wx.request({
+        url: `${app.globalData.baseUrl}/favourite_delete`,
+        method: "DELETE",
+        data:{
+          id:id,
+        },
+        success(res){
+          console.log(res)
+        }
+      })
+      
+    } else {
+      wx.request({
+        url: `${app.globalData.baseUrl}/favourite_recipes`,
+        method: "POST",
+        data:{
+          id:id,
+        },
+        success(res){
+          console.log(res)
+        }
+      })
+    }
+
+    page.setData({
+      isFavourite: !page.data.isFavourite,
+    })
   }
 })
