@@ -16,7 +16,7 @@ Page({
     const page = this
 
     wx.request({
-      url: `${app.globalData.baseUrl}/recipes/suggestion`, 
+      url: `${app.globalData.baseUrl}/suggestion`, 
       method: 'GET',
       success: (res) => {
         console.log(res)

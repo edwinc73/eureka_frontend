@@ -14,13 +14,17 @@ Page({
    */
 
   onLoad(options) {
-    const keyword = options.keyword;
+    const query = options.query;
+    console.log(query)
     wx.request({
-      url:  `${app.globalData.baseUrl}/recipes?query=${keyword}`, 
+      url:  `${app.globalData.baseUrl}/recipes`, 
       method: 'GET',
+      data :{
+        query: query
+      },
       success: (res) => {
         console.log(res)
-        this.setData({ results: res.data.recipes });
+        this.setData({ results: res.data });
       },
       fail: (err) => {
         console.log(err);

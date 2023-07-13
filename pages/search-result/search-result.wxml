@@ -2,7 +2,7 @@
 <CustomNav />
 <view class="container w-100">
   <view class="search-box w-100">
-    <SearchBox bind:inputChange="handleInputChange" />
+    <SearchBox />
   </view>
   <view class="filter w-100 flex">
     <scroll-view scroll-x="true" class="filter-text flex">

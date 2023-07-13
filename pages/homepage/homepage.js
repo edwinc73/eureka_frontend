@@ -18,7 +18,7 @@ Page({
     const page = this
     // load suggested recipe
     wx.request({
-      url: `${app.globalData.baseUrl}/recipes`,
+      url: `${app.globalData.baseUrl}/suggestion`,
       // header: app.globalData.header,
       success(res){
         const suggestions = res.data.recipes.slice(0, 3)
