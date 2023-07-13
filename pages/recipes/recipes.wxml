@@ -101,7 +101,7 @@
         <image wx:else src="../../images/icons/star_inactive.png" mode="aspectFill"/>
         </view>
       </view>
-      <text class="small text-light">2/5</text>
+      <text class="small text-light">{{selectedStars}}/5</text>
       </view>
       <textarea type="text" placeholder="Enter review..." maxlength="300" bindinput="handleTextareaInput"></textarea>
     </view>
@@ -112,8 +112,8 @@
         <Review data="{{item}}" />
       </view>
     </view>
-    <view class="spacer"></view>
   </view>
+    <view class="spacer"></view>
 </view>
 <CustomNav />
 <BottomMask />

@@ -19,11 +19,10 @@ Page({
     // load suggested recipe
     wx.request({
       url: `${app.globalData.baseUrl}/suggestion`,
-      // header: app.globalData.header,
+      header: app.globalData.header,
       success(res){
       console.log(res)
         const suggestions = res.data.slice(0, 3)
-        // console.log(suggestions)
         page.setData({
           suggestions: suggestions
         })
@@ -36,9 +35,31 @@ Page({
    */
   onReady() {
     const data = app.globalData.chartData
-    this.setData({goal: data})
+  },
+  canvasIdErrorCallback: function (e) {
+    console.error(e.detail.errMsg)
+  },
 
-    const chartComponent = this.selectComponent('#myCanvas');
+  /**
+   * Lifecycle function--Called when page show
+   */
+  onShow() {
+    const page = this
+    if (typeof this.getTabBar === 'function' &&
+    this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
+
+    wx.request({
+      url: `${app.globalData.baseUrl}/goals/90`,
+      success(res){
+        app.globalData.chartData = res.data
+        const data = app.globalData.chartData
+        page.setData({goal: data})
+
+    const chartComponent = page.selectComponent('#myCanvas');
     chartComponent.init((canvas, width, height, dpr) => {
 
       const chart = echarts.init(canvas, null, {
@@ -182,7 +203,7 @@ Page({
       return chart;
     });
 
-    const chartBg = this.selectComponent('#myCanvasBg');
+    const chartBg = page.selectComponent('#myCanvasBg');
     chartBg.init((canvas, width, height, dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width,
@@ -238,7 +259,7 @@ Page({
       return chart;
     });
 
-    const protein = this.selectComponent('#protein');
+    const protein = page.selectComponent('#protein');
     protein.init((canvas, width, height, dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width,
@@ -378,7 +399,7 @@ Page({
       return chart;
     });
 
-    const proteinBg = this.selectComponent('#protein_bg');
+    const proteinBg = page.selectComponent('#protein_bg');
     proteinBg.init((canvas, width, height, dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width ,
@@ -432,7 +453,7 @@ Page({
       return chart;
     });
     
-    const carbs = this.selectComponent('#carbs');
+    const carbs = page.selectComponent('#carbs');
     carbs.init((canvas, width, height, dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width ,
@@ -572,7 +593,7 @@ Page({
       return chart;
     });
 
-    const carbs_bg = this.selectComponent('#carbs_bg');
+    const carbs_bg = page.selectComponent('#carbs_bg');
     carbs_bg.init((canvas, width, height, dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width,
@@ -626,7 +647,7 @@ Page({
       return chart;
     });
 
-    const fat = this.selectComponent('#fat');
+    const fat = page.selectComponent('#fat');
     fat.init((canvas, width, height, dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width ,
@@ -766,7 +787,7 @@ Page({
       return chart;
     });
 
-    const fatBg = this.selectComponent('#fat_bg');
+    const fatBg = page.selectComponent('#fat_bg');
     fatBg.init((canvas, width, height, dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width,
@@ -819,24 +840,8 @@ Page({
       chart.setOption(bgoption);
       return chart;
     });
-
-
-
-  },
-  canvasIdErrorCallback: function (e) {
-    console.error(e.detail.errMsg)
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow() {
-    if (typeof this.getTabBar === 'function' &&
-    this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 0
-      })
-    }
+      }
+    })
   },
 
   /**
@@ -887,7 +892,7 @@ Page({
     // console.log("going")
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/recipes/recipes?id=${id}`,
+      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
     })
   }
 })
