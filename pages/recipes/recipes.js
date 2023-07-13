@@ -2,6 +2,8 @@ import * as echarts from '../../ec-canvas/echarts';
 
 const app = getApp()
 
+let chart = null
+
 Page({
   /**
    * Page initial data
@@ -20,10 +22,17 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
+  },
+
+  /**
+   * Lifecycle function--Called when page is initially rendered
+   */
+  onReady() {
+
+
     const page = this
-    const id = options.id
     wx.request({
-      url: `${app.globalData.baseUrl}/recipes/${id}`,
+      url: `${app.globalData.baseUrl}/recipes/2`,
       header:app.globalData.header,
       success(res){
         const recipe = res.data
@@ -31,6 +40,7 @@ Page({
         const instructions = recipe.instructions.split(/\d\./);
         instructions.shift()
         page.setData({
+          id: recipe.id,
           instructions: instructions,
           description: recipe.description,
           ingredients: recipe.ingredients,
@@ -55,13 +65,13 @@ Page({
         })
       }
     })
-    const chart = this.selectComponent('#protein');
-    chart.init((canvas, width, height, dpr) => {
-          const chart = echarts.init(canvas, null, {
-            width: width ,
-            height: height,
-            devicePixelRatio: dpr
-          });
+    const chartComponent = this.selectComponent('#protein');
+    chartComponent.init((canvas, width, height, dpr) => {
+      chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr
+      });
     
           let option = {
             xAxis: {
@@ -125,31 +135,26 @@ Page({
             ]
           };
     
-          // Set the chart options and render the chart
-          chart.setOption(option);
-          return chart;
-        });
-  },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady() {
-    // console.log(this.calories)
+        // Set the chart options and render the chart
+        chart.setOption(option);
+        return chart;
+      });
   },
 
   /**
    * Lifecycle function--Called when page show
    */
   onShow() {
-
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide() {
-
+    if (chart) {
+      chart.dispose(); // Dispose the chart to clean up resources
+      chart = null; // Set chart to null when hiding the page
+    }
   },
 
   /**
@@ -191,23 +196,23 @@ Page({
     })
   },
   addToMeal(e){
+    console.log(this.data)
     const portion = this.data.portion / 100;
-    let goal = app.globalData.chartData
-    const meal = {
-      calories: portion * this.data.caloriesPerPortion,
-      fat: portion * this.data.fat / 100,
-      protein: portion * this.data.protein / 100,
-      carbs: portion * this.data.carbs / 100
-    }
-    const updateGoal = {
-      current_carb: meal.carbs + goal.current_carb,
-      current_protein: meal.protein + goal.current_protein,
-      current_fat: meal.fat + goal.current_fat,
-      current_calorie: meal.calories + goal.current_calorie
-    }
-    console.log(updateGoal)
+    let id = this.data.id
     wx.request({
-      url: `${app.globalData.baseUrl}/api/v1/goals/:id`,
+      url: `${app.globalData.baseUrl}/add_to_goal`,
+      header: app.globalData.header,
+      method: "POST",
+      data: {
+        id: id,
+        portion: portion
+      },
+      success(res){
+        console.log(res)
+        wx.switchTab({
+          url: '/pages/homepage/homepage',
+        })
+      }
     })
   },
   portionChange(e){
@@ -216,11 +221,33 @@ Page({
     })
   },
   submitReview(e){
+    const page = this
     const selectedStars = this.data.selectedStars;
     const reviewText = this.data.reviewText;
+    let id = this.data.id
 
-    console.log("Selected stars:", selectedStars);
-    console.log("Review text:", reviewText);
+    wx.request({
+      url: `${app.globalData.baseUrl}/recipes/${id}/add_review`,
+      method: "POST",
+      data:{
+        review:{
+          rating: selectedStars,
+          content: reviewText
+        }
+      },
+      success(res){
+        console.log(res)
+        wx.redirectTo({
+          url: '/pages/recipes/recipes?showDetail=true&showreview=true'
+        })
+        page.setData({
+          showDetail: false,
+          showReview: true,
+          opacityDetail: "opacity: 0",
+          opacityRecipe: "opacity: 1"
+        })
+      }
+    })
   },
   handleStarClick(e) {
     const selectedStarIndex = e.currentTarget.dataset.index;
