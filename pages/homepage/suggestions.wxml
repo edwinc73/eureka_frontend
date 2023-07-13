@@ -12,8 +12,8 @@
     </scroll-view>
   </view>
   <view class="search-result w-100">
-      <view class="search-result-card">
-      <SearchResult results="{{results}}"/>
+    <view class="search-result-card" wx:for="{{results}}">
+      <SearchResult data="{{item}}"/>
     </view>
   </view>
 </view>
