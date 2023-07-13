@@ -16,9 +16,10 @@ Page({
     wx.request({
       url: `${app.globalData.baseUrl}/suggestion`,
       method: 'GET',
-      success(res){
+      success: (res) => {
+        console.log()
         this.setData({
-          results: res.data.suggestion_recipes
+          results: res.data
         })
       }
     })
