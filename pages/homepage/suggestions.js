@@ -6,7 +6,7 @@ Page({
    * Page initial data
    */
   data: {
-
+    results: []
   },
 
   /**
@@ -16,11 +16,9 @@ Page({
     wx.request({
       url: `${app.globalData.baseUrl}/suggestion`,
       method: 'GET',
-      // header: app.globalData.header,
       success(res){
-        const suggestions = res.data.recipes
         this.setData({
-          suggestions: suggestions
+          results: res.data.suggestion_recipes
         })
       }
     })
