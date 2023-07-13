@@ -55,6 +55,7 @@ Page({
     wx.request({
       url: `${app.globalData.baseUrl}/goals/90`,
       success(res){
+        console.log(res)
         app.globalData.chartData = res.data
         const data = app.globalData.chartData
         page.setData({goal: data})
@@ -67,7 +68,8 @@ Page({
         height: height,
         devicePixelRatio: dpr
       });
-      
+      console.log(data.current_calorie)
+
       let overCalories = {
         backgroundColor: "rgba(0,0,0,0)",
         series: [{
