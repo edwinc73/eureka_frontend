@@ -53,7 +53,7 @@ Page({
     }
 
     wx.request({
-      url: `${app.globalData.baseUrl}/goals/90`,
+      url: `${app.globalData.baseUrl}/goals/20`,
       success(res){
         app.globalData.chartData = res.data
         const data = app.globalData.chartData

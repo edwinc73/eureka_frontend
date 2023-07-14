@@ -1,1 +1,4 @@
 /* pages/favourite/favourite.wxss */
+.fav-card{
+  margin-top: 200px;
+}
