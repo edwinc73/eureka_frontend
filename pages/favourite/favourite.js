@@ -1,20 +1,40 @@
 // pages/favourite/favourite.js
+const app = getApp();
+
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+    recipes:[]
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
+    const page = this
+    wx.request({
+      url: `${app.globalData.baseUrl}/favourite_recipes`,
+      method: 'GET',
+      success: (res) => {
+        console.log(res)
+        page.setData({
+          recipes: res.data
+        })
+      }
+    })
 
   },
 
+  goToRecipe(e){
+    console.log(e)
+    const recipe_id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/recipes/recipes?id=${recipe_id}&showdetail=true&showreview=false`,
+    })
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */

@@ -1,2 +1,15 @@
 <!--pages/favourite/favourite.wxml-->
-<text>pages/favourite/favourite.wxml</text>
+<view class="container">
+  <view class="card-grid">
+    <view class="fav-card" wx:for="{{recipes}}" wx:for-item="recipe" bindtap="goToRecipe" wx:key="key" data-id="{{recipe.id}}">
+      <image src="{{recipe.photos}}" class="img-lg" mode="aspectFill"/>
+      <view class="fav-info flex justify-between">
+        <text class="recipe-name">{{recipe.name}}</text>
+        <view class="recipe-kcal">{{recipe.total_calories}}kcal</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<ButtomMask />
+<CustomNav />

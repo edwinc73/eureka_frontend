@@ -1,1 +1,17 @@
 /* pages/favourite/favourite.wxss */
+.fav-info{
+  align-items: center;
+}
+
+.recipe-info{
+  font-size: 16px;
+}
+
+.recipe-kcal{
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.card-grid{
+  margin-top: 110px;
+}
