@@ -28,6 +28,13 @@ Page({
 
   },
 
+  goToRecipe(e){
+    console.log(e)
+    const recipe_id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/recipes/recipes?id=${recipe_id}&showdetail=true&showreview=false`,
+    })
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */
