@@ -11,5 +11,5 @@
   </view>
 </view>
 
-<ButtomMask />
+<BottomMask />
 <CustomNav />
