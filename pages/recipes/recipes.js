@@ -9,36 +9,40 @@ Page({
    * Page initial data
    */
   data: {
-    showDetail : true,
-    opacityDetail: "opacity: 1",
     opacityRecipe: "opacity: 0",
-    opacityReview: "opacity: 0",
     portion: 100,
     stars: [1, 2, 3, 4, 5],
     selectedStars: 0,
+    protein: null,
+    carbs: null,
+    fat: null,
   },
-
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
+    this.setData({
+      showDetail: options.showdetail == "true",
+      showReview: options.showreview == "true",
+      opacityDetail: options.showdetail == "true" && "opacity: 1",
+      opacityReview: options.showreview == "false" && "opacity: 0"
+    })
   },
 
   /**
    * Lifecycle function--Called when page is initially rendered
    */
   onReady() {
-
-
     const page = this
     wx.request({
-      url: `${app.globalData.baseUrl}/recipes/2`,
-      header:app.globalData.header,
-      success(res){
-        const recipe = res.data
-        console.log(recipe)
+      url: `${app.globalData.baseUrl}/recipes/${page.options.id}`,
+      header: app.globalData.header,
+      success(res) {
+        const recipe = res.data;
+        console.log(recipe);
         const instructions = recipe.instructions.split(/\d\./);
-        instructions.shift()
+        instructions.shift();
+  
         page.setData({
           id: recipe.id,
           instructions: instructions,
@@ -55,24 +59,25 @@ Page({
           calories: recipe.total_calories,
           caloriesPerPortion: Math.ceil(recipe.total_calories / recipe.portion),
           nutrients: [
-            {protein: recipe.protein},
-            {fat: recipe.fat},
-            {carbs: recipe.carbs},
-            {sodium: recipe.sodium},
-            {fiber: recipe.fiber}
-          ]
-
-        })
-      }
-    })
-    const chartComponent = this.selectComponent('#protein');
-    chartComponent.init((canvas, width, height, dpr) => {
-      chart = echarts.init(canvas, null, {
-        width: width,
-        height: height,
-        devicePixelRatio: dpr
-      });
-    
+            { protein: recipe.protein },
+            { fat: recipe.fat },
+            { carbs: recipe.carbs },
+            { sodium: recipe.sodium },
+            { fiber: recipe.fiber },
+          ],
+          isFavourite: recipe.user_favourite
+        });
+  
+        const { protein, carbs, fat } = page.data; // Get the required data from the page data
+        const canvasId = 'protein'; // Set the canvas ID to use with ec-canvas component
+  
+        const canvas = page.selectComponent(`#${canvasId}`).init((canvas, width, height, dpr) => {
+          const chart = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr,
+          });
+  
           let option = {
             xAxis: {
               type: 'category',
@@ -108,7 +113,7 @@ Page({
             series: [
               {
                 type: 'bar',
-                data: [this.data.protein, this.data.carbs, this.data.fat],
+                data: [protein, carbs, fat],
                 showBackground: false,
                 barWidth: '12',
                 itemStyle: {
@@ -125,22 +130,26 @@ Page({
                     return params.value + "g";
                   },
                   textStyle: {
-                    color: 'rgba(25, 16, 17, 0.5)', // Set the label text color,
-                    fontSize: 12, // Set the label font size
-                    fontWeight: '400', // Set the label font weight,
-                    textBorderColor: 'transparent', // Set the text border color to transparent
+                    color: 'rgba(25, 16, 17, 0.5)', 
+                    fontSize: 12, 
+                    fontWeight: '400', 
+                    textBorderColor: 'transparent', 
                   },
                 },
               }
             ]
           };
-    
-        // Set the chart options and render the chart
-        chart.setOption(option);
-        return chart;
-      });
+  
+          chart.setOption(option);
+          return chart;
+        });
+  
+        page.setData({
+          [`${canvasId}.canvas`]: canvas,
+        });
+      },
+    });
   },
-
   /**
    * Lifecycle function--Called when page show
    */
@@ -205,7 +214,9 @@ Page({
       method: "POST",
       data: {
         id: id,
-        portion: portion
+        meal:{
+          portion: portion
+        }
       },
       success(res){
         console.log(res)
@@ -221,10 +232,9 @@ Page({
     })
   },
   submitReview(e){
-    const page = this
     const selectedStars = this.data.selectedStars;
     const reviewText = this.data.reviewText;
-    let id = this.data.id
+    const id = this.data.id
 
     wx.request({
       url: `${app.globalData.baseUrl}/recipes/${id}/add_review`,
@@ -238,13 +248,7 @@ Page({
       success(res){
         console.log(res)
         wx.redirectTo({
-          url: '/pages/recipes/recipes?showDetail=true&showreview=true'
-        })
-        page.setData({
-          showDetail: false,
-          showReview: true,
-          opacityDetail: "opacity: 0",
-          opacityRecipe: "opacity: 1"
+          url: '/pages/recipes/recipes?showdetail=false&showreview=true'
         })
       }
     })
@@ -263,5 +267,37 @@ Page({
     this.setData({
       reviewText: reviewText,
     });
+  },
+  clickFavourite(){
+    const id = this.data.id
+    const page = this
+    
+    if(page.data.isFavourite){
+      wx.request({
+        url: `${app.globalData.baseUrl}/favourite_delete`,
+        method: "DELETE",
+        data:{
+          id:id,
+        },
+        success(res){
+          console.log(res)
+        }
+      })
+    } else {
+      wx.request({
+        url: `${app.globalData.baseUrl}/favourite_recipes`,
+        method: "POST",
+        data:{
+          id:id,
+        },
+        success(res){
+          console.log(res)
+        }
+      })
+    }
+    page.setData({
+      isFavourite: !page.data.isFavourite,
+    })
   }
 })
+

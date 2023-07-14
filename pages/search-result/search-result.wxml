@@ -1,8 +1,6 @@
-<!--pages/search-result/search-result.wxml-->
-<CustomNav />
 <view class="container w-100">
   <view class="search-box w-100">
-    <SearchBox />
+    <SearchBox bind:inputChange="handleInputChange" />
   </view>
   <view class="filter w-100 flex">
     <scroll-view scroll-x="true" class="filter-text flex">
@@ -14,12 +12,10 @@
     </scroll-view>
   </view>
   <view class="search-result w-100">
-    <view class="search-result-card">
-      <SearchResult results="{{results}}"/>
+    <view class="search-result-card" wx:for="{{results}}">
+      <SearchResult data="{{item}}"/>
     </view>
   </view>
-
-  <button class="create-button p">Create Recipe</button>
 </view>
 <BottomMask />
-
+<CustomNav />
