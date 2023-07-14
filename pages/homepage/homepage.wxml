@@ -56,7 +56,7 @@
   </view>
   <view class="suggestions-container">
     <view class="suggestion-container" wx:for="{{suggestions}}" bindtap="goToRecipe" data-id="{{item.id}}">
-      <SearchResult data="{{item}}"/>
+      <SearchResult data="{{item}}" />
       <hr/>
     </view>
   </view>
