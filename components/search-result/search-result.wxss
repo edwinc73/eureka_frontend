@@ -30,7 +30,7 @@ hr{
   background: white;
   border-radius: 10px;
   height: 1px;
-  margin: 8px 0;
+  /* margin: 8px 0; */
 }
 
 .text-container{

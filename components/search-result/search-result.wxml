@@ -6,6 +6,8 @@
     <text class="small text-light">{{data.total_calories}}kcal</text>
   </view>
   </view>
-  <image src="../../images/icons/gotoarrow.png" mode="aspectFit" class="go-to-icon" />
+  <!-- <image wx:if="{{arrowBackground}}" src="../../images/icons/gotoarrow.png" mode="aspectFit" class="go-to-icon" /> -->
+  <image src="../../images/icons/goto.png" mode="aspectFit" class="go-to-icon" />
+
 </view>
 
