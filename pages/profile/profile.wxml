@@ -31,7 +31,7 @@
   <view class="achievements w-100">
     <text class="p">Achievements</text>
     <view class="badge-grid">
-      <view class="badge flex" wx:for="{{badges}}" wx:for-item="badge" bindtap="click" wx:key="key" data-id="{{badge.id}}">
+      <view class="badge flex" wx:for="{{badges}}" wx:for-item="badge" wx:for-index="index" data-index="{{index}}" bindtap="click" wx:key="key">
         <image class="badge-img" src="https://images.unsplash.com/photo-1569513586164-80529357ad6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" mode="aspectFill" />
         <text class="badge-name small text-light">{{badge.name}}</text>
 
@@ -40,17 +40,18 @@
         <view class="window" wx:if="{{show}}">
           <view class="badge-info flex">
             <view class="badge-title flex justify-between">
-              <text class="h1">{{badge.name}}</text>
-              <text class="small text-light">{{badge.gain_badge_date}}</text>
+              <text class="h1">{{currentBadge.name}}</text>
+              <text class="small text-light">{{currentBadge.gain_badge_date}}</text>
             </view>
             <image class="badge-img-larger" src="https://images.unsplash.com/photo-1569513586164-80529357ad6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" mode="aspectFill" />
-            <view>{{badge.description}}</view>
+            <view>{{currentBadge.description}}</view>
           </view>
         </view>
       </view>
     </view>
   </view>
 </view>
+<view class="spacer"></view>
 
 
 
