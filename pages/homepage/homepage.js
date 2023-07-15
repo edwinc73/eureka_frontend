@@ -15,19 +15,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    const page = this
-    // load suggested recipe
-    wx.request({
-      url: `${app.globalData.baseUrl}/suggestion`,
-      header: app.globalData.header,
-      success(res){
-      console.log(res)
-        const suggestions = res.data.slice(0, 3)
-        page.setData({
-          suggestions: suggestions
-        })
-      }
-    })
   },
 
   /**
@@ -51,6 +38,18 @@ Page({
         selected: 0
       })
     }
+    // load suggested recipe
+    wx.request({
+      url: `${app.globalData.baseUrl}/suggestion`,
+      header: app.globalData.header,
+      success(res){
+      console.log(res)
+        const suggestions = res.data.slice(0, 3)
+        page.setData({
+          suggestions: suggestions
+        })
+      }
+    })
 
     wx.request({
       url: `${app.globalData.baseUrl}/goals/90`,
