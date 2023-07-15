@@ -38,8 +38,9 @@
 }
 
 .date-container {
+  width: 100%;
   white-space: nowrap;
-  margin: 15px 0;
+  margin: 10px 0;
   position: relative;
 }
 
@@ -73,7 +74,6 @@
   text-align: center;
   margin: 0 10px;
 }
-
 
 .current-calories, .bg-chart{
   position: absolute;
@@ -128,4 +128,106 @@
   align-items: baseline;
   margin: 10px 0 10px;
   z-index: 100;
+}
+
+.nutrient-chart, .nutrient-bg{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: -22px;
+  width: 130px;
+  height: 130px;
+}
+
+.nutrient{
+  width: 85px;
+  height: 85px;
+  display: block;
+}
+
+.nutrient-container{
+  width: 85px;
+  height: 85px;
+  padding: 0;
+  position: relative;
+}
+
+.nutrient-label{
+  text-align: center;
+  margin: -5px;
+}
+
+.nutrient-value{
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: calc(85px / 2 - 9px);
+}
+
+.search-result-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E3F0E6; 
+}
+
+.search-result-container:last-child {
+  border-bottom: none;
+}
+
+.search-result-container .result-image{
+  height: 60px;
+  width: 60px;
+  border-radius: 5px;
+
+}
+.search-description{
+  display: flex;
+  align-items: center;
+}
+
+hr{
+  display: block;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  height: 1px;
+  /* margin: 8px 0; */
+}
+
+.text-container{
+  margin-left: 10px;
+}
+
+.go-to-icon{
+  width: 14px;
+  height: 14px;
+  box-sizing: border-box;
+}
+
+.p-bold{
+  font-weight: bold;
+  font-size: 16px;
+  color: #191011
+}
+
+.small{
+  font-weight: 500;
+  font-size: 14px;
+  color: #191011
+}
+
+.cta-text{
+  color: #52BE8C
+}
+
+.text-light{
+  color: #191011;
+  opacity: 60%;
 }
