@@ -103,6 +103,8 @@ page{
   height: 150px;
   padding: 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .calorie{
@@ -121,11 +123,6 @@ page{
   text-align: center;
   width: 100%;
   top: calc(150px / 2 + 10px);
-}
-
-.chart-container{
-  display: flex;
-  flex-direction: column;
 }
 
 .nutrient-chart, .nutrient-bg{
