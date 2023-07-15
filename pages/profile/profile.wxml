@@ -1,2 +1,58 @@
 <!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<view class="container">
+  <view class="user-banner flex justify-between">
+    <view class="fixed-data flex">
+      <text class="small">Age</text>
+      <text class="h1">{{age}}</text>
+    </view>
+    <view class="user-info">
+      <image class="avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" mode="aspectFill" />
+      <view class="h1">{{username}}</view>
+    </view>
+    <view class="fixed-data flex">
+      <text class="small">Height</text>
+      <text class="h1">{{height}}</text>
+    </view>
+  </view>
+  <view class="data-card flex justify-between">
+    <view class="data flex">
+      <text class="large-text">{{current_weight}}</text>
+      <text class="small text-light">Current weight</text>
+    </view>
+    <view class="data flex">
+      <text class="large-text">{{goal_weight}}</text>
+      <text class="small text-light">Goal weight</text>
+    </view>
+    <view class="data flex">
+      <text class="large-text">{{bmi}}</text>
+      <text class="small text-light">BMI</text>
+    </view>
+  </view>
+  <view class="achievements w-100">
+    <text class="p">Achievements</text>
+    <view class="badge-grid">
+      <view class="badge flex" wx:for="{{badges}}" wx:for-item="badge" bindtap="click" wx:key="key" data-id="{{badge.id}}">
+        <image class="badge-img" src="https://images.unsplash.com/photo-1569513586164-80529357ad6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" mode="aspectFill" />
+        <text class="badge-name small text-light">{{badge.name}}</text>
+
+        <view class="mask" wx:if="{{show}}">
+        </view>
+        <view class="window" wx:if="{{show}}">
+          <view class="badge-info flex">
+            <view class="badge-title flex justify-between">
+              <text class="h1">{{badge.name}}</text>
+              <text class="small text-light">{{badge.gain_badge_date}}</text>
+            </view>
+            <image class="badge-img-larger" src="https://images.unsplash.com/photo-1569513586164-80529357ad6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" mode="aspectFill" />
+            <view>{{badge.description}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<BottomMask />
+<CustomNav />
