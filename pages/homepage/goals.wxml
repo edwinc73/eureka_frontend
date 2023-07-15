@@ -1,2 +1,65 @@
-<!--pages/homepage/goals.wxml-->
-<text>pages/homepage/goals.wxml</text>
+<view class="spacer"></view>
+<view class="container">
+  <view class="tabs-container flex align-center w-100">
+    <view class="tab p" data-value="detail" bindtap="switchTab">Daily<view style="{{opacityDetail}}" class="tab-indicator"></view></view>
+    <view class="tab p" data-value="recipe" bindtap="switchTab">Weekly<view style="{{opacityRecipe}}" class="tab-indicator"></view></view>
+  </view>
+  <scroll-view class="date-container" scroll-x="true" scroll-left="100" style="width: 100%" scroll-with-animation="true" >
+    <block wx:for="{{dateRange.length}}" wx:for-index="index">
+      <view class="date-item" data-index="{{index}}" bindtap="selectDate" style="background-color: {{activeIndex == index  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
+        <view class="text">
+          <view class="p" style="color: {{activeIndex == index ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[index][0]}}</view>
+          <view class="h2" style="color: {{activeIndex == index ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[index][1]}}</view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="title-container w-100">Nutrient Intake Sumarry
+</view>
+<view class="goal-chart w-100" >
+    <view class="chart-container">
+      <view class="calorie">
+        <ec-canvas id="myCanvasBg" canvas-id="myChart-bg" class="bg-chart"></ec-canvas>
+        <ec-canvas id="myCanvas" canvas-id="myChart" class="current-calories"></ec-canvas>
+      </view>
+      <view class="calorie-value">
+        <text class=".p-bold">{{dailyGoal.current_calorie}} </text>
+        <text class="small text-light">kcal</text>
+        <view class="small text-light">out of {{dailyGoal.calorie_goal}}</view>
+      </view>
+    </view>
+    <!-- <view class="flex justify-between nutrient-charts"> -->
+      <!-- <view class="nutrient-container">
+        <view class="nutrient">
+          <ec-canvas id="protein" canvas-id="protein" class="nutrient-bg"></ec-canvas>
+          <ec-canvas id="protein_bg" canvas-id="protein_bg" class="nutrient-chart"></ec-canvas>
+        </view>
+        <view class="nutrient-label small text-light">Protein</view>
+        <view class="nutrient-value h3 text-light">{{goal.current_protein}}g</view>
+      </view> -->
+      <!-- <view class="nutrient-container">
+        <view class="nutrient">
+          <ec-canvas id="carbs" canvas-id="carbs" class="nutrient-bg"></ec-canvas>
+          <ec-canvas id="carbs_bg" canvas-id="carbs_bg" class="nutrient-chart"></ec-canvas>
+        </view>
+        <view class="nutrient-label small text-light">Carbs</view>
+        <view class="nutrient-value h3 text-light">{{goal.current_carb}}g</view>
+      </view>
+      <view class="nutrient-container">
+        <view class="nutrient">
+          <ec-canvas id="fat" canvas-id="fat" class="nutrient-bg"></ec-canvas>
+          <ec-canvas id="fat_bg" canvas-id="fat_bg" class="nutrient-chart"></ec-canvas>
+        </view> -->
+        <!-- <view class="nutrient-label small text-light">Fat</view>
+        <view class="nutrient-value h3 text-light">{{goal.current_fat}}g</view>
+      </view> -->
+    <!-- </view> -->
+  </view>
+  <view class="title-container w-100">History</view>
+<view>
+
+</view>
+</view>
+
+<BottomMask />
+<CustomNav />
