@@ -62,14 +62,14 @@
         <view class="small text-light">out of {{dailyGoal.calorie_goal}}</view>
       </view>
     </view>
-    <!-- <view class="flex justify-between nutrient-charts">
+    <view class="flex justify-between nutrient-charts">
       <view class="nutrient-container">
         <view class="nutrient">
           <ec-canvas id="protein" canvas-id="protein" class="nutrient-bg"></ec-canvas>
           <ec-canvas id="protein_bg" canvas-id="protein_bg" class="nutrient-chart"></ec-canvas>
         </view>
         <view class="nutrient-label small text-light">Protein</view>
-        <view class="nutrient-value h3 text-light">{{goal.current_protein}}g</view>
+        <view class="nutrient-value h3 text-light">{{dailyGoal.current_protein}}g</view>
       </view> 
       <view class="nutrient-container">
         <view class="nutrient">
@@ -77,7 +77,7 @@
           <ec-canvas id="carbs_bg" canvas-id="carbs_bg" class="nutrient-chart"></ec-canvas>
         </view>
         <view class="nutrient-label small text-light">Carbs</view>
-        <view class="nutrient-value h3 text-light">{{goal.current_carb}}g</view>
+        <view class="nutrient-value h3 text-light">{{dailyGoal.current_carbs}}g</view>
       </view>
       <view class="nutrient-container">
         <view class="nutrient">
@@ -85,19 +85,19 @@
           <ec-canvas id="fat_bg" canvas-id="fat_bg" class="nutrient-chart"></ec-canvas>
         </view>
         <view class="nutrient-label small text-light">Fat</view>
-        <view class="nutrient-value h3 text-light">{{goal.current_fat}}g</view>
+        <view class="nutrient-value h3 text-light">{{dailyGoal.current_fat}}g</view>
       </view>
-    </view> -->
+    </view>
   </view>
-  <view class="title-container w-100">History</view>
-  <view class="w-100">
-    <view wx:for="{{dailyGoal.meals}}" bindtap="goToRecipe" data-index="{{item.recipe.id}}" >
+  <view class="title-container w-100" style="margin:20px 0 0">History</view>
+  <view class="w-100 history">
+    <view wx:for="{{dailyGoal.meals}}" bindtap="goToRecipe" data-id="{{meal.recipe.id}}" wx:for-item="meal" class="history" >
       <view class="search-result-container">
       <view class="search-description">
-      <image src="{{item.recipe.photo}}" mode="aspectFill" class="result-image"/>
+      <image src="{{meal.recipe.photo}}" mode="aspectFill" class="result-image"/>
       <view class="text-container">
-        <view class="p-bold">{{item.recipe.name}}</view>
-        <text class="small text-light">{{item.recipe.total_calories * item.portion}}kcal</text>
+        <view class="p-bold">{{meal.recipe.name}}</view>
+        <text class="small text-light">{{meal.recipe.total_calories / meal.recipe.portion * meal.portion}}kcal</text>
       </view>
       </view>
       <image src="../../images/icons/goto.png" mode="aspectFit" class="go-to-icon" />

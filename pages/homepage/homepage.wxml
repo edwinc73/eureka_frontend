@@ -38,7 +38,7 @@
           <ec-canvas id="carbs_bg" canvas-id="carbs_bg" class="nutrient-chart"></ec-canvas>
         </view>
         <view class="nutrient-label small text-light">Carbs</view>
-        <view class="nutrient-value h3 text-light">{{goal.current_carb}}g</view>
+        <view class="nutrient-value h3 text-light">{{goal.current_carbs}}g</view>
       </view>
       <view class="nutrient-container">
         <view class="nutrient">
