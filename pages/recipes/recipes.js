@@ -50,26 +50,19 @@ Page({
           ingredients: recipe.ingredients,
           photo: recipe.photos,
           reviews: recipe.reviews,
-          carbs: Math.floor(recipe.nutritious.carbs),
-          fat: Math.floor(recipe.nutritious.fat),
-          sodium: Math.floor(recipe.nutritious.sodium),
-          fiber: Math.floor(recipe.nutritious.fiber),
-          protein: Math.floor(recipe.nutritious.protein),
+          carbs: Math.floor(recipe.nutritious_per_100g.carbs),
+          fat: Math.floor(recipe.nutritious_per_100g.fat),
+          sodium: Math.floor(recipe.nutritious_per_100g.sodium),
+          fiber: Math.floor(recipe.nutritious_per_100g.fiber),
+          protein: Math.floor(recipe.nutritious_per_100g.protein),
           name: recipe.name,
           calories: recipe.total_calories,
           caloriesPerPortion: Math.ceil(recipe.total_calories / recipe.portion),
-          nutrients: [
-            { protein: recipe.protein },
-            { fat: recipe.fat },
-            { carbs: recipe.carbs },
-            { sodium: recipe.sodium },
-            { fiber: recipe.fiber },
-          ],
           isFavourite: recipe.user_favourite
         });
   
-        const { protein, carbs, fat } = page.data; // Get the required data from the page data
-        const canvasId = 'protein'; // Set the canvas ID to use with ec-canvas component
+        const { protein, carbs, fat } = page.data;
+        const canvasId = 'protein';
   
         const canvas = page.selectComponent(`#${canvasId}`).init((canvas, width, height, dpr) => {
           const chart = echarts.init(canvas, null, {
@@ -160,10 +153,8 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide() {
-    if (chart) {
-      chart.dispose(); // Dispose the chart to clean up resources
-      chart = null; // Set chart to null when hiding the page
-    }
+    chart.dispose(); 
+    chart = null; 
   },
 
   /**
