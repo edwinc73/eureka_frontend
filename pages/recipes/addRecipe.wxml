@@ -1,0 +1,46 @@
+<view class="container w-100">
+  <view class="search-box w-100">
+    <SearchBox bind:inputChange="handleInputChange" placeholder="Search for ingredients" />
+  </view>
+  <view class="ingredients-list w-100">
+    <view class="ingredient flex w-100" wx:for="{{ingredients}}">
+    <view class="ingredient-info flex justify-between w-100">
+      <view class="small item-name ">{{item.name}}</view>
+        <view class="flex calorie-information">
+          <view class="small text-light">{{item.calories}}kcal/100g</view>
+          <image src="../../images/icons/add_icon.png" mode="aspectFit" data-id="{{item.id}}" bindtap="openDialogueWindow"/>
+        </view>
+      </view>
+      <hr/>
+      <view class="pop-up-window w-100" wx:if="{{show_window}}">
+        <view class="flex align-center pop-up-container">
+          <view class="pop-up-window-bg" bindtap="switchShow"></view>
+          <view class="dialogue-window">
+            <view class="h1">{{currentIngredient.name}}</view>
+            <slider bindchanging="portionChange" activeColor="#52BE8C" block-size="12" block-color="#52BE8C" value="100" step="10" min="10" max="1000" />
+            <view class="flex justify-between" style="gap:15px">
+              <view class="bubble recipe-portion h1">{{portion}}g</view>
+              <view class="bubble button" data-id="{{item.id}}" bindtap="addToCart">Add</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="button flex floating justify-between">
+    <view class="p cart-info">{{cart.length}} {{cart.length > 1 ? "Ingredients" : "Ingredient"}}</view>
+    <view class="add p" bindtap="goToConfirm">Add</view>
+  </view>
+  <view class="cart-list" wx:if="{{cart.length}}">
+    <view wx:for="{{cart}}" data-id="{{item.id}}" class="cart-item flex justify-between">
+      <view class="cart-item-left flex align-center">
+        <image class="cart-minus" src="../../images/icons/minus_icon.png" mode="aspectFit" bindtap="removeCartItem" data-index="{{index}}"/>
+        <text class="small">{{item.name}}</text>
+      </view>
+      <view class="small">{{item.portion}}g</view>
+    </view>
+  </view>
+  <view class="spacer"></view>
+</view>
+<BottomMask />
+<CustomNav />

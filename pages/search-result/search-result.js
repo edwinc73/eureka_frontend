@@ -81,10 +81,14 @@ Page({
 
   },
   goToRecipe(e){
-    console.log("going")
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+    })
+  },
+  goToAddRecipe(){
+    wx.navigateTo({
+      url: `/pages/recipes/addRecipe`,
     })
   }
 })

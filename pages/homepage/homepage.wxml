@@ -5,7 +5,7 @@
 </view>
 <view class="container">
   <view class="search-container w-100">
-    <SearchBox />
+    <SearchBox placeholder="Add your meal" />
   </view>
   <view class="title-container flex justify-between w-100" bindtap="goToMyGoals">
     <view class="h1 bold">My Goal</view>
