@@ -1,20 +1,44 @@
 // pages/profile/profile.js
+const app = getApp();
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+    show: false
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-
+    const page = this
+    wx.request({
+      url: `${app.globalData.baseUrl}/profile`,
+      method: 'GET',
+      success: (res) => {
+        console.log(res)
+        page.setData({
+          username: res.data.username,
+          age: res.data.age,
+          height: res.data.height,
+          current_weight: res.data.weight,
+          goal_weight: res.data.goal_weight,
+          bmi: (res.data.weight/ [(res.data.height/100) * (res.data.height/100)]).toFixed(1),
+          badges: res.data.badges
+        })
+      }
+    })
   },
 
+  click: function(e) {
+    const page = this
+    console.log(e)
+    page.setData({
+      show: !page.data.show
+    })
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */
