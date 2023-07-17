@@ -26,7 +26,7 @@ App({
     // load user goal
     const app = this
     wx.request({
-      url: `${app.globalData.baseUrl}/goals/90`,
+      url: `${app.globalData.baseUrl}/goals/69`,
       success(res){
         // console.log(res.data)
         app.globalData.chartData = res.data

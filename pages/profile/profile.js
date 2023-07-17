@@ -32,10 +32,13 @@ Page({
     })
   },
 
-  click: function(e) {
+  click(e) {
     const page = this
-    console.log(e)
+    const index = e.currentTarget.dataset.index
+    const badge = page.data.badges[index]
+    console.log(badge)
     page.setData({
+      currentBadge: badge,
       show: !page.data.show
     })
   },

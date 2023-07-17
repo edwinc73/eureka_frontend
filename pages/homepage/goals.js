@@ -31,10 +31,10 @@ Page({
   onShow() {
     const page = this
     wx.request({
-      url: `${app.globalData.baseUrl}/goals`,
+      url: `${app.globalData.baseUrl}/weekly_goals`,
       header: app.globalData.header,
       success(res){
-
+        console.log(res)
         // setting the dates based on the last
         const currentDate = new Date();
         const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -48,14 +48,14 @@ Page({
 
         // applying default data to the dailygoals
 
-        const dailyGoals = res.data.weekly_goals
-        const goal = res.data.weekly_goals[6]
-        console.log(goal)
+        const dailyGoals = res.data
+        const goal = res.data[6]
+        console.log(dailyGoals[0])
         page.setData({
           dailyGoal: goal,
           dailyGoals: dailyGoals,
           dateRange : dateRange.reverse(),
-          meals : res.data.weekly_goals[6].meals
+          meals : res.data[6].meals
         })
         },
       complete(res){
@@ -1243,5 +1243,3 @@ Page({
     })
   }
 })
-
-// 575757
