@@ -26,7 +26,21 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
+    const page = this
+    wx.getStorage({
+      key: 'chart',
+      success (res) {
+        console.log(res)
+        page.setData({
 
+        })
+      },
+      fail(res){
+        page.setData({
+          cart: []
+        })
+      }
+    })
   },
 
   /**
@@ -96,7 +110,7 @@ Page({
       id: this.data.currentIngredient.id,
       portion: this.data.portion
     }
-    const cart = this.data.cart || []
+    const cart = this.data.cart
     cart.push(cart_item)
     this.setData({
       cart: cart,
@@ -104,19 +118,22 @@ Page({
     })
   },
   goToConfirm(){
-    console.log("aslkdlk")
     const page = this
+    console.log(this.data.cart.length)
     if(page.data.cart.length == 0){
       wx.showToast({
-        title: 'Please Add Ingredients',
+        icon: 'error',
+        duration: 2000,
+        title: 'No Ingredients',
+      })
+    } else {
+      wx.setStorage({
+        key:"cart",
+        data: page.data.cart
+      })
+      wx.navigateTo({
+        url: '/pages/recipes/confirmRecipe',
       })
     }
-    wx.setStorage({
-      key:"cart",
-      data: page.data.cart
-    })
-    wx.navigateTo({
-      url: '/pages/recipes/confirmRecipe',
-    })
   }
 })

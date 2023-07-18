@@ -5,14 +5,22 @@ Page({
    * Page initial data
    */
   data: {
-
+    tempFiles:[]
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-
+    const page = this
+    wx.getStorage({
+      key: "cart",
+      success(res){
+        page.setData({
+          cart: res.data
+        })
+      }
+    })
   },
 
   /**
@@ -62,5 +70,36 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  uploadImage(){
+    const page = this
+    wx.chooseMedia({
+      count: 1,
+      mediaType: 'image',
+      sourceType: ['album', 'camera'],
+      camera: 'back',
+      success(res) {
+        page.setData({
+          tempFiles: res.tempFiles
+        })
+      }
+    })
+  },
+  submitRecipe(e){
+    const recipe = e.detail.value
+    recipe.ingredients = this.data.cart
+    const name = recipe.name 
+    const description = recipe.description
+    const instructions = recipe.instructions
+    const tempFiles = this.data.tempFiles
+    if(!name || !description || !instructions || tempFiles.length == 0){
+      wx.showToast({
+        icon: 'error',
+        duration: 2000,
+        title: 'Missing input',
+      })
+    } else{
+      console.log("valid recipe")
+    }
   }
 })

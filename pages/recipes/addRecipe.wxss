@@ -136,3 +136,7 @@ hr{
   color: white;
   background: linear-gradient(153deg, #52BE8D 0%, #A1D97E 100%);
 }
+
+.ingredient:last-child hr{
+  display: none;
+}
