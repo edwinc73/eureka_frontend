@@ -10,10 +10,11 @@
     "pages/search-result/search-result",
     "pages/homepage/suggestions",
     "pages/recipes/recipes",
+    "pages/recipes/addRecipe",
+    "pages/recipes/confirmRecipe",
     "components/custom-nav/custom-nav",
     "components/search-result/search-result",
     "components/review/review"
-
   ],
   "window":{
     "navigationStyle": "custom"

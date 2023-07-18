@@ -14,18 +14,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    const page = this
-    wx.request({
-      url: `${app.globalData.baseUrl}/favourite_recipes`,
-      method: 'GET',
-      success: (res) => {
-        console.log(res)
-        page.setData({
-          recipes: res.data
-        })
-      }
-    })
-
   },
 
   goToRecipe(e){
@@ -52,6 +40,19 @@ Page({
         selected: 1
       })
     }
+
+    const page = this
+    wx.request({
+      url: `${app.globalData.baseUrl}/favourite_recipes`,
+      method: 'GET',
+      success: (res) => {
+        console.log(res)
+        page.setData({
+          recipes: res.data
+        })
+      }
+    })
+    
   },
 
   /**

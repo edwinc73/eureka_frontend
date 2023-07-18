@@ -1,0 +1,41 @@
+<view class="container w-100">
+  <form class="post w-100" bindsubmit="submitRecipe">
+    <view class="images-container">
+      <view class="flex justify-between align-center">
+        <view class="p text-left">Images *</view>
+        <view class="small text-light">{{tempFiles.length}}/1</view>
+      </view>
+        <scroll-view class="image-gallery" scroll-x="true" style="width: 100%">
+            <view class="image-uploader recipe-image" bindtap="uploadImage"></view>
+          <block wx:for="{{tempFiles}}">
+            <image src="{{item.tempFilePath}}" mode="aspectFill" class="recipe-image" />
+          </block>
+        </scroll-view>
+    </view>
+    <view class="p text-left">Name *</view>
+    <view class="input-field">
+      <textarea type="text" name="name" class="input w-100" maxlength="40"></textarea>
+    </view>
+    <view class="p">Description *</view>
+    <view class="input-field">
+      <textarea type="text" name="description" class="auto-grow-textarea" auto-height maxlength="300"></textarea>
+    </view>
+    <view class="p">Instruction *</view>
+    <view class="input-field">
+      <textarea type="text" name="instructions" class="auto-grow-textarea" auto-height="true"  maxlength="500"></textarea>
+    </view>
+    <view class="cart-list">
+      <view wx:for="{{cart}}" class="cart-item flex w-100">
+      <view class="flex justify-between">
+        <view class="item-name p">{{item.name}}</view>
+        <view class="p">{{item.portion}}g</view>
+      </view>
+      <hr/>
+      </view>
+    </view> 
+    <button class="floating p" form-type="submit">Submit</button>
+  </form>
+  <view class="spacer"></view>
+</view>
+<BottomMask />
+<CustomNav />

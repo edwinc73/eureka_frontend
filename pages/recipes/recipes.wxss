@@ -21,6 +21,7 @@
 
 .recipe-hr{
   background-color: #E3F0E6 !important;
+  margin: 8px 0 12px;
 }
 
 .tab{
