@@ -3,6 +3,30 @@ import * as echarts from '../../ec-canvas/echarts';
 
 const app = getApp();
 
+let chart = null
+let chartBg = null
+let protein = null
+let proteinBg = null
+let carbs = null
+let carbsBg = null
+let fat = null
+let fatBg = null
+
+function clearChart(ec){
+  ec.clear(); 
+  ec = null; 
+}
+
+function clearAllChart() {
+  clearChart(chart)
+  clearChart(chartBg)
+  clearChart(protein)
+  clearChart(proteinBg)
+  clearChart(carbsBg)
+  clearChart(fat)
+  clearChart(fatBg)
+}
+
 Page({
   /**
    * Page initial data
@@ -43,17 +67,17 @@ Page({
       url: `${app.globalData.baseUrl}/suggestion`,
       header: app.globalData.header,
       success(res){
-      console.log(res)
         const suggestions = res.data.slice(0, 3)
         page.setData({
           suggestions: suggestions
         })
       }
     })
-
+    // load echart
     wx.request({
       url: `${app.globalData.baseUrl}/goals/90`,
       success(res){
+        console.log(res)
         app.globalData.chartData = res.data
         const data = app.globalData.chartData
         page.setData({goal: data})
@@ -61,7 +85,7 @@ Page({
     const chartComponent = page.selectComponent('#myCanvas');
     chartComponent.init((canvas, width, height, dpr) => {
 
-      const chart = echarts.init(canvas, null, {
+      chart = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
@@ -202,9 +226,9 @@ Page({
       return chart;
     });
 
-    const chartBg = page.selectComponent('#myCanvasBg');
-    chartBg.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+    const chartBgComponent = page.selectComponent('#myCanvasBg');
+    chartBgComponent.init((canvas, width, height, dpr) => {
+      chartBg = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
@@ -254,13 +278,13 @@ Page({
       };
 
       // Set the chart options and render the chart
-      chart.setOption(bgoption);
-      return chart;
+      chartBg.setOption(bgoption);
+      return chartBg;
     });
 
-    const protein = page.selectComponent('#protein');
-    protein.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+    const proteinComponent = page.selectComponent('#protein');
+    proteinComponent.init((canvas, width, height, dpr) => {
+      protein = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
@@ -394,13 +418,13 @@ Page({
       }
 
       // Set the chart options and render the chart
-      chart.setOption(option);
-      return chart;
+      protein.setOption(option);
+      return protein;
     });
 
-    const proteinBg = page.selectComponent('#protein_bg');
-    proteinBg.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+    const proteinBgComponent = page.selectComponent('#protein_bg');
+    proteinBgComponent.init((canvas, width, height, dpr) => {
+      proteinBg = echarts.init(canvas, null, {
         width: width ,
         height: height,
         devicePixelRatio: dpr
@@ -448,13 +472,13 @@ Page({
       };
 
       // Set the chart options and render the chart
-      chart.setOption(bgoption);
-      return chart;
+      proteinBg.setOption(bgoption);
+      return proteinBg;
     });
     
-    const carbs = page.selectComponent('#carbs');
-    carbs.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+    const carbsComponent = page.selectComponent('#carbs');
+    carbsComponent.init((canvas, width, height, dpr) => {
+      carbs = echarts.init(canvas, null, {
         width: width ,
         height: height,
         devicePixelRatio: dpr
@@ -518,7 +542,7 @@ Page({
             borderRadius: 200
           },
           data: [{
-            value: data.current_protein,
+            value: data.current_carbs,
             itemStyle: {
               color: '#F8D477'
             },
@@ -526,7 +550,7 @@ Page({
               show: false
             }
           },{
-            value: data.protein_goal,
+            value: data.carbs_goal,
             name: "fill",
             itemStyle: {
               color: 'none',
@@ -588,13 +612,13 @@ Page({
       }
 
       // Set the chart options and render the chart
-      chart.setOption(option);
-      return chart;
+      carbs.setOption(option);
+      return carbs;
     });
 
-    const carbs_bg = page.selectComponent('#carbs_bg');
-    carbs_bg.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+    const carbsBgComponent = page.selectComponent('#carbs_bg');
+    carbsBgComponent.init((canvas, width, height, dpr) => {
+      carbsBg = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
@@ -642,13 +666,13 @@ Page({
       };
 
       // Set the chart options and render the chart
-      chart.setOption(bgoption);
-      return chart;
+      carbsBg.setOption(bgoption);
+      return carbsBg;
     });
 
-    const fat = page.selectComponent('#fat');
-    fat.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+    const fatComponent = page.selectComponent('#fat');
+    fatComponent.init((canvas, width, height, dpr) => {
+      fat = echarts.init(canvas, null, {
         width: width ,
         height: height,
         devicePixelRatio: dpr
@@ -712,7 +736,7 @@ Page({
             borderRadius: 200
           },
           data: [{
-            value: data.current_protein,
+            value: data.current_fat,
             itemStyle: {
               color: '#575757'
             },
@@ -720,7 +744,7 @@ Page({
               show: false
             }
           },{
-            value: data.protein_goal,
+            value: data.fat_goal,
             name: "fill",
             itemStyle: {
               color: 'none',
@@ -782,13 +806,13 @@ Page({
       }
 
       // Set the chart options and render the chart
-      chart.setOption(option);
-      return chart;
+      fat.setOption(option);
+      return fat;
     });
 
-    const fatBg = page.selectComponent('#fat_bg');
-    fatBg.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+    const fatBgComponent = page.selectComponent('#fat_bg');
+    fatBgComponent.init((canvas, width, height, dpr) => {
+      fatBg = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
@@ -836,8 +860,8 @@ Page({
       };
 
       // Set the chart options and render the chart
-      chart.setOption(bgoption);
-      return chart;
+      fatBg.setOption(bgoption);
+      return fatBg;
     });
       }
     })
@@ -847,14 +871,12 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide() {
-
   },
-
+  
   /**
    * Lifecycle function--Called when page unload
    */
   onUnload() {
-
   },
 
   /**
@@ -878,17 +900,19 @@ Page({
 
   },
   goToMyGoals(){
+    clearAllChart()
     wx.navigateTo({
       url: '/pages/homepage/goals',
     })
   },
   goToSuggestions(){
+    clearAllChart()
     wx.navigateTo({
       url: '/pages/homepage/suggestions',
     })
   },
   goToRecipe(e){
-    // console.log("going")
+    clearAllChart()
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
