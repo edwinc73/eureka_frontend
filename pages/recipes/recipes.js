@@ -4,6 +4,11 @@ const app = getApp()
 
 let chart = null
 
+function clearChart(ec){
+  ec.clear(); 
+  ec = null; 
+}
+
 Page({
   /**
    * Page initial data
@@ -63,7 +68,7 @@ Page({
         const canvasId = 'protein';
   
         const canvas = page.selectComponent(`#${canvasId}`).init((canvas, width, height, dpr) => {
-          const chart = echarts.init(canvas, null, {
+          chart = echarts.init(canvas, null, {
             width: width,
             height: height,
             devicePixelRatio: dpr,
@@ -134,10 +139,6 @@ Page({
           chart.setOption(option);
           return chart;
         });
-  
-        page.setData({
-          [`${canvasId}.canvas`]: canvas,
-        });
       },
     });
   },
@@ -184,6 +185,7 @@ Page({
   },
   switchTab(e){
     const state = e.currentTarget.dataset.value
+    clearChart(chart)
     this.setData({
       showDetail: state == "detail",
       showRecipe: state == "recipe",
@@ -192,6 +194,82 @@ Page({
       opacityRecipe: state == "recipe" ? "opacity: 1" : "opacity: 0",
       opacityReview: state == "review" ? "opacity: 1" : "opacity: 0"
     })
+    if(state == "detail"){
+      const page = this
+        const canvas = page.selectComponent(`#protein`)
+        canvas.init((canvas, width, height, dpr) => {
+        chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr,
+        });
+
+        let option = {
+          xAxis: {
+            type: 'category',
+            data: ['Protein', 'Carbs', 'Fat'],
+            axisLine: {
+              show: false,
+            },
+            splitLine: false,
+            axisTick: false,
+            axisLabel: {
+              color: 'rgba(25, 16, 17, 0.5)',
+              fontSize: 12,
+              fontWeight: '400',
+            },
+          },
+          yAxis: {
+            axisLabel:{
+              show: false
+            },
+            axisLine:{
+              show: false,
+            },
+            splitLine: false,
+            axisTick: false,
+          },
+          grid: {
+            top: '20%',
+            left: '0%',
+            right: '0%',
+            bottom: '0%',
+            containLabel: true,
+          },
+          series: [
+            {
+              type: 'bar',
+              data: [page.data.protein, page.data.carbs, page.data.fat],
+              showBackground: false,
+              barWidth: '12',
+              itemStyle: {
+                color: function(params) {
+                  const colorList = ['#D83D4B', '#F8D477', '#575757'];
+                  return colorList[params.dataIndex];
+                },
+                borderRadius: 50,
+              },
+              label: {
+                show: true,
+                position: 'top',
+                formatter: function(params) {
+                  return params.value + "g";
+                },
+                textStyle: {
+                  color: 'rgba(25, 16, 17, 0.5)', 
+                  fontSize: 12, 
+                  fontWeight: '400', 
+                  textBorderColor: 'transparent', 
+                },
+              },
+            }
+          ]
+        };
+
+        chart.setOption(option);
+        return chart;
+      });
+    }
   },
   addToMeal(e){
     console.log(this.data)

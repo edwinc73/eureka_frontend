@@ -84,7 +84,6 @@ Page({
       complete(res){
         const chartComponent = page.selectComponent('#myCanvas');
         chartComponent.init((canvas, width, height, dpr) => {
-          console.log(width, height, canvas)
           chart = echarts.init(canvas, null, {
             width: width,
             height: height,

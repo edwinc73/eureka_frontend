@@ -716,7 +716,6 @@ Page({
           }]
         }]
       };
-      console.log(data.current_fat, data.fat_goal)
       // Configure your ECharts chart options and data
       let under = {
         backgroundColor: "rgba(0,0,0,0)",
@@ -917,6 +916,10 @@ Page({
   },
   goToRecipe(e){
     clearAllChart()
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    })
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
