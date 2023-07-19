@@ -901,6 +901,10 @@ Page({
   },
   goToMyGoals(){
     clearAllChart()
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    })
     wx.navigateTo({
       url: '/pages/homepage/goals',
     })

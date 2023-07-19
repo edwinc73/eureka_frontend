@@ -4,7 +4,7 @@
     <view class="tab p" data-value="detail" bindtap="switchTab">Daily<view style="{{opacityDetail}}" class="tab-indicator"></view></view>
     <view class="tab p" data-value="recipe" bindtap="switchTab">Weekly<view style="{{opacityRecipe}}" class="tab-indicator"></view></view>
   </view>
-  <scroll-view class="date-container" scroll-x="true" scroll-into-view="{{rightID}}" scroll-with-animation="true">
+  <scroll-view class="date-container" scroll-x="true" scroll-into-view="{{rightID}}" scroll-with-animation="true" show-scrollbar="false">
         <view class="date-item" bindtap="selectDate" data-index="0" style="background-color: {{activeIndex == 0  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
           <view class="text">
             <view class="p" style="color: {{activeIndex == 0 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[0][0]}}</view>
@@ -109,3 +109,12 @@
 
 <BottomMask />
 <CustomNav />
+<!-- Component
+let chart = null
+let chartBg = null
+let protein = null
+let proteinBg = null
+let carbs = null
+let carbsBg = null
+let fat = null
+let fatBg = null -->
