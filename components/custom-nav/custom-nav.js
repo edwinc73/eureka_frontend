@@ -5,15 +5,17 @@ Component({
   },
   ready() {
     let app = getApp()
-    if(getCurrentPages()[getCurrentPages().length - 1].route !== "pages/cars/homepage"){
-      if (getCurrentPages().length >= 1) {
-        this.setData({
-          showBackButton: true,
-        })
-      } else {
+    const currentRoute = getCurrentPages()[0].route
+    console.log(currentRoute)
+    if(currentRoute !== "pages/homepage/homepage"){
+      if (app.globalData.tabPages.includes(currentRoute)) {
         this.setData({
           showAppName: true,
          })
+      } else {
+        this.setData({
+          showBackButton: true,
+        })
       }
     }
   },
