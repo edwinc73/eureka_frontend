@@ -1,6 +1,7 @@
 <view class="container w-100">
   <view class="search-box w-100">
-    <SearchBox bind:inputChange="handleInputChange" placeholder="Search for ingredients" />
+      <image src="/images/icons/search.png" mode="aspectFit"/>
+      <input type="text" value='{{query}}' bindconfirm="searchIngredient" placeholder="Search for ingredients" placeholder-style="color:#777; font-size:16px; font-family:quicksand" />
   </view>
   <view class="ingredients-list w-100">
     <view class="ingredient flex w-100" wx:for="{{ingredients}}">
@@ -41,6 +42,7 @@
     </view>
   </view>
   <view class="spacer"></view>
+
 </view>
 <BottomMask />
 <CustomNav />

@@ -1,4 +1,6 @@
 // pages/recipes/confirmRecipe.js
+const app = getApp()
+
 Page({
 
   /**
@@ -87,10 +89,22 @@ Page({
   },
   submitRecipe(e){
     const recipe = e.detail.value
-    recipe.ingredients = this.data.cart
-    const name = recipe.name 
-    const description = recipe.description
-    const instructions = recipe.instructions
+    const ingredientsData = this.data.cart
+    const reformattedData = []
+    ingredientsData.forEach(ingredient => {
+      reformattedData.push({
+        [ingredient.name] : {
+          id: ingredient.id,
+          portion: ingredient.portion / 100
+        }
+      })
+    });
+
+    console.log({
+      recipe: recipe,
+      ingredients: reformattedData
+    })
+    const {name,description,instructions} = recipe
     const tempFiles = this.data.tempFiles
     if(!name || !description || !instructions || tempFiles.length == 0){
       wx.showToast({
@@ -99,7 +113,20 @@ Page({
         title: 'Missing input',
       })
     } else{
-      console.log("valid recipe")
+      wx.request({
+        url: `${app.globalData.baseUrl}/recipes`,
+        method: "POST",
+        header: app.globalData.header,
+        data:{
+          recipe: recipe,
+          ingredients: reformattedData
+        },
+        success(res){
+          wx.navigateTo({
+            url: '/page/',
+          })
+        }
+      })
     }
   }
 })
