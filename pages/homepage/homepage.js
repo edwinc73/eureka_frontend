@@ -151,7 +151,7 @@ Page({
             borderRadius: 200
           },
           data: [{
-            value: data.current_calorie,
+            value: data.current_calorie / data.calorie_goal * 100,
             itemStyle: {
               color: '#52BE8C'
             },
@@ -159,7 +159,7 @@ Page({
               show: false
             }
           },{
-            value: data.calorie_goal,
+            value: 100 - (data.current_calorie / data.calorie_goal * 100) + 100,
             name: "fill",
             itemStyle: {
               color: 'none',
@@ -348,7 +348,7 @@ Page({
             borderRadius: 200
           },
           data: [{
-            value: data.current_protein,
+            value: data.current_protein / data.protein_goal * 100,
             itemStyle: {
               color: '#D83D4B'
             },
@@ -356,7 +356,7 @@ Page({
               show: false
             }
           },{
-            value: data.protein_goal,
+            value: 100 - (data.current_protein / data.protein_goal * 100) + 13.8,
             name: "fill",
             itemStyle: {
               color: 'none',
@@ -542,7 +542,7 @@ Page({
             borderRadius: 200
           },
           data: [{
-            value: data.current_carbs,
+            value: data.current_carbs / data.carbs_goal * 100,
             itemStyle: {
               color: '#F8D477'
             },
@@ -550,7 +550,7 @@ Page({
               show: false
             }
           },{
-            value: data.carbs_goal,
+            value: 100 - (data.current_carbs / data.carbs_goal * 100) + 13.8,
             name: "fill",
             itemStyle: {
               color: 'none',
@@ -716,7 +716,7 @@ Page({
           }]
         }]
       };
-
+      console.log(data.current_fat, data.fat_goal)
       // Configure your ECharts chart options and data
       let under = {
         backgroundColor: "rgba(0,0,0,0)",
@@ -736,7 +736,7 @@ Page({
             borderRadius: 200
           },
           data: [{
-            value: data.current_fat,
+            value: ( data.current_fat / data.fat_goal) * 100,
             itemStyle: {
               color: '#575757'
             },
@@ -744,7 +744,7 @@ Page({
               show: false
             }
           },{
-            value: data.fat_goal,
+            value: 100 - (data.current_fat / data.fat_goal * 100) + 13.8,
             name: "fill",
             itemStyle: {
               color: 'none',
