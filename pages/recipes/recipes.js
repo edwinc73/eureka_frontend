@@ -39,10 +39,8 @@ Page({
       header: app.globalData.header,
       success(res) {
         const recipe = res.data;
-        console.log(recipe);
         const instructions = recipe.instructions.split(/\d\./);
         instructions.shift();
-  
         page.setData({
           id: recipe.id,
           instructions: instructions,
@@ -239,7 +237,7 @@ Page({
       success(res){
         console.log(res)
         wx.redirectTo({
-          url: '/pages/recipes/recipes?showdetail=false&showreview=true'
+          url: `/pages/recipes/recipes?id=${id}showdetail=false&showreview=true`
         })
       }
     })
