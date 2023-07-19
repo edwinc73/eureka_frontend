@@ -5,7 +5,7 @@
       <image src="{{recipe.photos}}" class="img-lg" mode="aspectFill"/>
       <view class="fav-info flex justify-between">
         <text class="recipe-name">{{recipe.name}}</text>
-        <view class="recipe-kcal">{{recipe.total_calories}}kcal</view>
+        <view class="recipe-kcal">{{recipe.calories_per_100g}}kcal</view>
       </view>
     </view>
   </view>
