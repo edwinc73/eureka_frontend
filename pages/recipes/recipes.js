@@ -53,6 +53,7 @@ Page({
           ingredients: recipe.ingredients,
           photo: recipe.photos,
           reviews: recipe.reviews,
+          rating: Math.floor(recipe.rating),
           carbs: Math.floor(recipe.nutritious_per_100g.carbs),
           fat: Math.floor(recipe.nutritious_per_100g.fat),
           sodium: Math.floor(recipe.nutritious_per_100g.sodium),
@@ -63,6 +64,8 @@ Page({
           caloriesPerPortion: Math.ceil(recipe.total_calories / recipe.portion),
           isFavourite: recipe.user_favourite
         });
+
+        console.log(res)
   
         const { protein, carbs, fat } = page.data;
         const canvasId = 'protein';

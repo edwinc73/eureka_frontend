@@ -5,7 +5,7 @@
       <image src="{{photo}}" mode="aspectFill" class="recipe-image" />
       <view>
         <view class="h2">{{name}}</view>
-        <text wx:for="[1,2]" class="star">⭐</text>
+        <text wx:for="{{rating}}" class="star">⭐</text>
       </view>
     </view>
     <view class="heart-container">
