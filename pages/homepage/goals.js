@@ -2,6 +2,31 @@
 import * as echarts from '../../ec-canvas/echarts';
 
 const app = getApp()
+let chart = null
+let chartBg = null
+let protein = null
+let proteinBg = null
+let carbs = null
+let carbsBg = null
+let fat = null
+let fatBg = null
+
+function clearChart(ec){
+  ec.clear(); 
+  ec = null; 
+}
+
+function clearAllChart() {
+  clearChart(chart)
+  clearChart(chartBg)
+  clearChart(protein)
+  clearChart(proteinBg)
+  clearChart(carbsBg)
+  clearChart(fat)
+  clearChart(fatBg)
+}
+
+
 Page({
 
   /**
@@ -22,7 +47,6 @@ Page({
    * Lifecycle function--Called when page is initially rendered
    */
   onReady() {
-    // this.scrollRight()
   },
 
   /**
@@ -34,7 +58,6 @@ Page({
       url: `${app.globalData.baseUrl}/weekly_goals`,
       header: app.globalData.header,
       success(res){
-        console.log(res)
         // setting the dates based on the last
         const currentDate = new Date();
         const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -50,7 +73,7 @@ Page({
 
         const dailyGoals = res.data
         const goal = res.data[6]
-        console.log(dailyGoals[0])
+        console.log(goal)
         page.setData({
           dailyGoal: goal,
           dailyGoals: dailyGoals,
@@ -59,239 +82,285 @@ Page({
         })
         },
       complete(res){
-          const chartComponent = page.selectComponent('#myCanvas');
-          chartComponent.init((canvas, width, height, dpr) => {
-      
-            const chart = echarts.init(canvas, null, {
-              width: width,
-              height: height,
-              devicePixelRatio: dpr
-            });
-            
-            let overCalories = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                width: "100%",
-                height: "100%",
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 180,
-                itemStyle: {
-                  borderRadius: 200
-                },
-                data: [{
-                  value: 100,
-                  itemStyle: {
-                    color: '#FBC63E'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 100,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
-              }]
-            };
-      
-            let underCalories = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 180,
-                itemStyle: {
-                  borderRadius: 200
-                },
-                data: [{
-                  value: page.data.dailyGoal.current_calorie,
-                  itemStyle: {
-                    color: '#52BE8C'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: page.data.dailyGoal.calorie_goal,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
-              }]
-            };
-      
-            let overCaloriesGreen = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 180,
-                itemStyle: {
-                  borderRadius: 200
-                },
-                data: [{
-                  value: 100,
-                  itemStyle: {
-                    color: '#52BE8C'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 100,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
-              }]
-            };
-      
-            let option
-            if(page.data.dailyGoal.current_calorie / app.globalData.calorieGrace > page.data.dailyGoal.calorie_goal){
-              option = overCalories
-            } else if(page.data.dailyGoal.current_calorie > page.data.dailyGoal.calorie_goal) {
-              option = overCaloriesGreen
-            } else {
-              option = underCalories
-            }
-      
-            // Set the chart options and render the chart
-            chart.setOption(option);
-            return chart;
+        const chartComponent = page.selectComponent('#myCanvas');
+        chartComponent.init((canvas, width, height, dpr) => {
+          console.log(width, height, canvas)
+          chart = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr
           });
-      
-          const chartBg = page.selectComponent('#myCanvasBg');
-          chartBg.init((canvas, width, height, dpr) => {
-            const chart = echarts.init(canvas, null, {
-              width: width,
-              height: height,
-              devicePixelRatio: dpr
-            });
           
-            let bgoption = {
-              animation: false,
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: false,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 180,
+          let overCalories = {
+            backgroundColor: "rgba(0,0,0,0)",
+            grid: {
+                top: '20%',
+                left: '0%',
+                right: '0%',
+                bottom: '0%',
+                containLabel: true
+              },
+            series: [{
+              label: {
+                show: true,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              width: "100%",
+              height: "100%",
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 180,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [{
+                value: 100,
                 itemStyle: {
-                  borderRadius: 200,
-                  color: '#52BE8C',
-                  opacity: 0.15
+                  color: '#FBC63E'
                 },
-                data: [{
-                  value: 100,
-                  itemStyle: {
-                    color: '#A1D97E'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 100,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
+                label: {
+                  show: false
+                }
+              },{
+                value: 100,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
               }]
-            };
-      
-            // Set the chart options and render the chart
-            chart.setOption(bgoption);
-            return chart;
-          });
-
-          const protein = page.selectComponent('#protein');
-          protein.init((canvas, width, height, dpr) => {
-            const chart = echarts.init(canvas, null, {
-              width: width,
-              height: height,
-              devicePixelRatio: dpr
-            });
-            
-            let overProtein = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
+            }]
+          };
+    
+          let underCalories = {
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: true,
+                formatter(param) {
+                  const currentCalories = page.data.dailyGoal.current_calorie;
+                  const caloriesGoal = page.data.dailyGoal.calorie_goal;
+                  const percentage = (currentCalories / caloriesGoal) * 100;
+                  const visiblePercentage = Math.min(percentage, 50);
+                  return `${param.name} (${visiblePercentage.toFixed(0)}%)`;
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 180,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [{
+                value: (page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal) * 100,
                 itemStyle: {
-                  borderRadius: 200
+                  color: '#52BE8C'
                 },
-                data: [{
-                  value: 100,
+                label: {
+                  show: false
+                }
+              },{
+                value: (100 - (page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal) * 100 + 100),
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
+              }]
+            }]
+          };
+    
+          let overCaloriesGreen = {
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: true,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 180,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [{
+                value: 100,
+                itemStyle: {
+                  color: '#52BE8C'
+                },
+                label: {
+                  show: false
+                }
+              },{
+                value: 100,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
+              }]
+            }]
+          };
+    
+          let option
+          if(page.data.dailyGoal.current_calorie / app.globalData.calorieGrace > page.data.dailyGoal.calorie_goal){
+            option = overCalories
+          } else if(page.data.dailyGoal.current_calorie > page.data.dailyGoal.calorie_goal) {
+            option = overCaloriesGreen
+          } else {
+            option = underCalories
+          }
+    
+          // Set the chart options and render the chart
+          chart.setOption(option);
+          return chart;
+        });
+    
+        const chartBgComponent = page.selectComponent('#myCanvasBg');
+        chartBgComponent.init((canvas, width, height, dpr) => {
+          chartBg = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr
+          });
+        
+          let bgoption = {
+            animation: false,
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: false,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 180,
+              itemStyle: {
+                borderRadius: 200,
+                color: '#52BE8C',
+                opacity: 0.15
+              },
+              data: [{
+                value: 100,
+                itemStyle: {
+                  color: '#A1D97E'
+                },
+                label: {
+                  show: false
+                }
+              },{
+                value: 100,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
+              }]
+            }]
+          };
+    
+          // Set the chart options and render the chart
+          chartBg.setOption(bgoption);
+          return chartBg;
+        });
+
+        const proteinComponent = page.selectComponent('#protein');
+        proteinComponent.init((canvas, width, height, dpr) => {
+          protein = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr
+          });
+          let overProtein = {
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: true,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [{
+                value: 100,
+                itemStyle: {
+                  color: '#D83D4B'
+                },
+                label: {
+                  show: false
+                }
+              },{
+                value: 15,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
+              }]
+            }]
+          };
+        
+          let underProtein = {
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: true
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [
+                {
+                  value: (page.data.dailyGoal.current_protein / page.data.dailyGoal.protein_goal) * 100,
                   itemStyle: {
                     color: '#D83D4B'
                   },
                   label: {
                     show: false
                   }
-                },{
-                  value: 15,
-                  name: "fill",
+                },
+                {
+                  value: 100 - (page.data.dailyGoal.current_protein / page.data.dailyGoal.protein_goal * 100) + 13.8,
+                  name: 'fill',
                   itemStyle: {
                     color: 'none',
                     borderRadius: 100
@@ -300,454 +369,414 @@ Page({
                     show: false
                   }
                 }]
-              }]
-            };
-          
-            let underProtein = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
-                itemStyle: {
-                  borderRadius: 200
-                },
-                data: [{
-                  value: page.data.dailyGoal.current_protein,
-                  itemStyle: {
-                    color: '#D83D4B'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: page.data.dailyGoal.protein_goal,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
-              }]
-            };
+            }]
+          };
 
-            let option
-            if(page.data.dailyGoal.current_protein > page.data.dailyGoal.protein_goal){
-              option = overProtein
-            } else {
-              option = underProtein
-            }
+          let option
+          if(page.data.dailyGoal.current_protein > page.data.dailyGoal.protein_goal){
+            option = overProtein
+          } else {
+            option = underProtein
+          }
 
-            // Set the chart options and render the chart
-            chart.setOption(option);
-            return chart;
+          // Set the chart options and render the chart
+          protein.setOption(option);
+          return protein;
+        });
+
+        const proteinBgComponent = page.selectComponent('#protein_bg');
+        proteinBgComponent.init((canvas, width, height, dpr) => {
+          proteinBg = echarts.init(canvas, null, {
+            width: width ,
+            height: height,
+            devicePixelRatio: dpr
           });
-
-          const proteinBg = page.selectComponent('#protein_bg');
-          proteinBg.init((canvas, width, height, dpr) => {
-            const chart = echarts.init(canvas, null, {
-              width: width ,
-              height: height,
-              devicePixelRatio: dpr
-            });
-          
-            var bgoption = {
-              animation: false,
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
+        
+          var bgoption = {
+            animation: false,
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: false,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              
+              itemStyle: {
+                color: '#D83D4B',
+                opacity: 0.15,
+                borderRadius: 10,
+              },
+              data: [{
+                value: 100,
                 label: {
-                  show: false,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
-                
+                  show: false
+                }
+              },{
+                value: 15,
+                name: "fill",
                 itemStyle: {
-                  color: '#D83D4B',
-                  opacity: 0.15,
-                  borderRadius: 10,
+                  color: 'none',
+                  borderRadius: 100
                 },
-                data: [{
-                  value: 100,
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 15,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
+                label: {
+                  show: false
+                }
               }]
-            };
+            }]
+          };
 
-            // Set the chart options and render the chart
-            chart.setOption(bgoption);
-            return chart;
+          // Set the chart options and render the chart
+          proteinBg.setOption(bgoption);
+          return proteinBg;
+        });
+
+        const carbs = page.selectComponent('#carbs');
+        carbs.init((canvas, width, height, dpr) => {
+          const chart = echarts.init(canvas, null, {
+            width: width ,
+            height: height,
+            devicePixelRatio: dpr
           });
-
-          const carbs = page.selectComponent('#carbs');
-          carbs.init((canvas, width, height, dpr) => {
-            const chart = echarts.init(canvas, null, {
-              width: width ,
-              height: height,
-              devicePixelRatio: dpr
-            });
-            
-            let over = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
+          
+          let over = {
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: true,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [{
+                value: 100,
                 itemStyle: {
-                  borderRadius: 200
+                  color: '#F8D477'
                 },
-                data: [{
-                  value: 100,
-                  itemStyle: {
-                    color: '#F8D477'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 15,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
+                label: {
+                  show: false
+                }
+              },{
+                value: 15,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
               }]
-            };
+            }]
+          };
 
-      let under = {
-        backgroundColor: "rgba(0,0,0,0)",
-        series: [{
-          label: {
-            show: true,
-            formatter(param) {
-              // correct the percentage
-              return param.name + ' (' + param.percent * 2 + '%)';
-            }
-          },
-          type: 'pie',
-          center: ['50%', '50%'],
-          radius: ['50%', '40%'],
-          startAngle: 310,
+    let under = {
+      backgroundColor: "rgba(0,0,0,0)",
+      series: [{
+        label: {
+          show: true,
+          formatter(param) {
+            // correct the percentage
+            return param.name + ' (' + param.percent * 2 + '%)';
+          }
+        },
+        type: 'pie',
+        center: ['50%', '50%'],
+        radius: ['50%', '40%'],
+        startAngle: 310,
+        itemStyle: {
+          borderRadius: 200
+        },
+        data: [{
+          value: page.data.dailyGoal.current_carbs / page.data.dailyGoal.carbs_goal * 100,
           itemStyle: {
-            borderRadius: 200
+            color: '#F8D477'
           },
-          data: [{
-            value: page.data.dailyGoal.current_carbs,
-            itemStyle: {
-              color: '#F8D477'
-            },
-            label: {
-              show: false
-            }
-          },{
-            value: page.data.dailyGoal.carbs_goal,
-            name: "fill",
-            itemStyle: {
-              color: 'none',
-              borderRadius: 100
-            },
-            label: {
-              show: false
-            }
-          }]
+          label: {
+            show: false
+          }
+        },{
+          value: 100 - (page.data.dailyGoal.current_carbs / page.data.dailyGoal.carbs_goal * 100) + 13.8,
+          name: "fill",
+          itemStyle: {
+            color: 'none',
+            borderRadius: 100
+          },
+          label: {
+            show: false
+          }
         }]
-      };
+      }]
+    };
 
-      let option
-      if(page.data.dailyGoal.current_carbs > page.data.dailyGoal.carbs_goal){
-        option = over
-      } else {
-        option = under
-      }
+    let option
+    if(page.data.dailyGoal.current_carbs > page.data.dailyGoal.carbs_goal){
+      option = over
+    } else {
+      option = under
+    }
 
-      // Set the chart options and render the chart
-      chart.setOption(option);
-      return chart;
-    });
-          
-
-          const carbs_bg = page.selectComponent('#carbs_bg');
-          carbs_bg.init((canvas, width, height, dpr) => {
-            const chart = echarts.init(canvas, null, {
-              width: width,
-              height: height,
-              devicePixelRatio: dpr
-            });
-          
-            var bgoption = {
-              animation: false,
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: false,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
-                
-                itemStyle: {
-                  color: '#F8D477',
-                  opacity: 0.35,
-                  borderRadius: 10,
-                },
-                data: [{
-                  value: 100,
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 15,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
-              }]
-            };
-
-            // Set the chart options and render the chart
-            chart.setOption(bgoption);
-            return chart;
+    // Set the chart options and render the chart
+    chart.setOption(option);
+    return chart;
+        });
+        
+        const carbsBgComponent = page.selectComponent('#carbs_bg');
+        carbsBgComponent.init((canvas, width, height, dpr) => {
+          carbsBg = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr
           });
-
-          const fat = page.selectComponent('#fat');
-          fat.init((canvas, width, height, dpr) => {
-            const chart = echarts.init(canvas, null, {
-              width: width ,
-              height: height,
-              devicePixelRatio: dpr
-            });
-            
-            let over = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
+        
+          var bgoption = {
+            animation: false,
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: false,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              
+              itemStyle: {
+                color: '#F8D477',
+                opacity: 0.35,
+                borderRadius: 10,
+              },
+              data: [{
+                value: 100,
                 label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
+                  show: false
+                }
+              },{
+                value: 15,
+                name: "fill",
                 itemStyle: {
-                  borderRadius: 200
+                  color: 'none',
+                  borderRadius: 100
                 },
-                data: [{
-                  value: 100,
-                  itemStyle: {
-                    color: '#575757'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 15,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
-              }]
-            };
-
-            let under = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
                 label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
-                itemStyle: {
-                  borderRadius: 200
-                },
-                data: [{
-                  value: page.data.dailyGoal.current_fat,
-                  itemStyle: {
-                    color: '#575757'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: page.data.dailyGoal.fat_goal,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
+                  show: false
+                }
               }]
-            };
+            }]
+          };
 
-            let overGreen = {
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: true,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
-                itemStyle: {
-                  borderRadius: 200
-                },
-                data: [{
-                  value: 100,
-                  itemStyle: {
-                    color: '#575757'
-                  },
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 100,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
-              }]
-            };
+          // Set the chart options and render the chart
+          carbsBg.setOption(bgoption);
+          return carbsBg;
+        });
 
-            let option
-            if(page.data.dailyGoal.current_fat > page.data.dailyGoal.current_fat){
-              option = over
-            } else {
-              option = under
-            }
-
-            // Set the chart options and render the chart
-            chart.setOption(option);
-            return chart;
+        const fatComponent = page.selectComponent('#fat');
+        fatComponent.init((canvas, width, height, dpr) => {
+          fat = echarts.init(canvas, null, {
+            width: width ,
+            height: height,
+            devicePixelRatio: dpr
           });
-
-          const fatBg = page.selectComponent('#fat_bg');
-          fatBg.init((canvas, width, height, dpr) => {
-            const chart = echarts.init(canvas, null, {
-              width: width,
-              height: height,
-              devicePixelRatio: dpr
-            });
           
-            var bgoption = {
-              animation: false,
-              backgroundColor: "rgba(0,0,0,0)",
-              series: [{
-                label: {
-                  show: false,
-                  formatter(param) {
-                    // correct the percentage
-                    return param.name + ' (' + param.percent * 2 + '%)';
-                  }
-                },
-                type: 'pie',
-                center: ['50%', '50%'],
-                radius: ['50%', '40%'],
-                startAngle: 310,
-                
+          let over = {
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: true,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [{
+                value: 100,
                 itemStyle: {
-                  color: '#575757',
-                  opacity: 0.2,
-                  borderRadius: 10,
+                  color: '#575757'
                 },
-                data: [{
-                  value: 100,
-                  label: {
-                    show: false
-                  }
-                },{
-                  value: 15,
-                  name: "fill",
-                  itemStyle: {
-                    color: 'none',
-                    borderRadius: 100
-                  },
-                  label: {
-                    show: false
-                  }
-                }]
+                label: {
+                  show: false
+                }
+              },{
+                value: 15,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
               }]
-            };
+            }]
+          };
 
-            // Set the chart options and render the chart
-            chart.setOption(bgoption);
-            return chart;
+          let under = {
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: true,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [{
+                value: page.data.dailyGoal.current_fat / page.data.dailyGoal.fat_goal * 100,
+                itemStyle: {
+                  color: '#575757'
+                },
+                label: {
+                  show: false
+                }
+              },{
+                value: 100 - (page.data.dailyGoal.current_fat / page.data.dailyGoal.fat_goal * 100) + 13.8,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
+              }]
+            }]
+          };
+
+          let overGreen = {
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: true,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              itemStyle: {
+                borderRadius: 200
+              },
+              data: [{
+                value: 100,
+                itemStyle: {
+                  color: '#575757'
+                },
+                label: {
+                  show: false
+                }
+              },{
+                value: 100,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
+              }]
+            }]
+          };
+
+          let option
+          if(page.data.dailyGoal.current_fat > page.data.dailyGoal.current_fat){
+            option = over
+          } else {
+            option = under
+          }
+
+          // Set the chart options and render the chart
+          fat.setOption(option);
+          return fat;
+        });
+
+        const fatBgComponent = page.selectComponent('#fat_bg');
+        fatBgComponent.init((canvas, width, height, dpr) => {
+          fatBg = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr
           });
+        
+          var bgoption = {
+            animation: false,
+            backgroundColor: "rgba(0,0,0,0)",
+            series: [{
+              label: {
+                show: false,
+                formatter(param) {
+                  // correct the percentage
+                  return param.name + ' (' + param.percent * 2 + '%)';
+                }
+              },
+              type: 'pie',
+              center: ['50%', '50%'],
+              radius: ['50%', '40%'],
+              startAngle: 310,
+              
+              itemStyle: {
+                color: '#575757',
+                opacity: 0.2,
+                borderRadius: 10,
+              },
+              data: [{
+                value: 100,
+                label: {
+                  show: false
+                }
+              },{
+                value: 15,
+                name: "fill",
+                itemStyle: {
+                  color: 'none',
+                  borderRadius: 100
+                },
+                label: {
+                  show: false
+                }
+              }]
+            }]
+          };
+
+          // Set the chart options and render the chart
+          fatBg.setOption(bgoption);
+          return fatBg;
+        });
       }
     })
   },
@@ -801,6 +830,8 @@ Page({
       dailyGoal: this.data.dailyGoals[index]
     });
 
+    clearAllChart()
+
     const chartComponent = page.selectComponent('#myCanvas');
 
     let overCalories = {
@@ -848,11 +879,7 @@ Page({
       backgroundColor: "rgba(0,0,0,0)",
       series: [{
         label: {
-          show: true,
-          formatter(param) {
-            // correct the percentage
-            return param.name + ' (' + param.percent * 2 + '%)';
-          }
+          show: true
         },
         type: 'pie',
         center: ['50%', '50%'],
@@ -862,7 +889,7 @@ Page({
           borderRadius: 200
         },
         data: [{
-          value: page.data.dailyGoals[index].current_calorie,
+          value: page.data.dailyGoals[index].current_calorie / page.data.dailyGoals[index].calorie_goal * 100,
           itemStyle: {
             color: '#52BE8C'
           },
@@ -870,7 +897,7 @@ Page({
             show: false
           }
         },{
-          value: page.data.dailyGoals[index].calorie_goal,
+          value: 100 - (page.data.dailyGoals[index].calorie_goal / page.data.dailyGoals[index].current_calorie /100) + 13.8,
           name: "fill",
           itemStyle: {
             color: 'none',
@@ -942,6 +969,59 @@ Page({
       return chart
     })
 
+    const chartBgComponent = page.selectComponent('#myCanvasBg');
+    
+    let chartOption = {
+      animation: false,
+      backgroundColor: "rgba(0,0,0,0)",
+      series: [{
+        label: {
+          show: false,
+          formatter(param) {
+            // correct the percentage
+            return param.name + ' (' + param.percent * 2 + '%)';
+          }
+        },
+        type: 'pie',
+          center: ['50%', '50%'],
+          radius: ['50%', '40%'],
+          startAngle: 180,
+          itemStyle: {
+            borderRadius: 200,
+            color: '#52BE8C',
+            opacity: 0.15
+          },
+          data: [{
+            value: 100,
+            itemStyle: {
+              color: '#A1D97E'
+            },
+            label: {
+              show: false
+            }
+          },{
+            value: 100,
+            name: "fill",
+            itemStyle: {
+              color: 'none',
+              borderRadius: 100
+            },
+            label: {
+              show: false
+            }
+          }]
+        }]
+      };
+      chartBgComponent.init((canvas, width, height, dpr) => {
+        chartBg = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr
+        });
+        chartBg.setOption(chartOption);
+        return chartBg;
+    });
+    
     const proteinComponent = page.selectComponent('#protein');
 
     let overProtein = {
@@ -1001,7 +1081,7 @@ Page({
           borderRadius: 200
         },
         data: [{
-          value: page.data.dailyGoal.current_protein,
+          value: page.data.dailyGoal.current_protein / page.data.dailyGoal.protein_goal * 100,
           itemStyle: {
             color: '#D83D4B'
           },
@@ -1009,7 +1089,7 @@ Page({
             show: false
           }
         },{
-          value: page.data.dailyGoal.protein_goal,
+          value: 100 - (page.data.dailyGoal.current_protein / page.data.dailyGoal.protein_goal * 100) + 13.8,
           name: "fill",
           itemStyle: {
             color: 'none',
@@ -1031,13 +1111,65 @@ Page({
     }
 
     proteinComponent.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+      protein = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
       });
-      chart.setOption(proteinOption);
-      return chart
+      protein.setOption(proteinOption);
+      return protein
+    })
+
+    const proteinBgComponent = page.selectComponent('#protein_bg');
+        
+    var bgoption = {
+      animation: false,
+      backgroundColor: "rgba(0,0,0,0)",
+      series: [{
+        label: {
+          show: false,
+          formatter(param) {
+            // correct the percentage
+            return param.name + ' (' + param.percent * 2 + '%)';
+          }
+        },
+        type: 'pie',
+        center: ['50%', '50%'],
+        radius: ['50%', '40%'],
+        startAngle: 310,
+        
+        itemStyle: {
+          color: '#D83D4B',
+          opacity: 0.15,
+          borderRadius: 10,
+        },
+        data: [{
+          value: 100,
+          label: {
+            show: false
+          }
+        },{
+          value: 15,
+          name: "fill",
+          itemStyle: {
+            color: 'none',
+            borderRadius: 100
+          },
+          label: {
+            show: false
+          }
+        }]
+      }]
+    };
+
+    proteinBgComponent.init((canvas, width, height, dpr) => {
+      proteinBg = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr
+      });
+      proteinBg.setOption(bgoption);
+      return proteinBg
     })
 
     const carbComponent = page.selectComponent('#carbs');
@@ -1099,7 +1231,7 @@ Page({
           borderRadius: 200
         },
         data: [{
-          value: page.data.dailyGoal.current_carbs,
+          value: page.data.dailyGoal.current_carbs / page.data.dailyGoal.carbs_goal * 100,
           itemStyle: {
             color: '#F8D477'
           },
@@ -1107,7 +1239,7 @@ Page({
             show: false
           }
         },{
-          value: page.data.dailyGoal.carbs_goal,
+          value: 100 - (page.data.dailyGoal.current_carbs / page.data.dailyGoal.carbs_goal * 100) + 13.8,
           name: "fill",
           itemStyle: {
             color: 'none',
@@ -1129,14 +1261,66 @@ Page({
     }
 
     carbComponent.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+      carbs = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
       });
-      chart.setOption(carbOption);
-      return chart
+      carbs.setOption(carbOption);
+      return carbs
     })
+
+    const carbsBgComponent = page.selectComponent('#carbs_bg');
+
+    var carbBgOption = {
+      animation: false,
+      backgroundColor: "rgba(0,0,0,0)",
+      series: [{
+        label: {
+          show: false,
+          formatter(param) {
+            // correct the percentage
+            return param.name + ' (' + param.percent * 2 + '%)';
+          }
+        },
+        type: 'pie',
+        center: ['50%', '50%'],
+        radius: ['50%', '40%'],
+        startAngle: 310,
+        
+        itemStyle: {
+          color: '#F8D477',
+          opacity: 0.35,
+          borderRadius: 10,
+        },
+        data: [{
+          value: 100,
+          label: {
+            show: false
+          }
+        },{
+          value: 15,
+          name: "fill",
+          itemStyle: {
+            color: 'none',
+            borderRadius: 100
+          },
+          label: {
+            show: false
+          }
+        }]
+      }]
+    };
+
+    carbsBgComponent.init((canvas, width, height, dpr) => {
+      carbsBg = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr
+      })
+      carbsBg.setOption(carbBgOption);
+      return carbsBg;
+    });
 
     const fatComponent = page.selectComponent('#fat');
 
@@ -1197,7 +1381,7 @@ Page({
           borderRadius: 200
         },
         data: [{
-          value: page.data.dailyGoal.current_fat,
+          value: page.data.dailyGoal.current_fat / page.data.dailyGoal.fat_goal * 100,
           itemStyle: {
             color: '#575757'
           },
@@ -1205,7 +1389,7 @@ Page({
             show: false
           }
         },{
-          value: page.data.dailyGoal.fat_goal,
+          value: 100 - (page.data.dailyGoal.current_fat / page.data.dailyGoal.fat_goal * 100) + 13.8,
           name: "fill",
           itemStyle: {
             color: 'none',
@@ -1227,16 +1411,68 @@ Page({
     }
 
     fatComponent.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+      fat = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
       });
-      chart.setOption(fatOption);
-      return chart
+      fat.setOption(fatOption);
+      return fat
     })
+    const fatBgComponent = page.selectComponent('#fat_bg');
+
+    var fatBgOption = {
+      animation: false,
+      backgroundColor: "rgba(0,0,0,0)",
+      series: [{
+        label: {
+          show: false,
+          formatter(param) {
+            // correct the percentage
+            return param.name + ' (' + param.percent * 2 + '%)';
+          }
+        },
+        type: 'pie',
+        center: ['50%', '50%'],
+        radius: ['50%', '40%'],
+        startAngle: 310,
+        
+        itemStyle: {
+          color: '#575757',
+          opacity: 0.2,
+          borderRadius: 10,
+        },
+        data: [{
+          value: 100,
+          label: {
+            show: false
+          }
+        },{
+          value: 15,
+          name: "fill",
+          itemStyle: {
+            color: 'none',
+            borderRadius: 100
+          },
+          label: {
+            show: false
+          }
+        }]
+      }]
+    };
+
+    fatBgComponent.init((canvas, width, height, dpr) => {
+      fatBg = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr
+      });
+      fatBg.setOption(fatBgOption);
+      return fatBg;
+    });
   },
   goToRecipe(e){
+    clearAllChart()
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
