@@ -1,10 +1,11 @@
+const app = getApp()
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    ingredients:[{name:"chicken", id:1 ,calories:160},{name:"chicken_1", id:2,calories:120},{name:"chicken_2", id:3 ,calories:100},{name:"chicken_3", id:4 ,calories:100}],
+    ingredients:[],
     show_window: false
   },
 
@@ -28,11 +29,11 @@ Page({
   onShow() {
     const page = this
     wx.getStorage({
-      key: 'chart',
+      key: 'cart',
       success (res) {
         console.log(res)
         page.setData({
-
+          cart: res.data
         })
       },
       fail(res){
@@ -135,5 +136,23 @@ Page({
         url: '/pages/recipes/confirmRecipe',
       })
     }
+  },
+  searchIngredient(e){
+    const page = this
+    const query = e.detail.value
+    wx.request({
+      url: `${app.globalData.baseUrl}/ingredients?query=${query}`,
+      header: app.globalData.header,
+      success(res){
+        page.setData({
+          ingredients: res.data
+        })
+      }
+    })
   }
+  
 })
+
+// beef: { id: 1, portion: 1 },
+//       # rice: { id: 2, portion: 1 },
+//       # broccoli: { id: 3, portion: 1 }
