@@ -22,7 +22,7 @@
     </view>
     <view class="p">Instruction *</view>
     <view class="input-field">
-      <textarea type="text" name="instructions" class="auto-grow-textarea" auto-height="true"  maxlength="500"></textarea>
+      <textarea type="text" name="instructions" class="auto-grow-textarea" auto-height="true"  maxlength="2000"></textarea>
     </view>
     <view class="cart-list">
       <view wx:for="{{cart}}" class="cart-item flex w-100">

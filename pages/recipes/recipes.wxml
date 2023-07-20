@@ -80,7 +80,7 @@
     </view>
   </view>
   
-  <view wx:if="{{showRecipe}}" wx:for-index="index">
+  <view wx:if="{{showRecipe}}" wx:for-index="index" class="w-100" >
     <view class="ingredients w-100">
     <view class="h1 title">Ingredients</view>
     <view class="ingredient p" wx:for="{{ingredients}}">
@@ -89,7 +89,7 @@
   </view>
   <view class="h1 title w-100">Instructions</view>
     <view wx:for="{{instructions}}" class="instruction p">
-    {{index + 1}}.{{item}}
+    {{index + 1}}. {{item}}
     </view>
   </view>
 
