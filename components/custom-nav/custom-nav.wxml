@@ -4,5 +4,7 @@
       <image src="/images/icons/back-btn.png" mode="aspectFit" class="back-icon" bindtap="goBack" />
     </view>
   </view>
-  <view class="btn-container app-name" wx:if="{{showAppName}}">Eureka!</view>
+  <view class="title-container app-name" wx:if="{{showAppName}}">
+    Eureka!
+  </view>
 </view>

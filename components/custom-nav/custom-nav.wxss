@@ -1,15 +1,11 @@
 /* components/custom-nav/custom-nav.wxss */
 .btn-container{
-  margin: 42px 0 0 20rpx;
   width: 35px;
   height: 35px;
-  display: block;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 10000;
-  padding-left: 3px;
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
 }
 
 .app-name{
@@ -32,6 +28,8 @@
   display: block;
 }
 
-.back-icon {
-  margin-top: 40rpx;
+.title-container{
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
 }
