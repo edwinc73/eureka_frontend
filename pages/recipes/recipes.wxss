@@ -156,7 +156,7 @@ slider{
 }
 
 .instruction{
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .title{

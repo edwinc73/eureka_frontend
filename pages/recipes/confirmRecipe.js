@@ -88,22 +88,17 @@ Page({
     })
   },
   submitRecipe(e){
+    const page = this
     const recipe = e.detail.value
     const ingredientsData = this.data.cart
-    const reformattedData = []
+    const reformattedData = {}
     ingredientsData.forEach(ingredient => {
-      reformattedData.push({
-        [ingredient.name] : {
+      reformattedData[ingredient.name] = {
           id: ingredient.id,
           portion: ingredient.portion / 100
         }
       })
-    });
 
-    console.log({
-      recipe: recipe,
-      ingredients: reformattedData
-    })
     const {name,description,instructions} = recipe
     const tempFiles = this.data.tempFiles
     if(!name || !description || !instructions || tempFiles.length == 0){
@@ -122,8 +117,21 @@ Page({
           ingredients: reformattedData
         },
         success(res){
-          wx.navigateTo({
-            url: '/page/',
+          const id = res.data.recipe_id
+          wx.uploadFile({
+            url: `${app.globalData.baseUrl}/recipes/${res.data.recipe_id}/upload_img`,
+            filePath: page.data.tempFiles[0].tempFilePath,
+            name: 'photos',
+            header: app.globalData.header,
+            complete(res){
+              console.log(res)
+              wx.showToast({
+                title: "Recipe Added",
+              })
+              wx.redirectTo({
+                url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`
+              })
+            }
           })
         }
       })

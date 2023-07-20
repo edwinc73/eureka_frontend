@@ -29,7 +29,7 @@ Page({
     this.setData({
       showDetail: options.showdetail == "true",
       showReview: options.showreview == "true",
-      opacityDetail: options.showdetail == "true" && "opacity: 1",
+      opacityDetail: options.showdetail == "false" && "opacity: 0",
       opacityReview: options.showreview == "false" && "opacity: 0"
     })
   },
@@ -44,8 +44,12 @@ Page({
       header: app.globalData.header,
       success(res) {
         const recipe = res.data;
-        const instructions = recipe.instructions.split(/\d\./);
-        instructions.shift();
+        const instructions = recipe.instructions.replace(/^\d+\.\s?/gm, '')
+        .replace(/(^\w|\.\s\w)/gm, (match) => match.toUpperCase()) 
+        .trim() 
+        .split('\n')
+        .filter((str) => str.trim() !== '')
+        console.log(instructions)
         page.setData({
           id: recipe.id,
           instructions: instructions,
@@ -64,8 +68,6 @@ Page({
           caloriesPerPortion: Math.ceil(recipe.total_calories / recipe.portion),
           isFavourite: recipe.user_favourite
         });
-
-        console.log(res)
   
         const { protein, carbs, fat } = page.data;
         const canvasId = 'protein';
@@ -149,6 +151,8 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
+    console.log(this.data.showDetail)
+    console.log(this.data.showReview)
   },
 
   /**
@@ -305,23 +309,24 @@ Page({
     const selectedStars = this.data.selectedStars;
     const reviewText = this.data.reviewText;
     const id = this.data.id
-
-    wx.request({
-      url: `${app.globalData.baseUrl}/recipes/${id}/add_review`,
-      method: "POST",
-      data:{
-        review:{
-          rating: selectedStars,
-          content: reviewText
+    if(reviewText != ""){
+      wx.request({
+        url: `${app.globalData.baseUrl}/recipes/${id}/add_review`,
+        method: "POST",
+        data:{
+          review:{
+            rating: selectedStars,
+            content: reviewText
+          }
+        },
+        success(res){
+          console.log(res)
+          wx.redirectTo({
+            url: `/pages/recipes/recipes?id=${id}&showdetail=false&showreview=true`
+          })
         }
-      },
-      success(res){
-        console.log(res)
-        wx.redirectTo({
-          url: `/pages/recipes/recipes?id=${id}showdetail=false&showreview=true`
-        })
-      }
-    })
+      })
+    }
   },
   handleStarClick(e) {
     const selectedStarIndex = e.currentTarget.dataset.index;
