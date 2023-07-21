@@ -44,6 +44,7 @@ page{
   width: 250px;
   box-sizing: border-box;
   margin: 0 auto 15px;
+  
 }
 
 .goal-chart{
@@ -159,4 +160,7 @@ page{
   text-align: center;
   width: 100%;
   top: calc(85px / 2 - 9px);
+}
+ec-canvas{
+  z-index: 1;
 }
