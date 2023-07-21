@@ -65,10 +65,9 @@ Page({
           protein: Math.floor(recipe.nutritious_per_100g.protein),
           name: recipe.name,
           calories: recipe.total_calories,
-          caloriesPerPortion: Math.ceil(recipe.total_calories / recipe.portion),
+          caloriesPerPortion: recipe.calories_per_100g,
           isFavourite: recipe.user_favourite
         });
-  
         const { protein, carbs, fat } = page.data;
         const canvasId = 'protein';
   
@@ -151,8 +150,6 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
-    console.log(this.data.showDetail)
-    console.log(this.data.showReview)
   },
 
   /**
@@ -279,7 +276,6 @@ Page({
     }
   },
   addToMeal(e){
-    console.log(this.data)
     const portion = this.data.portion / 100;
     let id = this.data.id
     wx.request({
@@ -313,6 +309,7 @@ Page({
       wx.request({
         url: `${app.globalData.baseUrl}/recipes/${id}/add_review`,
         method: "POST",
+        header: app.globalData.header,
         data:{
           review:{
             rating: selectedStars,
@@ -320,7 +317,6 @@ Page({
           }
         },
         success(res){
-          console.log(res)
           wx.redirectTo({
             url: `/pages/recipes/recipes?id=${id}&showdetail=false&showreview=true`
           })
