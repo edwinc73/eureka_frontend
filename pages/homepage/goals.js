@@ -921,17 +921,10 @@ Page({
 
     if(state == "daily"){
       clearChart(weeklyChart)
-      console.log("need to set chart for daily")
       setDailyCharts(page)
       this.setData({
-        activeIndex: 6,
-        rightID: "date6"
       })
     } else {
-      this.setData({
-        activeIndex: 11,
-        rightID: "month11"
-      })
       clearAllChart()
       setWeeklyChart(page)
     }
