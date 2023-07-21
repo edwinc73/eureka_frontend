@@ -10,6 +10,7 @@ let carbs = null
 let carbsBg = null
 let fat = null
 let fatBg = null
+let weeklyChart = null
 
 function clearChart(ec){
   ec.clear(); 
@@ -41,6 +42,12 @@ Page({
    */
   onLoad(options) {
     this.scrollRight()
+    this.setData({
+      showDaily: options.showdaily == "true",
+      showWeekly: options.showweekly == "true",
+      opacityDaily: options.showdaily == "false" && "opacity: 0",
+      opacityWeekly: options.showweekly == "false" && "opacity: 0"
+    })
   },
 
   /**
@@ -69,15 +76,33 @@ Page({
           dateRange.push([[dayOfWeek],[date.getDate()]])
         }
 
+        function getMonthsFromToday() {
+          const months = [];
+          const today = new Date();
+          const currentYear = today.getFullYear();
+          const currentMonth = today.getMonth();
+        
+          for (let i = 0; i < 12; i++) {
+            const year = currentYear - Math.floor((currentMonth + i) / 12);
+            const monthIndex = (currentMonth - i + 12) % 12;
+            const newDate = new Date(year, monthIndex);
+            const monthName = newDate.toLocaleString('default', { month: 'short' });
+        
+            months.push([monthName, year]);
+          }
+        
+          return months;
+        }
+
         // applying default data to the dailygoals
 
         const dailyGoals = res.data
         const goal = res.data[6]
-        console.log(goal)
         page.setData({
           dailyGoal: goal,
           dailyGoals: dailyGoals,
           dateRange : dateRange.reverse(),
+          monthRange : getMonthsFromToday().reverse(),
           meals : res.data[6].meals
         })
         },
@@ -778,6 +803,52 @@ Page({
         });
       }
     })
+
+    // get goals index for weekly view
+    wx.request({
+      url: `${app.globalData.baseUrl}/goals`,
+      header: app.globalData.header,
+      success(res){
+        console.log(res.data)
+        const data = res.data
+        const dates = data.map(goal => goal.created_date)
+        const calorieData = data.map(goal => goal.current_calorie)
+        const goalsAchieved = 0
+        data.forEach(goal => { 
+          if(goal.current_calorie < goal.calorie_goal * app.globalData.calorieGrace){
+            if(goal.calorie_goal * (2 - app.globalData.calorieGrace) < goal.current_calorie){
+              goalsAchieved += 1
+            }
+          }
+        })
+        const proteinData = data.map(goal => goal.current_protein)
+        const fatData = data.map(goal => goal.current_fat)
+        const carbsData = data.map(goal => goal.current_carbs)
+
+      
+
+        function findAverage(arr) {
+          if (arr.length === 0) {
+            return 0;
+          }
+        
+          const sum = arr.reduce((total, current) => total + current, 0);
+          const average = sum / arr.length;
+          return average.toFixed(0);
+        }
+
+        page.setData({
+          average_calories: findAverage(calorieData),
+          average_protein: findAverage(proteinData),
+          average_fat: findAverage(fatData),
+          average_carbs: findAverage(carbsData),
+          goalsAchieved : goalsAchieved,
+          calorieData: calorieData,
+          dates: dates,
+          weekly_calorie_goal: data[0].calorie_goal
+        })
+      }
+    })
   },
 
   /**
@@ -828,10 +899,47 @@ Page({
       activeIndex: index,
       dailyGoal: this.data.dailyGoals[index]
     });
-
     clearAllChart()
+    setDailyCharts(page)
+  },
+  goToRecipe(e){
+    clearAllChart()
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+    })
+  },
+  switchTab(e){
+    const page = this
+    const state = e.currentTarget.dataset.value
+    this.setData({
+      showDaily: state == "daily",
+      showWeekly: state == "weekly",
+      opacityDaily: state == "daily" ? "opacity: 1" : "opacity: 0",
+      opacityWeekly: state == "weekly" ? "opacity: 1" : "opacity: 0"
+    })
 
-    const chartComponent = page.selectComponent('#myCanvas');
+    if(state == "daily"){
+      clearChart(weeklyChart)
+      console.log("need to set chart for daily")
+      setDailyCharts(page)
+      this.setData({
+        activeIndex: 6,
+        rightID: "date6"
+      })
+    } else {
+      this.setData({
+        activeIndex: 11,
+        rightID: "month11"
+      })
+      clearAllChart()
+      setWeeklyChart(page)
+    }
+  }
+})
+
+function setDailyCharts(page){
+  const chartComponent = page.selectComponent('#myCanvas');
 
     let overCalories = {
       backgroundColor: "rgba(0,0,0,0)",
@@ -888,7 +996,7 @@ Page({
           borderRadius: 200
         },
         data: [{
-          value: page.data.dailyGoals[index].current_calorie / page.data.dailyGoals[index].calorie_goal * 100,
+          value: page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal * 100,
           itemStyle: {
             color: '#52BE8C'
           },
@@ -896,7 +1004,7 @@ Page({
             show: false
           }
         },{
-          value: 100 - (page.data.dailyGoals[index].calorie_goal / page.data.dailyGoals[index].current_calorie /100) + 13.8,
+          value: 100 - (page.data.dailyGoal.calorie_goal / page.data.dailyGoal.current_calorie /100) + 13.8,
           name: "fill",
           itemStyle: {
             color: 'none',
@@ -959,7 +1067,7 @@ Page({
     }
 
     chartComponent.init((canvas, width, height, dpr) => {
-      const chart = echarts.init(canvas, null, {
+      chart = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
@@ -1469,12 +1577,110 @@ Page({
       fatBg.setOption(fatBgOption);
       return fatBg;
     });
-  },
-  goToRecipe(e){
-    clearAllChart()
-    const id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+}
+
+function setWeeklyChart(page){
+  console.log(page.data)
+  const chartComponent = page.selectComponent('#weeklyChart');
+  let option = {
+    height: 350,
+    xAxis: {
+      type: 'category',
+      data: page.data.dates,
+      axisLine: {
+        show: false,
+      },
+      splitLine: false,
+      axisTick: false,
+      axisLabel: {
+        color: 'rgba(25, 16, 17, 0.5)',
+        fontSize: 12,
+        fontWeight: '400',
+      },
+    },
+    yAxis: {
+      axisLabel:{
+        show: false
+      },
+      axisLine:{
+        show: false,
+      },
+      splitLine: false,
+      axisTick: false,
+    },
+    grid: {
+      top: '15',
+      left: '15',
+      right: '15%',
+      bottom: '15',
+      containLabel: true,
+    },
+    series: [
+      {
+        type: 'bar',
+        data: page.data.calorieData,
+        showBackground: false,
+        barWidth: '8',
+        markLine: {
+          formatter:function (params) {
+            return params.value.toFixed(0);
+          },
+          lineStyle:{
+            color: "#52BE8C",
+            cap: "rounded",
+            opacity: 0.75,
+          },
+          label:{
+            show:true,
+            color: '#fff',
+            padding: 4,
+            borderRadius: 10,
+            fontFamily: "arial",
+            fontWeight: "bold",
+            fontSize: 10 ,
+            backgroundColor: '#52BE8C'
+          },
+          data: [{ 
+            type: 'average',
+            name: 'Avg',
+            lineStyle:{
+              color: "#D83D4B",
+              opacity: 0.75,
+            },
+            label:{
+              backgroundColor: '#D83D4B'
+            }
+          },[
+            {
+                name: 'Goal',
+                x: 15,
+                yAxis: page.data.weekly_calorie_goal
+            },
+            {
+                x: "85%",
+                yAxis: page.data.weekly_calorie_goal
+            }
+        ]],
+          roundCap: true
+        },
+        itemStyle: {
+          color: "#52BE8C",
+          borderRadius: 50,
+        },
+        label: {
+          show: false,
+        },
+      }
+    ]
+  };
+
+    chartComponent.init((canvas, width, height, dpr) => {
+      weeklyChart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr
+      });
+      weeklyChart.setOption(option);
+      return weeklyChart
     })
-  }
-})
+}
