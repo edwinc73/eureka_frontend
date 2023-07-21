@@ -6,7 +6,6 @@ Component({
   ready() {
     let app = getApp()
     const currentRoute = getCurrentPages()[getCurrentPages().length - 1].route
-    console.log(currentRoute)
     if(currentRoute !== "pages/homepage/homepage"){
       if (app.globalData.tabPages.includes(currentRoute)) {
         this.setData({
@@ -16,7 +15,6 @@ Component({
         this.setData({
           showBackButton: true,
         })
-        console.log(this.data.showBackButton)
       }
     }
   },

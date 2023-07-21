@@ -906,7 +906,7 @@ Page({
       duration: 0
     })
     wx.navigateTo({
-      url: '/pages/homepage/goals',
+      url: '/pages/homepage/goals?showdaily=true&showweekly=false',
     })
   },
   goToSuggestions(){
