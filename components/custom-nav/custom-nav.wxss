@@ -20,10 +20,10 @@
 }
 
 .nav-bar-bg{
+  height: 90px;
   position: fixed;
   top: 0;
   background:linear-gradient(153deg, #52BE8D 0%, #A1D97E 100%);
-  height: 90px;
   width: 100%;
   display: block;
   z-index: 10000;
@@ -31,6 +31,6 @@
 
 .title-container{
   position: absolute;
-  bottom: 15px;
+  bottom: 5px;
   left: 15px;
 }
