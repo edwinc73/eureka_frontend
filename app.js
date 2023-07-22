@@ -23,12 +23,8 @@ App({
     //   }
     // })
 
-    // get all of system data for nav bar
-    //get status bar height
-    // pill is around 44 px highet
-    // console.log(wx.getSystemInfoSync())
-    // wx.getMenuButtonBoundingClientRect()
-
+    const system = wx.getSystemInfoSync()
+    console.log(system.statusBarHeight)
     // load user goal
     const app = this
     wx.request({
@@ -55,7 +51,7 @@ App({
     })
   },
   globalData: {
-    // statusBarHeight: wx.getSystemInfoSync()
+    navBarHeight: wx.getMenuButtonBoundingClientRect().height+ 9 + wx.getSystemInfoSync().statusBarHeight,
     userInfo: null,
     baseUrl: 'http://127.0.0.1:3000/api/v1',
     tabPages: ["pages/profile/profile","pages/favourite/favourite","pages/homepage/homepage"],

@@ -1,4 +1,4 @@
-<view class="nav-bar-bg">
+<view class="nav-bar-bg" style="height: {{navBarHeight}}px;">
   <view class="outer-container" bindtap="goBack" wx:if="{{showBackButton}}">
     <view class="btn-container">
       <image src="/images/icons/back-btn.png" mode="aspectFit" class="back-icon" bindtap="goBack" />

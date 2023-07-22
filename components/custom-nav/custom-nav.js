@@ -10,10 +10,12 @@ Component({
       if (app.globalData.tabPages.includes(currentRoute)) {
         this.setData({
           showAppName: true,
+          navBarHeight: app.globalData.navBarHeight
          })
       } else {
         this.setData({
           showBackButton: true,
+          navBarHeight: app.globalData.navBarHeight
         })
       }
     }
