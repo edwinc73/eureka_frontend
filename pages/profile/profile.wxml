@@ -14,7 +14,7 @@
       <text class="h1">{{height}}</text>
     </view>
   </view>
-  <view class="data-card flex justify-between">
+  <view class="data-card flex">
     <view class="data flex">
       <text class="large-text">{{current_weight}}</text>
       <text class="small text-light">Current weight</text>
@@ -41,7 +41,7 @@
           <view class="badge-info flex">
             <view class="badge-title flex justify-between">
               <text class="h1">{{currentBadge.name}}</text>
-              <text class="small text-light">{{currentBadge.gain_badge_date}}</text>
+              <text class="small text-light date">{{currentBadge.gain_badge_date}}</text>
             </view>
             <image class="badge-img-larger" src="{{currentBadge.image}}" mode="aspectFill" />
             <view>{{currentBadge.description}}</view>
