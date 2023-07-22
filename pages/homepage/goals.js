@@ -811,9 +811,9 @@ Page({
       success(res){
         console.log(res.data)
         const data = res.data
-        const dates = data.map(goal => goal.created_date)
-        const calorieData = data.map(goal => goal.current_calorie)
-        const goalsAchieved = 0
+        const dates = data.map(goal => goal.created_date).slice(-7)
+        const calorieData = data.map(goal => goal.current_calorie).slice(-7)
+        let goalsAchieved = 0
         data.forEach(goal => { 
           if(goal.current_calorie < goal.calorie_goal * app.globalData.calorieGrace){
             if(goal.calorie_goal * (2 - app.globalData.calorieGrace) < goal.current_calorie){
@@ -921,17 +921,10 @@ Page({
 
     if(state == "daily"){
       clearChart(weeklyChart)
-      console.log("need to set chart for daily")
       setDailyCharts(page)
       this.setData({
-        activeIndex: 6,
-        rightID: "date6"
       })
     } else {
-      this.setData({
-        activeIndex: 11,
-        rightID: "month11"
-      })
       clearAllChart()
       setWeeklyChart(page)
     }
@@ -1583,7 +1576,7 @@ function setWeeklyChart(page){
   console.log(page.data)
   const chartComponent = page.selectComponent('#weeklyChart');
   let option = {
-    height: 350,
+    height: 400,
     xAxis: {
       type: 'category',
       data: page.data.dates,
@@ -1609,10 +1602,9 @@ function setWeeklyChart(page){
       axisTick: false,
     },
     grid: {
-      top: '15',
+      top: '0',
       left: '15',
       right: '15%',
-      bottom: '15',
       containLabel: true,
     },
     series: [
@@ -1620,7 +1612,7 @@ function setWeeklyChart(page){
         type: 'bar',
         data: page.data.calorieData,
         showBackground: false,
-        barWidth: '8',
+        barWidth: '10',
         markLine: {
           formatter:function (params) {
             return params.value.toFixed(0);

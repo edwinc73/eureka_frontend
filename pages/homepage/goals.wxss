@@ -239,13 +239,14 @@ hr{
 }
 
 .weekly-chart{
-  height: 550px;
+  height: 600px;
   background-color: #E3F0E6;
   width: 100%;
   border-radius: 15px;
   position: relative;
   padding: 15px;
   box-sizing: border-box;
+  margin-top: 15px;
 }
 
 .weekly-averages{
@@ -261,7 +262,7 @@ hr{
   font-size: 40px;
 }
 
-.weekly-nutrient-list{
+.weekly-nutrient-list, .statement{
   text-align: center;
   gap: 15px;
   margin-top: 10px;
