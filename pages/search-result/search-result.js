@@ -82,6 +82,10 @@ Page({
   },
   goToRecipe(e){
     const id = e.currentTarget.dataset.id
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    })
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
     })

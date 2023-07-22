@@ -75,7 +75,10 @@ Page({
 
   },
   goToRecipe(e){
-    console.log("going")
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    })
     const id = e.currentTarget.dataset.id
     console.log(id)
     wx.navigateTo({
