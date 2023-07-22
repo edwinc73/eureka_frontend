@@ -1,6 +1,6 @@
 /* pages/favourite/favourite.wxss */
 .fav-info{
-  align-items: center;
+  align-items: top;
 }
 
 .recipe-info{
@@ -10,6 +10,7 @@
 .recipe-kcal{
   font-size: 12px;
   font-weight: 400;
+  margin-left: 5px;
 }
 
 .card-grid{
