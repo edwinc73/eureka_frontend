@@ -16,6 +16,7 @@ Page({
     typedText: '', 
     typingSpeed: 55, 
     currentCharIndex: 0,
+    screenWidth:0
   },
 
   /**
@@ -123,6 +124,7 @@ Page({
       dialogue: "Tell me more.",
       typedText: "",
       currentCharIndex: 0,
+      screenWidth: 390
     })
     this.typeNextCharStep2()
   },
