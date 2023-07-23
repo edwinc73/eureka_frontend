@@ -96,6 +96,12 @@ Page({
 
         // applying default data to the dailygoals
 
+        res.data.forEach(goal => {
+          goal.meals.forEach(meal=>{
+            meal.total_calories = (meal.recipe_nutritious_per_100g.calories * meal.portion).toFixed(0)
+          })
+        });
+
         const dailyGoals = res.data
         const goal = res.data[6]
         page.setData({
@@ -824,8 +830,6 @@ Page({
         const proteinData = data.map(goal => goal.current_protein)
         const fatData = data.map(goal => goal.current_fat)
         const carbsData = data.map(goal => goal.current_carbs)
-
-      
 
         function findAverage(arr) {
           if (arr.length === 0) {

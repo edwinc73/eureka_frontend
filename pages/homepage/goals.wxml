@@ -97,7 +97,7 @@
       <image src="{{meal.recipe.photo}}" mode="aspectFill" class="result-image"/>
       <view class="text-container">
         <view class="p-bold">{{meal.recipe.name}}</view>
-        <text class="small text-light">{{(meal.recipe_nutritious_per_100g.calories * 100 * meal.portion) / 100}}kcal</text>
+        <text class="small text-light">{{meal.total_calories}}kcal</text>
       </view>
       </view>
       <image src="../../images/icons/goto.png" mode="aspectFit" class="go-to-icon" />
