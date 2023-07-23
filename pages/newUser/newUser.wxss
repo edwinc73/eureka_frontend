@@ -1,0 +1,166 @@
+.floating{
+  height: 60px;
+  border-radius: 100px;
+  color: white;
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  line-height: 45px;
+  background: linear-gradient(153deg, #52BE8D 0%, #A1D97E 100%);
+  z-index: 1000;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.15);
+}
+
+.bg-image{
+  height: 100vh;
+  background: linear-gradient(180deg, #FFF 11.46%, rgba(255, 255, 255, 0.00) 100%),linear-gradient(153deg, #52BE8D 0%, #A1D97E 100%);
+  opacity: 0.65;
+}
+
+view, .logo{
+  z-index: 2;
+}
+
+.bg-pattern{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  mix-blend-mode: soft-light;
+}
+
+.logo{
+  width: 115px;
+  height: 85px;
+}
+
+.welcome-message{
+  justify-content: center;
+  flex-direction: column;
+}
+
+.dialogue{
+  margin: 30px 0 15px;
+}
+
+.avatar-wrapper{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color:transparent;
+  position: relative;
+}
+
+.avatar{
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0px 3px 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.avatar-container{
+  position: relative;
+}
+
+.add-icon{
+  position: absolute;
+  bottom: 0px;
+  right: 25px;
+  background-color: #E3F0E6;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #191011;
+  font-family: "quicksand";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 7px 0;
+  box-sizing: border-box;
+  border: 2px solid white;
+}
+
+.inputs{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  width: 450rpx;
+}
+
+.input{
+  height: 50px;
+  background-color: white;
+  border-radius: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+input[type=nickname]{
+  font-family: "quicksand" !important;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+input{
+  font-family: "quicksand" !important;
+  font-weight: 300;
+}
+
+picker{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin-left: -7px;
+}
+
+.date{
+
+}
+
+.label{
+  width: 110px !important;
+  display: inline-block;
+}
+
+.dob{
+  /* height: px; */
+}
+
+.gender{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+  filter: saturate(0.75);
+}
+
+.active{
+  background:rgba(25, 163, 99, 0.20);
+  filter: saturate(1);
+
+}
+
+.gender-input{
+  display: flex;
+  gap: 5px;
+  width: fit-content;
+  height: 50px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.page2{
+  margin-top: 150rpx;
+}
