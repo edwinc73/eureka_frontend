@@ -1,0 +1,63 @@
+  <view class="spacer"></view>
+<view class="container">
+  <view class="w-100 welcome-message flex align-center">
+    <view class="h1">Welcome to</view>
+    <image class="logo" src="../../images/icons/logo.png" mode="aspectFit"/>
+  </view>
+  <view class="dialogue p">
+    {{typedText}}
+  </view>
+    <view class="avatar-container" wx:if="{{firstPage}}">
+      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image class="avatar" src="{{avatarUrl}}"></image>
+      </button> 
+        <view class="add-icon">+</view>
+    </view>
+    <view class="inputs" wx:if="{{firstPage}}">
+      <view class="input w-100">
+        <view class="p label" bind>Name:</view>
+        <input class="p" type="nickname" bindblur="setNickname" />
+      </view>
+      <view class="input dob w-100">
+        <view class="p label">Birth Date:</view>
+        <picker name="endDate" mode="date" end="{{today}}" bindchange="bindDateChange">
+              <view class="p date">{{birthday}}</view>
+            </picker>
+      </view>
+      <view class="input gender-input">
+        <image class="gender {{maleActive}}" src="../../images/icons/male.png" mode="aspectFit" bindtap="setGender" data-value="m"/>
+        <image class="gender {{femaleActive}}" src="../../images/icons/female.png" mode="aspectFit" bindtap="setGender" data-value="f"/>
+      </view>
+    </view>
+    <button class="floating p" bindtap="goToNext" wx:if="{{firstPage}}">Next</button>
+    <view class="inputs page2">
+      <view class="input w-100 page2-input" style="opacity: {{firstPage ? 0 : 1}}">
+        <view class="flex">
+          <view class="p label">Height:</view>
+          <input class="p" type="text" bindinput="setHeight"/>
+        </view>
+        <view class="p text-light">m</view>
+      </view>
+      <view class="input w-100 page2-input" style="opacity: {{firstPage ? 0 : 1}}">
+        <view class="flex">
+          <view class="p label">Weight:</view>
+          <input class="p" type="text" bindinput="setWeight"/>
+        </view>
+        <view class="p text-light">kg</view>
+      </view>
+      <view class="input w-100 page2-input" style="opacity: {{firstPage ? 0 : 1}}">
+        <view class="flex">
+          <view class="p label">Target:</view>
+          <input class="p" type="text" bindinput="setTarget"/>
+        </view>
+        <view class="p text-light">kg</view>
+      </view>
+      
+
+    </view>
+    <button class="floating p" bindtap="goToHomepage" wx:if="{{!firstPage}}">Finish</button>
+  <image class="bg-pattern" src="../../images/newUserBg.png" mode="aspectFill" style="left:-{{screenWidth}}px"/>
+    <view class="bg-image w-100"></view>
+</view>
+<view class="spacer"></view>
+<BottomMask />
