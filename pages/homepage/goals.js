@@ -801,7 +801,7 @@ Page({
           const average = sum / arr.length;
           return average.toFixed(0);
         }
-
+        console.log(data)
         page.setData({
           average_calories: findAverage(calorieData),
           average_protein: findAverage(proteinData),
@@ -810,7 +810,7 @@ Page({
           goalsAchieved : goalsAchieved,
           calorieData: calorieData,
           dates: dates,
-          weekly_calorie_goal: data[0].calorie_goal
+          weekly_calorie_goal: data[data.length - 1].calorie_goal
         })
       }
     })
@@ -1019,12 +1019,10 @@ function setDailyCharts(page){
 
     let option
   
-    if(page.data.dailyGoal.current_calorie / app.globalData.calorieGrace > page.data.dailyGoal.calorie_goal){
-      option = overCalories
-    } else if(page.data.dailyGoal.current_calorie > page.data.dailyGoal.calorie_goal) {
-      option = overCaloriesGreen
-    } else {
+    if(page.data.dailyGoal.current_calorie < page.data.dailyGoal.calorie_goal * app.globalData.calorieGrace){
       option = underCalories
+    } else if(page.data.dailyGoal.current_calorie > page.data.dailyGoal.calorie_goal) {
+      option = overCalories
     }
 
     chartComponent.init((canvas, width, height, dpr) => {
