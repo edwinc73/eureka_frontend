@@ -897,7 +897,6 @@ Page({
   selectDate(e){
     const page = this
     const index = e.currentTarget.dataset.index;
-    console.log(index)
     this.setData({
       scrollIntoView: `date_${index}`,
       activeIndex: index,
@@ -908,6 +907,10 @@ Page({
   },
   goToRecipe(e){
     clearAllChart()
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    })
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
