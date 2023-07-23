@@ -14,7 +14,7 @@
       <text class="h1">{{height}}</text>
     </view>
   </view>
-  <view class="data-card flex">
+  <view class="data-card flex justify-between">
     <view class="data flex">
       <text class="large-text">{{current_weight}}</text>
       <text class="small text-light">Current weight</text>
