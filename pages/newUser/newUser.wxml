@@ -15,8 +15,8 @@
     </view>
     <view class="inputs" wx:if="{{firstPage}}">
       <view class="input w-100">
-        <view class="p label">Name:</view>
-        <input class="p" type="nickname"/>
+        <view class="p label" bind>Name:</view>
+        <input class="p" type="nickname" bindblur="setNickname" />
       </view>
       <view class="input dob w-100">
         <view class="p label">Birth Date:</view>
@@ -34,21 +34,21 @@
       <view class="input w-100">
         <view class="flex">
           <view class="p label">Height:</view>
-          <input class="p" type="text"/>
+          <input class="p" type="text" bindinput="setHeight"/>
         </view>
         <view class="p text-light">m</view>
       </view>
       <view class="input w-100">
         <view class="flex">
           <view class="p label">Weight:</view>
-          <input class="p" type="text"/>
+          <input class="p" type="text" bindinput="setWeight"/>
         </view>
         <view class="p text-light">kg</view>
       </view>
       <view class="input w-100">
         <view class="flex">
           <view class="p label">Target:</view>
-          <input class="p" type="text"/>
+          <input class="p" type="text" bindinput="setTarget"/>
         </view>
         <view class="p text-light">kg</view>
       </view>

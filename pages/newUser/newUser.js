@@ -150,4 +150,50 @@ Page({
       }, this.data.typingSpeed);
     }
   },
+  goToHomepage(){
+    this.setUserData()
+  },
+  setUserData(){
+    const {birthday, avatarUrl, nickname, gender, height, weight, target} = this.data
+
+    function calculateAge(date) {
+      const [birthYear, birthMonth, birthDay] = date.split('-').map(Number);
+      const currentDate = new Date();
+      let age = currentDate.getFullYear() - birthYear;
+
+      if (currentDate.getMonth() < birthMonth - 1 || (currentDate.getMonth() === birthMonth - 1 && currentDate.getDate() < birthDay)) {
+        age--;
+      }
+      return age;
+    }
+    
+    const userData = {
+      age: calculateAge(birthday),
+      username: nickname,
+      gender: gender,
+      height: height,
+      weight: weight,
+      target: target
+    }
+    console.log(userData)
+    // wx.request({
+    //   url: 'url',
+    // })
+  },
+  setNickname (e) {
+    const input = e.detail.value;
+    this.setData({ nickname: input });
+  },
+  setHeight (e){
+    const input = e.detail.value
+    this.setData({height: input})
+  },
+  setWeight (e){
+    const input = e.detail.value
+    this.setData({weight: input})
+  },
+  setTarget (e){
+    const input = e.detail.value
+    this.setData({target: input})
+  }
 })
