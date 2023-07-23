@@ -48,6 +48,7 @@
     "CustomNav": "../../components/custom-nav/custom-nav",
     "SearchResult": "./components/search-result/search-result",
     "ec-canvas": "../../ec-canvas/ec-canvas",
-    "Review": "./components/review/review"
+    "Review": "./components/review/review",
+    "CustomLoading": "../../components/custom-loading/custom-loading"
   }
 }

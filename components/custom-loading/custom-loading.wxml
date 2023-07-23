@@ -1,4 +1,6 @@
-<view class="loading-container">
-  <image src="../../images/noodle animation.gif" class="loading-icon" mode="aspectFit"/>
-  <text>Loading...</text>
+<view class="position-center">
+  <view class="loading-container">
+    <image src="../../images/noodle animation.gif" class="loading-icon" mode="aspectFit"/>
+    <text>Loading...</text>
+  </view>
 </view>
