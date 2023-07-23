@@ -14,7 +14,8 @@
     "pages/recipes/confirmRecipe",
     "components/custom-nav/custom-nav",
     "components/search-result/search-result",
-    "components/review/review"
+    "components/review/review",
+    "components/custom-loading/custom-loading"
   ],
   "window":{
     "navigationStyle": "custom"
