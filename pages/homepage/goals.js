@@ -96,6 +96,12 @@ Page({
 
         // applying default data to the dailygoals
 
+        res.data.forEach(goal => {
+          goal.meals.forEach(meal=>{
+            meal.total_calories = (meal.recipe_nutritious_per_100g.calories * meal.portion).toFixed(0)
+          })
+        });
+
         const dailyGoals = res.data
         const goal = res.data[6]
         page.setData({
@@ -698,47 +704,8 @@ Page({
             }]
           };
 
-          let overGreen = {
-            backgroundColor: "rgba(0,0,0,0)",
-            series: [{
-              label: {
-                show: true,
-                formatter(param) {
-                  // correct the percentage
-                  return param.name + ' (' + param.percent * 2 + '%)';
-                }
-              },
-              type: 'pie',
-              center: ['50%', '50%'],
-              radius: ['50%', '40%'],
-              startAngle: 310,
-              itemStyle: {
-                borderRadius: 200
-              },
-              data: [{
-                value: 100,
-                itemStyle: {
-                  color: '#575757'
-                },
-                label: {
-                  show: false
-                }
-              },{
-                value: 100,
-                name: "fill",
-                itemStyle: {
-                  color: 'none',
-                  borderRadius: 100
-                },
-                label: {
-                  show: false
-                }
-              }]
-            }]
-          };
-
           let option
-          if(page.data.dailyGoal.current_fat > page.data.dailyGoal.current_fat){
+          if(page.data.dailyGoal.current_fat > page.data.dailyGoal.fat_goal){
             option = over
           } else {
             option = under
@@ -825,8 +792,6 @@ Page({
         const fatData = data.map(goal => goal.current_fat)
         const carbsData = data.map(goal => goal.current_carbs)
 
-      
-
         function findAverage(arr) {
           if (arr.length === 0) {
             return 0;
@@ -836,7 +801,7 @@ Page({
           const average = sum / arr.length;
           return average.toFixed(0);
         }
-
+        console.log(data)
         page.setData({
           average_calories: findAverage(calorieData),
           average_protein: findAverage(proteinData),
@@ -845,7 +810,7 @@ Page({
           goalsAchieved : goalsAchieved,
           calorieData: calorieData,
           dates: dates,
-          weekly_calorie_goal: data[0].calorie_goal
+          weekly_calorie_goal: data[data.length - 1].calorie_goal
         })
       }
     })
@@ -855,14 +820,14 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide() {
-
+    clearAllChart()
   },
 
   /**
    * Lifecycle function--Called when page unload
    */
   onUnload() {
-
+    clearAllChart()
   },
 
   /**
@@ -893,7 +858,6 @@ Page({
   selectDate(e){
     const page = this
     const index = e.currentTarget.dataset.index;
-    console.log(index)
     this.setData({
       scrollIntoView: `date_${index}`,
       activeIndex: index,
@@ -904,6 +868,10 @@ Page({
   },
   goToRecipe(e){
     clearAllChart()
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    })
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
@@ -1051,12 +1019,10 @@ function setDailyCharts(page){
 
     let option
   
-    if(page.data.dailyGoal.current_calorie / app.globalData.calorieGrace > page.data.dailyGoal.calorie_goal){
-      option = overCalories
-    } else if(page.data.dailyGoal.current_calorie > page.data.dailyGoal.calorie_goal) {
-      option = overCaloriesGreen
-    } else {
+    if(page.data.dailyGoal.current_calorie < page.data.dailyGoal.calorie_goal * app.globalData.calorieGrace){
       option = underCalories
+    } else if(page.data.dailyGoal.current_calorie > page.data.dailyGoal.calorie_goal) {
+      option = overCalories
     }
 
     chartComponent.init((canvas, width, height, dpr) => {

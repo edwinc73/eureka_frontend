@@ -173,52 +173,11 @@ Page({
         }]
       };
 
-      let overCaloriesGreen = {
-        backgroundColor: "rgba(0,0,0,0)",
-        series: [{
-          label: {
-            show: true,
-            formatter(param) {
-              // correct the percentage
-              return param.name + ' (' + param.percent * 2 + '%)';
-            }
-          },
-          type: 'pie',
-          center: ['50%', '50%'],
-          radius: ['50%', '40%'],
-          startAngle: 180,
-          itemStyle: {
-            borderRadius: 200
-          },
-          data: [{
-            value: 100,
-            itemStyle: {
-              color: '#52BE8C'
-            },
-            label: {
-              show: false
-            }
-          },{
-            value: 100,
-            name: "fill",
-            itemStyle: {
-              color: 'none',
-              borderRadius: 100
-            },
-            label: {
-              show: false
-            }
-          }]
-        }]
-      };
-
       let option
       // console.log(app.globalData.calorieGrace)
-      if(data.current_calorie * app.globalData.calorieGrace > data.calorie_goal){
-        option = overCalories
+      if(data.current_calorie < app.globalData.calorieGrace * data.calorie_goal){
+        option = underCalories
       } else if(data.current_calorie > data.calorie_goal) {
-        option = overCaloriesGreen
-      } else {
         option = underCalories
       }
 
