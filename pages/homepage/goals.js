@@ -704,47 +704,8 @@ Page({
             }]
           };
 
-          let overGreen = {
-            backgroundColor: "rgba(0,0,0,0)",
-            series: [{
-              label: {
-                show: true,
-                formatter(param) {
-                  // correct the percentage
-                  return param.name + ' (' + param.percent * 2 + '%)';
-                }
-              },
-              type: 'pie',
-              center: ['50%', '50%'],
-              radius: ['50%', '40%'],
-              startAngle: 310,
-              itemStyle: {
-                borderRadius: 200
-              },
-              data: [{
-                value: 100,
-                itemStyle: {
-                  color: '#575757'
-                },
-                label: {
-                  show: false
-                }
-              },{
-                value: 100,
-                name: "fill",
-                itemStyle: {
-                  color: 'none',
-                  borderRadius: 100
-                },
-                label: {
-                  show: false
-                }
-              }]
-            }]
-          };
-
           let option
-          if(page.data.dailyGoal.current_fat > page.data.dailyGoal.current_fat){
+          if(page.data.dailyGoal.current_fat > page.data.dailyGoal.fat_goal){
             option = over
           } else {
             option = under
@@ -859,14 +820,14 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide() {
-
+    clearAllChart()
   },
 
   /**
    * Lifecycle function--Called when page unload
    */
   onUnload() {
-
+    clearAllChart()
   },
 
   /**
