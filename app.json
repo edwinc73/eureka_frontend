@@ -1,9 +1,9 @@
 {
   "pages":[
+    "pages/newUser/newUser",
     "pages/homepage/homepage",
     "pages/index/index",
     "pages/logs/logs",
-    "custom-tab-bar/index",
     "pages/favourite/favourite",
     "pages/profile/profile",
     "pages/homepage/goals",
@@ -13,6 +13,7 @@
     "pages/recipes/addRecipe",
     "pages/recipes/confirmRecipe",
     "components/custom-nav/custom-nav",
+    "custom-tab-bar/index",
     "components/search-result/search-result",
     "components/review/review"
   ],
