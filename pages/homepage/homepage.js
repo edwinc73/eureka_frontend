@@ -32,14 +32,14 @@ Page({
    * Page initial data
    */
   data: {
-    chartData: {}
+    chartData: {},
+    showLoading: true,
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    
   },
 
   /**
@@ -47,6 +47,7 @@ Page({
    */
   onReady() {
     const data = app.globalData.chartData
+    this.setData({ showLoading: false });
   },
   canvasIdErrorCallback: function (e) {
     console.error(e.detail.errMsg)
@@ -883,6 +884,11 @@ Page({
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+      success: () => {
+        setTimeout(() => {
+          wx.hideLoading();
+        }, 1000); 
+      },
     })
   }
 })

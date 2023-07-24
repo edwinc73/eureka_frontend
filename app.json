@@ -15,7 +15,8 @@
     "components/custom-nav/custom-nav",
     "custom-tab-bar/index",
     "components/search-result/search-result",
-    "components/review/review"
+    "components/review/review",
+    "components/custom-loading/custom-loading"
   ],
   "window":{
     "navigationStyle": "custom"
@@ -47,6 +48,7 @@
     "CustomNav": "../../components/custom-nav/custom-nav",
     "SearchResult": "./components/search-result/search-result",
     "ec-canvas": "../../ec-canvas/ec-canvas",
-    "Review": "./components/review/review"
+    "Review": "./components/review/review",
+    "CustomLoading": "../../components/custom-loading/custom-loading"
   }
 }
