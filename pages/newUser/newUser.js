@@ -16,7 +16,11 @@ Page({
     typedText: '', 
     typingSpeed: 55, 
     currentCharIndex: 0,
-    screenWidth:0
+    screenWidth:0,
+    height: 0,
+    weight: 0,
+    target: 0,
+    showLoading: false
   },
 
   /**
@@ -119,14 +123,22 @@ Page({
     }
   },
   goToNext(){
-    this.setData({
-      firstPage: false,
-      dialogue: "Tell me more.",
-      typedText: "",
-      currentCharIndex: 0,
-      screenWidth: 390
-    })
-    this.typeNextCharStep2()
+    const {birthday, avatarUrl, nickname, gender,today} = this.data
+    if(birthday == today || avatarUrl == defaultAvatarUrl || nickname == "" || gender == ""){
+      wx.showToast({
+        icon: "error",
+        title: 'Missing input',
+      })
+    } else {
+      this.setData({
+        firstPage: false,
+        dialogue: "Tell me more.",
+        typedText: "",
+        currentCharIndex: 0,
+        screenWidth: 390
+      })
+      this.typeNextCharStep2()
+    }
   },
   typeNextChar () {
     if (this.data.currentCharIndex < this.data.text.length) {
@@ -153,7 +165,21 @@ Page({
     }
   },
   goToHomepage(){
-    this.setUserData()
+    const {height, weight, target} = this.data
+
+    if(height == 0 || weight == 0 || target == 0){
+      wx.showToast({
+        icon: "error",
+        title: 'Missing input',
+      })
+    } else {
+      this.setUserData()
+      this.setData({showLoading: true})
+      setTimeout(() => {
+        this.setData({ showLoading: false });
+        wx.switchTab({ url: '/pages/homepage/homepage' })
+      }, 2000);
+    }
   },
   setUserData(){
     const {birthday, avatarUrl, nickname, gender, height, weight, target} = this.data

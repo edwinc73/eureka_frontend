@@ -60,4 +60,5 @@
     <view class="bg-image w-100"></view>
 </view>
 <view class="spacer"></view>
+<CustomLoading wx:if="{{showLoading}}" />
 <BottomMask />
