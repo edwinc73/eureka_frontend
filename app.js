@@ -5,6 +5,7 @@ App({
     // const logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
+    const app = this
 
     wx.login({
       success: res => {
@@ -15,22 +16,28 @@ App({
           success(loginRes) {
             app.globalData.user = loginRes.data.user
             app.globalData.header = loginRes.data.headers
+            console.log(loginRes.data.new_user)
+            if(loginRes.data.new_user){
+              app.globalData.newUser = true
+            }else{
+              app.globalData.newUser = false
+              wx.request({
+                url: `${app.globalData.baseUrl}/goals/69`,
+                header: loginRes.data.headers,
+                success(res){
+                  app.globalData.chartData = res.data
+                  wx.switchTab({ url: '/pages/homepage/homepage' });
+                }
+              })
+            }
           },
         })
       }
     })
 
+
     const system = wx.getSystemInfoSync()
     console.log(system.statusBarHeight)
-    // load user goal
-    const app = this
-    wx.request({
-      url: `${app.globalData.baseUrl}/goals/69`,
-      success(res){
-        // console.log(res.data)
-        app.globalData.chartData = res.data
-      }
-    })
 
     // load font
     wx.loadFontFace({

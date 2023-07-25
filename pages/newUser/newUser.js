@@ -1,6 +1,6 @@
 // pages/newUser/newUser.js
 const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-
+const app = getApp()
 Page({
 
   /**
@@ -166,7 +166,6 @@ Page({
   },
   goToHomepage(){
     const {height, weight, target} = this.data
-
     if(height == 0 || weight == 0 || target == 0){
       wx.showToast({
         icon: "error",
@@ -183,7 +182,7 @@ Page({
   },
   setUserData(){
     const {birthday, avatarUrl, nickname, gender, height, weight, target} = this.data
-
+    const page = this
     function calculateAge(date) {
       const [birthYear, birthMonth, birthDay] = date.split('-').map(Number);
       const currentDate = new Date();
@@ -195,18 +194,32 @@ Page({
       return age;
     }
     
-    const userData = {
+    const user = {
       age: calculateAge(birthday),
       username: nickname,
       gender: gender,
-      height: height,
-      weight: weight,
-      target: target
+      height: parseInt(height, 10),
+      weight: parseInt(weight, 10),
+      goal_weight: parseInt(target, 10)
     }
-    console.log(userData)
-    // wx.request({
-    //   url: 'url',
-    // })
+    wx.request({
+      url: `${app.globalData.baseUrl}/users/1`,
+      method: "PUT",
+      header: app.globalData.header,
+      data:{ user },
+      success(res){
+        console.log(res)
+        wx.uploadFile({
+          url: `${app.globalData.baseUrl}/upload_avatar`,
+          filePath: page.data.avatarUrl,
+          name: 'avatar',
+          header: app.globalData.header,
+          complete(res){
+            console.log(res)
+          }
+        })
+      }
+    })
   },
   setNickname (e) {
     const input = e.detail.value;

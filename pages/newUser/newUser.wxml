@@ -36,7 +36,7 @@
           <view class="p label">Height:</view>
           <input class="p" type="text" bindinput="setHeight"/>
         </view>
-        <view class="p text-light">m</view>
+        <view class="p text-light">cm</view>
       </view>
       <view class="input w-100 page2-input" style="opacity: {{firstPage ? 0 : 1}}">
         <view class="flex">
