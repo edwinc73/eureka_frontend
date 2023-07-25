@@ -49,7 +49,7 @@ Page({
         .trim() 
         .split('\n')
         .filter((str) => str.trim() !== '')
-        console.log(instructions)
+        console.log(res.data)
         page.setData({
           id: recipe.id,
           instructions: instructions,
@@ -289,7 +289,6 @@ Page({
         }
       },
       success(res){
-        console.log(res)
         wx.switchTab({
           url: '/pages/homepage/homepage',
         })
@@ -331,7 +330,6 @@ Page({
     this.setData({
       selectedStars: selectedStars,
     });
-    console.log(this.data.selectedStars)
   },
   handleTextareaInput(e){
     const reviewText = e.detail.value;
@@ -346,23 +344,23 @@ Page({
     if(page.data.isFavourite){
       wx.request({
         url: `${app.globalData.baseUrl}/favourite_delete`,
+        header: app.globalData.header,
         method: "DELETE",
         data:{
           id:id,
         },
         success(res){
-          console.log(res)
         }
       })
     } else {
       wx.request({
         url: `${app.globalData.baseUrl}/favourite_recipes`,
+        header: app.globalData.header,
         method: "POST",
         data:{
           id:id,
         },
         success(res){
-          console.log(res)
         }
       })
     }

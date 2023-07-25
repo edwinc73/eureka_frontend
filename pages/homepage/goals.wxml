@@ -90,6 +90,7 @@
     </view>
   </view>
   <view class="title-container w-100" style="margin:20px 0 0">History</view>
+    <view class="small-text text-light" wx:if="{{dailyGoal.meals.length < 1}}" >No meals added</view>
   <view class="w-100 history">
     <view wx:for="{{dailyGoal.meals}}" bindtap="goToRecipe" data-id="{{meal.recipe.id}}" wx:for-item="meal" class="history" >
       <view class="search-result-container">

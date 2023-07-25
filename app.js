@@ -16,7 +16,6 @@ App({
           success(loginRes) {
             app.globalData.user = loginRes.data.user
             app.globalData.header = loginRes.data.headers
-            console.log(loginRes.data.new_user)
             if(loginRes.data.new_user){
               app.globalData.newUser = true
             }else{
@@ -37,7 +36,6 @@ App({
 
 
     const system = wx.getSystemInfoSync()
-    console.log(system.statusBarHeight)
 
     // load font
     wx.loadFontFace({

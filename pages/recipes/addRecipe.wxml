@@ -1,29 +1,29 @@
 <view class="container w-100">
   <view class="search-box w-100">
       <image src="/images/icons/search.png" mode="aspectFit"/>
-      <input type="text" value='{{query}}' bindconfirm="searchIngredient" placeholder="Search for ingredients" placeholder-style="color:#777; font-size:16px; font-family:quicksand" />
+      <input type="text" value='{{query}}' bindconfirm="searchIngredient" placeholder="Search for ingredients" placeholder-style="color:#777; font-size:16px; font-family:quicksand;" />
   </view>
   <view class="ingredients-list w-100">
-    <view class="ingredient flex w-100" wx:for="{{ingredients}}">
+    <view class="ingredient flex w-100" wx:for="{{ingredients}}" key="{{item.id}}">
     <view class="ingredient-info flex justify-between w-100">
       <view class="small item-name ">{{item.name}}</view>
         <view class="flex calorie-information">
           <view class="small text-light">{{item.calories}}kcal/100g</view>
-          <image src="../../images/icons/add_icon.png" mode="aspectFit" data-id="{{item.id}}" bindtap="openDialogueWindow"/>
+          <image src="../../images/icons/add_icon.png" mode="aspectFit" data-id="{{item.id}}" bindtap="openDialogueWindow" />
         </view>
       </view>
       <hr/>
-      <view class="pop-up-window w-100" wx:if="{{show_window}}">
-        <view class="flex align-center pop-up-container">
-          <view class="pop-up-window-bg" bindtap="switchShow"></view>
-          <view class="dialogue-window">
-            <view class="h1">{{currentIngredient.name}}</view>
-            <slider bindchanging="portionChange" activeColor="#52BE8C" block-size="12" block-color="#52BE8C" value="100" step="10" min="10" max="1000" />
-            <view class="flex justify-between" style="gap:15px">
-              <view class="bubble recipe-portion h1">{{portion}}g</view>
-              <view class="bubble button" data-id="{{item.id}}" bindtap="addToCart">Add</view>
-            </view>
-          </view>
+    </view>
+  </view>
+  <view class="pop-up-window w-100" wx:if="{{show_window}}">
+    <view class="flex align-center pop-up-container">
+      <view class="pop-up-window-bg" bindtap="switchShow"></view>
+      <view class="dialogue-window">
+        <view class="h1">{{currentIngredient.name}}</view>
+        <slider bindchanging="portionChange" activeColor="#52BE8C" block-size="12" block-color="#52BE8C" value="100" step="10" min="10" max="1000" />
+        <view class="flex justify-between" style="gap:15px">
+          <view class="bubble recipe-portion h1">{{portion}}g</view>
+          <view class="bubble button" data-id="{{item.id}}" bindtap="addToCart">Add</view>
         </view>
       </view>
     </view>

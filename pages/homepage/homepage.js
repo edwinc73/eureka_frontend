@@ -78,8 +78,8 @@ Page({
     // load echart
     wx.request({
       url: `${app.globalData.baseUrl}/goals/90`,
+      header: app.globalData.header,
       success(res){
-        console.log(res)
         app.globalData.chartData = res.data
         const data = app.globalData.chartData
         page.setData({goal: data})
@@ -175,11 +175,10 @@ Page({
       };
 
       let option
-      // console.log(app.globalData.calorieGrace)
       if(data.current_calorie < app.globalData.calorieGrace * data.calorie_goal){
         option = underCalories
       } else if(data.current_calorie > data.calorie_goal) {
-        option = underCalories
+        option = overCalories
       }
 
       // Set the chart options and render the chart

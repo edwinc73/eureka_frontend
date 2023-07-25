@@ -1,4 +1,3 @@
-// pages/homepage/goals.js
 import * as echarts from '../../ec-canvas/echarts';
 
 const app = getApp()
@@ -75,26 +74,30 @@ Page({
           const dayOfWeek = daysOfWeek[date.getDay()];
           dateRange.push([[dayOfWeek],[date.getDate()]])
         }
+        const dailyGoals = res.data
+        const goal = res.data[res.data.length - 1]
+        console.log(goal)
+        
+        // applying default data to the dailygoals
 
-        function getMonthsFromToday() {
-          const months = [];
-          const today = new Date();
-          const currentYear = today.getFullYear();
-          const currentMonth = today.getMonth();
-        
-          for (let i = 0; i < 12; i++) {
-            const year = currentYear - Math.floor((currentMonth + i) / 12);
-            const monthIndex = (currentMonth - i + 12) % 12;
-            const newDate = new Date(year, monthIndex);
-            const monthName = newDate.toLocaleString('default', { month: 'short' });
-        
-            months.push([monthName, year]);
-          }
-        
-          return months;
+        const defaultData = {
+          calorie_goal: 1668,
+          carbs_goal: 208.5,
+          current_calorie: 0,
+          current_carbs: 0,
+          current_fat: 0,
+          current_protein: 0,
+          fat_goal: res.data[res.data.length - 1].fat_goal,
+          protein_goal: res.data[res.data.length - 1].protein_goal,
+          carbs_goal: res.data[res.data.length - 1].carbs_goal,
+          meals: []
         }
 
-        // applying default data to the dailygoals
+        while(dailyGoals.length < 7){
+          dailyGoals.unshift(defaultData)
+        }
+
+        console.log(dailyGoals)
 
         res.data.forEach(goal => {
           goal.meals.forEach(meal=>{
@@ -102,14 +105,11 @@ Page({
           })
         });
 
-        const dailyGoals = res.data
-        const goal = res.data[6]
         page.setData({
           dailyGoal: goal,
           dailyGoals: dailyGoals,
           dateRange : dateRange.reverse(),
-          monthRange : getMonthsFromToday().reverse(),
-          meals : res.data[6].meals
+          meals : res.data[res.data.length - 1].meals
         })
         },
       complete(res){
@@ -132,11 +132,7 @@ Page({
               },
             series: [{
               label: {
-                show: true,
-                formatter(param) {
-                  // correct the percentage
-                  return param.name + ' (' + param.percent * 2 + '%)';
-                }
+                show: true
               },
               type: 'pie',
               width: "100%",
@@ -776,7 +772,6 @@ Page({
       url: `${app.globalData.baseUrl}/goals`,
       header: app.globalData.header,
       success(res){
-        console.log(res.data)
         const data = res.data
         const dates = data.map(goal => goal.created_date).slice(-7)
         const calorieData = data.map(goal => goal.current_calorie).slice(-7)
@@ -801,7 +796,6 @@ Page({
           const average = sum / arr.length;
           return average.toFixed(0);
         }
-        console.log(data)
         page.setData({
           average_calories: findAverage(calorieData),
           average_protein: findAverage(proteinData),
@@ -922,7 +916,7 @@ function setDailyCharts(page){
           borderRadius: 200
         },
         data: [{
-          value: 100,
+          value: 0,
           itemStyle: {
             color: '#FBC63E'
           },
@@ -957,7 +951,7 @@ function setDailyCharts(page){
           borderRadius: 200
         },
         data: [{
-          value: page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal * 100,
+          value: page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal * 100 ,
           itemStyle: {
             color: '#52BE8C'
           },
@@ -965,46 +959,7 @@ function setDailyCharts(page){
             show: false
           }
         },{
-          value: 100 - (page.data.dailyGoal.calorie_goal / page.data.dailyGoal.current_calorie /100) + 13.8,
-          name: "fill",
-          itemStyle: {
-            color: 'none',
-            borderRadius: 100
-          },
-          label: {
-            show: false
-          }
-        }]
-      }]
-    };
-
-    let overCaloriesGreen = {
-      backgroundColor: "rgba(0,0,0,0)",
-      series: [{
-        label: {
-          show: true,
-          formatter(param) {
-            // correct the percentage
-            return param.name + ' (' + param.percent * 2 + '%)';
-          }
-        },
-        type: 'pie',
-        center: ['50%', '50%'],
-        radius: ['50%', '40%'],
-        startAngle: 180,
-        itemStyle: {
-          borderRadius: 200
-        },
-        data: [{
-          value: 100,
-          itemStyle: {
-            color: '#52BE8C'
-          },
-          label: {
-            show: false
-          }
-        },{
-          value: 100,
+          value: 100 - (page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal /100) + 13.8,
           name: "fill",
           itemStyle: {
             color: 'none',
@@ -1539,7 +1494,6 @@ function setDailyCharts(page){
 }
 
 function setWeeklyChart(page){
-  console.log(page.data)
   const chartComponent = page.selectComponent('#weeklyChart');
   let option = {
     height: 400,

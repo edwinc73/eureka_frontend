@@ -19,7 +19,6 @@ Page({
       header: app.globalData.header,
       method: 'GET',
       success: (res) => {
-        console.log(res)
         page.setData({
           username: res.data.username,
           age: res.data.age,
@@ -27,7 +26,8 @@ Page({
           current_weight: res.data.weight,
           goal_weight: res.data.goal_weight,
           bmi: (res.data.weight/ [(res.data.height/100) * (res.data.height/100)]).toFixed(1),
-          badges: res.data.badges
+          badges: res.data.badges,
+          avatar: res.data.image
         })
       }
     })
@@ -37,7 +37,6 @@ Page({
     const page = this
     const index = e.currentTarget.dataset.index
     const badge = page.data.badges[index]
-    console.log(badge)
     page.setData({
       currentBadge: badge,
       show: !page.data.show

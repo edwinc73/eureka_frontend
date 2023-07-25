@@ -16,9 +16,9 @@ Page({
     const page = this
     wx.request({
       url: `${app.globalData.baseUrl}/suggestion`,
+      header: app.globalData.header,
       method: 'GET',
       success: (res) => {
-        console.log(res)
         page.setData({
           results: res.data
         })
@@ -80,7 +80,6 @@ Page({
       duration: 0
     })
     const id = e.currentTarget.dataset.id
-    console.log(id)
     wx.navigateTo({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
     })

@@ -20,6 +20,10 @@
   align-items: center;
 }
 
+.user-info .h1{
+  text-align: center;
+}
+
 .data-card {
   background-color: #E3F0E6;
   border-radius: 15px;

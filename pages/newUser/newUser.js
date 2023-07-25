@@ -94,8 +94,7 @@ Page({
 
   },
   onChooseAvatar(e) {
-    const { avatarUrl } = e.detail 
-    console.log(avatarUrl)
+    const { avatarUrl } = e.detail
     this.setData({
       avatarUrl,
     })
@@ -203,12 +202,11 @@ Page({
       goal_weight: parseInt(target, 10)
     }
     wx.request({
-      url: `${app.globalData.baseUrl}/users/1`,
+      url: `${app.globalData.baseUrl}/fill_up_profile`,
       method: "PUT",
       header: app.globalData.header,
       data:{ user },
       success(res){
-        console.log(res)
         wx.uploadFile({
           url: `${app.globalData.baseUrl}/upload_avatar`,
           filePath: page.data.avatarUrl,

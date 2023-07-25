@@ -37,5 +37,6 @@
   </form>
   <view class="spacer"></view>
 </view>
+<CustomLoading wx:if="{{showLoading}}" />
 <BottomMask />
 <CustomNav />

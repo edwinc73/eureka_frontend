@@ -10,6 +10,7 @@
   margin-top: 30rpx;
 }
 
+
 .item-name{
   text-transform: capitalize;
 }

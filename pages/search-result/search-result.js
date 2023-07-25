@@ -1,30 +1,20 @@
-// pages/search-result/search-result.js
 const app = getApp();
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
     results:[],
   },
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-
   onLoad(options) {
     const page = this
     const query = options.query;
-    console.log(query)
     wx.request({
       url:  `${app.globalData.baseUrl}/recipes`, 
+      header: app.globalData.header,
       method: 'GET',
       data :{
         query: query
       },
       success: (res) => {
-        console.log(res)
         page.setData({ results: res.data });
       },
       fail: (err) => {
