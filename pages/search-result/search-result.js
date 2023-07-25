@@ -16,7 +16,6 @@ Page({
   onLoad(options) {
     const page = this
     const query = options.query;
-    console.log(query)
     wx.request({
       url:  `${app.globalData.baseUrl}/recipes`, 
       header: app.globalData.header,
@@ -26,7 +25,6 @@ Page({
         query: query
       },
       success: (res) => {
-        console.log(res)
         page.setData({ results: res.data });
       },
       fail: (err) => {
