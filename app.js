@@ -36,7 +36,6 @@ App({
 
 
     const system = wx.getSystemInfoSync()
-    console.log(system.statusBarHeight)
 
     // load font
     wx.loadFontFace({
