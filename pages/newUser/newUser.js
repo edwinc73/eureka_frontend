@@ -213,6 +213,7 @@ Page({
           name: 'avatar',
           header: app.globalData.header,
           complete(res){
+            console.log(res)
           }
         })
       }

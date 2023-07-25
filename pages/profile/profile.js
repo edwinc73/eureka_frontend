@@ -26,7 +26,8 @@ Page({
           current_weight: res.data.weight,
           goal_weight: res.data.goal_weight,
           bmi: (res.data.weight/ [(res.data.height/100) * (res.data.height/100)]).toFixed(1),
-          badges: res.data.badges
+          badges: res.data.badges,
+          avatar: res.data.image
         })
       }
     })

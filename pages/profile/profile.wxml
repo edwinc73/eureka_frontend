@@ -6,7 +6,7 @@
       <text class="h1">{{age}}</text>
     </view>
     <view class="user-info">
-      <image class="avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" mode="aspectFill" />
+      <image class="avatar" src="{{avatar}}" mode="aspectFill" />
       <view class="h1">{{username}}</view>
     </view>
     <view class="fixed-data flex">
@@ -21,11 +21,11 @@
     </view>
     <view class="data flex">
       <text class="large-text">{{goal_weight}}</text>
-      <text class="small text-light">Goal weight</text>
+      <text class="small text-light">Target weight</text>
     </view>
     <view class="data flex">
       <text class="large-text">{{bmi}}</text>
-      <text class="small text-light">BMI</text>
+      <text class="small text-light">Body Mass Index (BMI)</text>
     </view>
   </view>
   <view class="achievements w-100">
