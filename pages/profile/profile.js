@@ -19,7 +19,6 @@ Page({
       header: app.globalData.header,
       method: 'GET',
       success: (res) => {
-        console.log(res)
         page.setData({
           username: res.data.username,
           age: res.data.age,
@@ -37,7 +36,6 @@ Page({
     const page = this
     const index = e.currentTarget.dataset.index
     const badge = page.data.badges[index]
-    console.log(badge)
     page.setData({
       currentBadge: badge,
       show: !page.data.show
