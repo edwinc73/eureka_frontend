@@ -26,7 +26,7 @@ App({
                 header: loginRes.data.headers,
                 success(res){
                   app.globalData.chartData = res.data
-                  wx.switchTab({ url: '/pages/homepage/homepage' });
+                  // wx.switchTab({ url: '/pages/homepage/homepage' });
                 }
               })
             }

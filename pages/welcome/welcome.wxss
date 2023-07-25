@@ -1,0 +1,39 @@
+.bg-image{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #FFF 11.46%, rgba(255, 255, 255, 0.00) 100%),linear-gradient(153deg, #52BE8D 0%, #A1D97E 100%);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+view, .logo{
+  z-index: 3;
+}
+
+.bg-pattern{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 1000px;
+  height: 120%;
+  z-index: 2;
+  mix-blend-mode: soft-light;
+}
+
+.logo{
+  width: 150px;
+  height: 110px;
+  margin-top: 20px;
+}
+
+.msg{
+  margin-top: 140px;
+  flex-direction: column;
+  align-items: center;
+}
