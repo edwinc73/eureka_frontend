@@ -144,7 +144,6 @@ Page({
               }]
             }]
           };
-          console.log(page.data.dailyGoal)
     
           let underCalories = {
             backgroundColor: "rgba(0,0,0,0)",
@@ -753,7 +752,6 @@ Page({
       url: `${app.globalData.baseUrl}/goals`,
       header: app.globalData.header,
       success(res){
-        console.log(res)
         const data = res.data
         const dates = data.map(goal => goal.created_date).slice(-7)
         const calorieData = data.map(goal => goal.current_calorie).slice(-7)
@@ -778,7 +776,6 @@ Page({
           const average = sum / arr.length;
           return average.toFixed(0);
         }
-        console.log(data)
         page.setData({
           average_calories: findAverage(calorieData),
           average_protein: findAverage(proteinData),
@@ -1516,7 +1513,6 @@ function setDailyCharts(page){
 }
 
 function setWeeklyChart(page){
-  console.log(page.data)
   const chartComponent = page.selectComponent('#weeklyChart');
   let option = {
     height: 400,
