@@ -16,6 +16,7 @@ Page({
     const page = this
     wx.request({
       url: `${app.globalData.baseUrl}/profile`,
+      header: app.globalData.header,
       method: 'GET',
       success: (res) => {
         console.log(res)
