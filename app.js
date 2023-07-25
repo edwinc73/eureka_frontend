@@ -14,10 +14,14 @@ App({
           method: 'post',
           data: { code: res.code }, 
           success(loginRes) {
+            console.log(loginRes)
             app.globalData.user = loginRes.data.user
             app.globalData.header = loginRes.data.headers
             if(loginRes.data.new_user){
               app.globalData.newUser = true
+              setTimeout(() =>{
+                wx.navigateTo({ url: '/pages/newUser/newUser' });
+              }, 1000)
             }else{
               app.globalData.newUser = false
               wx.request({
@@ -25,7 +29,9 @@ App({
                 header: loginRes.data.headers,
                 success(res){
                   app.globalData.chartData = res.data
-                  // wx.switchTab({ url: '/pages/homepage/homepage' });
+                  setTimeout(() =>{
+                    wx.switchTab({ url: '/pages/homepage/homepage' });
+                  }, 1000)
                 }
               })
             }

@@ -14,22 +14,17 @@ Page({
    */
   onLoad(options) {
     const animation = wx.createAnimation({
-      duration: 2000,
-      timingFunction: 'ease-in-out',
+      duration: 5000,
+      timingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
     })
 
     this.animation = animation
 
-    animation.translateY(-50).step()
+    animation.translateY(-100).opacity(0.45).step()
 
     this.setData({
       animationData: animation.export()
     })
-
-    setTimeout(() => {
-      wx.switchTab({ url: '/pages/homepage/homepage' })
-    }, 2500);
-
   },
 
   /**
