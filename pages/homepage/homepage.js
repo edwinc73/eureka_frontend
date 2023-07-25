@@ -178,7 +178,7 @@ Page({
       if(data.current_calorie < app.globalData.calorieGrace * data.calorie_goal){
         option = underCalories
       } else if(data.current_calorie > data.calorie_goal) {
-        option = underCalories
+        option = overCalories
       }
 
       // Set the chart options and render the chart

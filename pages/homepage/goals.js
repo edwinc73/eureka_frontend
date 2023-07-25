@@ -74,17 +74,38 @@ Page({
           const dayOfWeek = daysOfWeek[date.getDay()];
           dateRange.push([[dayOfWeek],[date.getDate()]])
         }
-
-        // applying default data to the dailygoals
-
-        res.data.forEach(goal => {
-          goal.meals.forEach(meal=>{
-            meal.total_calories = (meal.recipe_nutritious_per_100g.calories * meal.portion).toFixed(0)
-          })
-        });
-
         const dailyGoals = res.data
         const goal = res.data[res.data.length - 1]
+        console.log(goal)
+        
+        // applying default data to the dailygoals
+
+        const defaultData = {
+          calorie_goal: 1668,
+          carbs_goal: 208.5,
+          current_calorie: 0,
+          current_carbs: 0,
+          current_fat: 0,
+          current_protein: 0,
+          fat_goal: res.data[res.data.length - 1].fat_goal,
+          protein_goal: res.data[res.data.length - 1].protein_goal,
+          carbs_goal: res.data[res.data.length - 1].carbs_goal
+        }
+
+        while(dailyGoals.length < 7){
+          dailyGoals.unshift(defaultData)
+        }
+
+        console.log(dailyGoals)
+
+        res.data.forEach(goal => {
+          if(goal.hasOwnProperty("meal")){
+            goal.meals.forEach(meal=>{
+              meal.total_calories = (meal.recipe_nutritious_per_100g.calories * meal.portion).toFixed(0)
+            })
+          }
+        });
+
         page.setData({
           dailyGoal: goal,
           dailyGoals: dailyGoals,
@@ -896,7 +917,7 @@ function setDailyCharts(page){
           borderRadius: 200
         },
         data: [{
-          value: 100,
+          value: 0,
           itemStyle: {
             color: '#FBC63E'
           },
@@ -931,7 +952,7 @@ function setDailyCharts(page){
           borderRadius: 200
         },
         data: [{
-          value: page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal * 100,
+          value: page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal * 100 ,
           itemStyle: {
             color: '#52BE8C'
           },
@@ -939,46 +960,7 @@ function setDailyCharts(page){
             show: false
           }
         },{
-          value: 100 - (page.data.dailyGoal.calorie_goal / page.data.dailyGoal.current_calorie /100) + 13.8,
-          name: "fill",
-          itemStyle: {
-            color: 'none',
-            borderRadius: 100
-          },
-          label: {
-            show: false
-          }
-        }]
-      }]
-    };
-
-    let overCaloriesGreen = {
-      backgroundColor: "rgba(0,0,0,0)",
-      series: [{
-        label: {
-          show: true,
-          formatter(param) {
-            // correct the percentage
-            return param.name + ' (' + param.percent * 2 + '%)';
-          }
-        },
-        type: 'pie',
-        center: ['50%', '50%'],
-        radius: ['50%', '40%'],
-        startAngle: 180,
-        itemStyle: {
-          borderRadius: 200
-        },
-        data: [{
-          value: 100,
-          itemStyle: {
-            color: '#52BE8C'
-          },
-          label: {
-            show: false
-          }
-        },{
-          value: 100,
+          value: 100 - (page.data.dailyGoal.current_calorie / page.data.dailyGoal.calorie_goal /100) + 13.8,
           name: "fill",
           itemStyle: {
             color: 'none',
