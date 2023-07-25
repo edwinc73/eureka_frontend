@@ -344,6 +344,7 @@ Page({
     if(page.data.isFavourite){
       wx.request({
         url: `${app.globalData.baseUrl}/favourite_delete`,
+        header: app.globalData.header,
         method: "DELETE",
         data:{
           id:id,
@@ -354,6 +355,7 @@ Page({
     } else {
       wx.request({
         url: `${app.globalData.baseUrl}/favourite_recipes`,
+        header: app.globalData.header,
         method: "POST",
         data:{
           id:id,
