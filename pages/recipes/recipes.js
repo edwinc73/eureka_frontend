@@ -289,7 +289,6 @@ Page({
         }
       },
       success(res){
-        console.log(res)
         wx.switchTab({
           url: '/pages/homepage/homepage',
         })
@@ -331,7 +330,6 @@ Page({
     this.setData({
       selectedStars: selectedStars,
     });
-    console.log(this.data.selectedStars)
   },
   handleTextareaInput(e){
     const reviewText = e.detail.value;
@@ -351,7 +349,6 @@ Page({
           id:id,
         },
         success(res){
-          console.log(res)
         }
       })
     } else {
@@ -362,7 +359,6 @@ Page({
           id:id,
         },
         success(res){
-          console.log(res)
         }
       })
     }
