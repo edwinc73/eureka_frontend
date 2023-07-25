@@ -78,6 +78,7 @@ Page({
     // load echart
     wx.request({
       url: `${app.globalData.baseUrl}/goals/90`,
+      header: app.globalData.header,
       success(res){
         console.log(res)
         app.globalData.chartData = res.data

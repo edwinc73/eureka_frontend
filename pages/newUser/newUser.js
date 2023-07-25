@@ -203,7 +203,7 @@ Page({
       goal_weight: parseInt(target, 10)
     }
     wx.request({
-      url: `${app.globalData.baseUrl}/users/1`,
+      url: `${app.globalData.baseUrl}/fill_up_profile`,
       method: "PUT",
       header: app.globalData.header,
       data:{ user },

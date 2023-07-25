@@ -49,7 +49,7 @@ Page({
         .trim() 
         .split('\n')
         .filter((str) => str.trim() !== '')
-        console.log(instructions)
+        console.log(res)
         page.setData({
           id: recipe.id,
           instructions: instructions,

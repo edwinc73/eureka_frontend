@@ -19,6 +19,8 @@ Page({
     console.log(query)
     wx.request({
       url:  `${app.globalData.baseUrl}/recipes`, 
+      header: app.globalData.header,
+
       method: 'GET',
       data :{
         query: query

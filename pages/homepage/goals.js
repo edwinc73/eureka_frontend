@@ -1,4 +1,3 @@
-// pages/homepage/goals.js
 import * as echarts from '../../ec-canvas/echarts';
 
 const app = getApp()
@@ -76,24 +75,6 @@ Page({
           dateRange.push([[dayOfWeek],[date.getDate()]])
         }
 
-        function getMonthsFromToday() {
-          const months = [];
-          const today = new Date();
-          const currentYear = today.getFullYear();
-          const currentMonth = today.getMonth();
-        
-          for (let i = 0; i < 12; i++) {
-            const year = currentYear - Math.floor((currentMonth + i) / 12);
-            const monthIndex = (currentMonth - i + 12) % 12;
-            const newDate = new Date(year, monthIndex);
-            const monthName = newDate.toLocaleString('default', { month: 'short' });
-        
-            months.push([monthName, year]);
-          }
-        
-          return months;
-        }
-
         // applying default data to the dailygoals
 
         res.data.forEach(goal => {
@@ -103,13 +84,12 @@ Page({
         });
 
         const dailyGoals = res.data
-        const goal = res.data[6]
+        const goal = res.data[res.data.length - 1]
         page.setData({
           dailyGoal: goal,
           dailyGoals: dailyGoals,
           dateRange : dateRange.reverse(),
-          monthRange : getMonthsFromToday().reverse(),
-          meals : res.data[6].meals
+          meals : res.data[res.data.length - 1].meals
         })
         },
       complete(res){
@@ -132,11 +112,7 @@ Page({
               },
             series: [{
               label: {
-                show: true,
-                formatter(param) {
-                  // correct the percentage
-                  return param.name + ' (' + param.percent * 2 + '%)';
-                }
+                show: true
               },
               type: 'pie',
               width: "100%",
@@ -168,6 +144,7 @@ Page({
               }]
             }]
           };
+          console.log(page.data.dailyGoal)
     
           let underCalories = {
             backgroundColor: "rgba(0,0,0,0)",
@@ -776,7 +753,7 @@ Page({
       url: `${app.globalData.baseUrl}/goals`,
       header: app.globalData.header,
       success(res){
-        console.log(res.data)
+        console.log(res)
         const data = res.data
         const dates = data.map(goal => goal.created_date).slice(-7)
         const calorieData = data.map(goal => goal.current_calorie).slice(-7)
