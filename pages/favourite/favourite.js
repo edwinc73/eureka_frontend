@@ -46,7 +46,6 @@ Page({
       header:app.globalData.header,
       method: 'GET',
       success: (res) => {
-        console.log(res)
         page.setData({
           recipes: res.data
         })
