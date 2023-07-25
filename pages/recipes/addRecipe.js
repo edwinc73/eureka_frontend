@@ -13,7 +13,16 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-
+    const page = this
+    wx.request({
+      url: `${app.globalData.baseUrl}/ingredients?query=`,
+      header: app.globalData.header,
+      success(res){
+        page.setData({
+          ingredients: res.data
+        })
+      }
+    })
   },
 
   /**
@@ -83,7 +92,8 @@ Page({
     this.setData({
       portion: 100,
       show_window: true,
-      currentIngredient: ingredient
+      currentIngredient: ingredient,
+      currentId : id
     })
   },
   removeCartItem(e){

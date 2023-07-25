@@ -7,7 +7,8 @@ Page({
    * Page initial data
    */
   data: {
-    tempFiles:[]
+    tempFiles:[],
+    showLoading: false,
   },
 
   /**
@@ -108,6 +109,7 @@ Page({
         title: 'Missing input',
       })
     } else{
+      page.setData({ showLoading: true })
       wx.request({
         url: `${app.globalData.baseUrl}/recipes`,
         method: "POST",
@@ -125,6 +127,7 @@ Page({
             header: app.globalData.header,
             complete(res){
               console.log(res)
+              wx.clearStorage({ key: "cart" })
               wx.showToast({
                 title: "Recipe Added",
               })
