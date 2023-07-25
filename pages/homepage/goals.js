@@ -89,7 +89,8 @@ Page({
           current_protein: 0,
           fat_goal: res.data[res.data.length - 1].fat_goal,
           protein_goal: res.data[res.data.length - 1].protein_goal,
-          carbs_goal: res.data[res.data.length - 1].carbs_goal
+          carbs_goal: res.data[res.data.length - 1].carbs_goal,
+          meals: []
         }
 
         while(dailyGoals.length < 7){
@@ -99,11 +100,9 @@ Page({
         console.log(dailyGoals)
 
         res.data.forEach(goal => {
-          if(goal.hasOwnProperty("meal")){
-            goal.meals.forEach(meal=>{
-              meal.total_calories = (meal.recipe_nutritious_per_100g.calories * meal.portion).toFixed(0)
-            })
-          }
+          goal.meals.forEach(meal=>{
+            meal.total_calories = (meal.recipe_nutritious_per_100g.calories * meal.portion).toFixed(0)
+          })
         });
 
         page.setData({
