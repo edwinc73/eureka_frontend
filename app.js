@@ -20,7 +20,7 @@ App({
             if(loginRes.data.new_user){
               app.globalData.newUser = true
               setTimeout(() =>{
-                wx.navigateTo({ url: '/pages/newUser/newUser' });
+                wx.redirectTo({ url: '/pages/newUser/newUser' });
               }, 1000)
             }else{
               app.globalData.newUser = false
