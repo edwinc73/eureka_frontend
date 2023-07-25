@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/welcome/welcome",
     "pages/newUser/newUser",
     "pages/homepage/homepage",
     "pages/index/index",
