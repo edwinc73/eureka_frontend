@@ -31,7 +31,6 @@ Page({
     wx.getStorage({
       key: 'cart',
       success (res) {
-        console.log(res)
         page.setData({
           cart: res.data
         })
@@ -120,7 +119,6 @@ Page({
   },
   goToConfirm(){
     const page = this
-    console.log(this.data.cart.length)
     if(page.data.cart.length == 0){
       wx.showToast({
         icon: 'error',
