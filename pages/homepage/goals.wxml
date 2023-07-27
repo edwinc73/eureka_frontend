@@ -92,7 +92,7 @@
   <view class="title-container w-100" style="margin:20px 0 0">History</view>
     <view class="small-text text-light" wx:if="{{dailyGoal.meals.length < 1}}" >No meals added</view>
   <view class="w-100 history">
-    <view wx:for="{{dailyGoal.meals}}" wx:for-item="meal" class="history" >
+    <view wx:for="{{dailyGoal.meals}}" wx:for-item="meal" class="history" bindtap="goToRecipe" data-id="{{meal.recipe.id}}">
       <view class="search-result-container">
       <view class="search-description">
       <image src="{{meal.recipe.photo}}" mode="aspectFill" class="result-image"/>
@@ -102,8 +102,8 @@
       </view>
       </view>
       <view class="icons flex justify-between">
-        <image src="/images/icons/delete.png"  mode="aspectFit" class="delete-icon" bindtap="deleteMeal" data-id="{{meal.recipe.id}}" />
-        <image src="../../images/icons/goto.png" mode="aspectFit" class="go-to-icon" bindtap="goToRecipe" data-id="{{meal.recipe.id}}" />
+        <image src="/images/icons/delete.png"  mode="aspectFit" class="delete-icon" bindtap="deleteMeal" data-id="{{meal.id}}" data-index="{{index}}" id="delete" />
+        <image src="../../images/icons/goto.png" mode="aspectFit" class="go-to-icon" />
       </view>
     </view>
       <hr />
