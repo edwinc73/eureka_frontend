@@ -871,6 +871,33 @@ Page({
       url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
     })
   },
+  deleteMeal(e){
+    clearAllChart()
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
+    })
+    console.log(e)
+    const id = e.currentTarget.dataset.id
+
+    wx.request({
+      url:  `${app.globalData.baseUrl}/meals/${id}`, 
+      header: app.globalData.header,
+      method: 'DELETE',
+      data: {
+        meal: id
+      },
+      success: (res) => {
+        wx.showToast({
+          title: 'The meal is deleted',
+          duration: 1500
+        })
+      },
+      fail: (err) => {
+        console.log(err);
+      }
+    })
+  },
   switchTab(e){
     const page = this
     const state = e.currentTarget.dataset.value

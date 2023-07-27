@@ -268,4 +268,7 @@ hr{
   margin-top: 10px;
 }
 
-
+.icons{
+  width: 16%;
+  align-items: center;
+}
