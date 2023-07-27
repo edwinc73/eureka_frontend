@@ -881,8 +881,10 @@ Page({
       duration: 0
     })
     const id = e.currentTarget.dataset.id
+    const portion = e.currentTarget.dataset.portion
+
     wx.navigateTo({
-      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false&portion=${portion}`,
       success: () => {
         setTimeout(() => {
           wx.hideLoading();

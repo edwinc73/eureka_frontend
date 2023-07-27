@@ -55,7 +55,7 @@
     <view class="small cta-text" bindtap="goToSuggestions">MORE</view>
   </view>
   <view class="suggestions-container">
-    <view class="suggestion-container" wx:for="{{suggestions}}" bindtap="goToRecipe" data-id="{{item.id}}">
+    <view class="suggestion-container" wx:for="{{suggestions}}" bindtap="goToRecipe" data-id="{{item.id}}" data-portion="0" >
       <SearchResult data="{{item}}" />
       <hr/>
     </view>

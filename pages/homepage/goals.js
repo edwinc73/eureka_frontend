@@ -77,7 +77,7 @@ Page({
         const dailyGoals = res.data
         const goal = res.data[res.data.length - 1]
         console.log(goal)
-        
+      
         // applying default data to the dailygoals
 
         const defaultData = {
@@ -867,8 +867,10 @@ Page({
       duration: 0
     })
     const id = e.currentTarget.dataset.id
+    console.log(e.currentTarget.dataset)
+    const portion =e.currentTarget.dataset.portion
     wx.navigateTo({
-      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false&portion=${portion}`,
     })
   },
   switchTab(e){
