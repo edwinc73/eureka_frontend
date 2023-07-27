@@ -268,4 +268,12 @@ hr{
   margin-top: 10px;
 }
 
+.icons{
+  width: 84rpx;
+  align-items: center;
+}
 
+.delete-icon{
+  z-index: 30;
+  padding: 5px;
+}
