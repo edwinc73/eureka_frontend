@@ -72,12 +72,13 @@ Page({
   },
   goToRecipe(e){
     const id = e.currentTarget.dataset.id
+    const portion = e.currentTarget.dataset.portion
     wx.pageScrollTo({
       scrollTop: 0,
       duration: 0
     })
     wx.navigateTo({
-      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false&portion=${portion}`,
     })
   },
   goToAddRecipe(){

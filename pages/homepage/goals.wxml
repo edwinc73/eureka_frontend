@@ -92,7 +92,7 @@
   <view class="title-container w-100" style="margin:20px 0 0">History</view>
     <view class="small-text text-light" wx:if="{{dailyGoal.meals.length < 1}}" >No meals added</view>
   <view class="w-100 history">
-    <view wx:for="{{dailyGoal.meals}}" wx:for-item="meal" class="history" bindtap="goToRecipe" data-id="{{meal.recipe.id}}">
+    <view wx:for="{{dailyGoal.meals}}" bindtap="goToRecipe" data-id="{{meal.recipe.id}}" wx:for-item="meal" class="history" data-portion="{{meal.portion}}">
       <view class="search-result-container">
       <view class="search-description">
       <image src="{{meal.recipe.photo}}" mode="aspectFill" class="result-image"/>
@@ -145,12 +145,3 @@
 
 <BottomMask />
 <CustomNav />
-<!-- Component
-let chart = null
-let chartBg = null
-let protein = null
-let proteinBg = null
-let carbs = null
-let carbsBg = null
-let fat = null
-let fatBg = null -->

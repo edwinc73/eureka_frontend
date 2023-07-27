@@ -35,6 +35,10 @@ slider{
   margin: 0 auto 15px;
 }
 
+.tabs-container{
+  margin-bottom: 15px;
+}
+
 .tab-indicator{
   margin-top: 5px;
   display: block;
@@ -152,7 +156,7 @@ slider{
   border-radius: 15px;
   background-color: rgba(227, 240, 230, 1);
   box-sizing: border-box;
-  margin: 15px 0;
+  margin:0 0 15px;
 }
 
 .instruction{
@@ -168,7 +172,7 @@ slider{
   border-radius: 15px;
   width: 100%;
   padding: 15px;
-  margin: 15px 0;
+  margin: 0 0 15px;
   box-sizing: border-box;
 }
 

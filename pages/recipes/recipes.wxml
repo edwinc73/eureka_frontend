@@ -23,24 +23,24 @@
   <!-- show details tab -->
 
   <view wx:if="{{showDetail}}" class="w-100">
-  <form bindsubmit="addToMeal" class="w-100">
-    <view class="portion flex justify-between">
+  <form bindsubmit="addToMeal" wx:if="{{showRecipePage}}"class="w-100">
+    <view class="portion flex justify-between">`
       <view class="bubble recipe-portion h1">{{portion}}g</view>
       <view class="bubble recipe-calories h1 text-light">{{caloriesPerPortion * portion / 100}}kcal</view>  
     </view>
-      <slider bindchanging="portionChange" activeColor="#52BE8C" block-size="12" block-color="#52BE8C" value="100" step="10" min="10" max="1000" />
-      <button class="floating p" form-type="submit">Add to Goal</button>
+      <slider wx:if="{{showRecipePage}}" bindchanging="portionChange" activeColor="#52BE8C" block-size="12" block-color="#52BE8C" value="100" step="10" min="10" max="1000" />
+      <button wx:if="{{showRecipePage}}" class="floating p" form-type="submit">Add to Goal</button>
   </form>
     <view class="p">{{description}}</view>
     <view class="nutrition">
       <view class="title-container w-100 flex justify-between">
         <text class="p">Nutrition</text>
-        <text class="small text-light">per 100g</text>
+        <text class="small text-light">{{showRecipePage ? "per 100g": "per " + portion + "g"}}</text>
       </view>
       <view class="nutrition-info flex justify-between">
         <view class="nutrition-calories w-100">
           <view class="large-text">
-          {{caloriesPerPortion}}
+          {{showRecipePage ? caloriesPerPortion : caloriesPerPortion * portion / 100}}
           </view>
           <view class="p text-light">kcal</view>
         </view>
@@ -100,7 +100,6 @@
       <view class="star-container flex">
         <view class="star" wx:for="{{stars}}" wx:key="{{index}}" data-index="{{index}}" bindtap="handleStarClick">
         <image wx:if="{{selectedStars >= index + 1}}"src="../../images/icons/star_active.png" mode="aspectFill"/>
-
         <image wx:else src="../../images/icons/star_inactive.png" mode="aspectFill"/>
         </view>
       </view>
