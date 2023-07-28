@@ -9,6 +9,8 @@
       </view>
     </view>
     <view class="recipe-icons">
+      <image wx:if="{{isOwner}}" src="../../images/icons/" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
+
       <view class="heart-container">
         <image wx:if="{{isFavourite}}" src="../../images/icons/heart.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
         <image wx:else src="../../images/icons/heartstroke.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
