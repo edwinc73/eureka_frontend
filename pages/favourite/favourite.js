@@ -18,8 +18,9 @@ Page({
 
   goToRecipe(e){
     const recipe_id = e.currentTarget.dataset.id
+    const portion = "0"
     wx.navigateTo({
-      url: `/pages/recipes/recipes?id=${recipe_id}&showdetail=true&showreview=false`,
+      url: `/pages/recipes/recipes?id=${recipe_id}&showdetail=true&showreview=false&portion=${portion}`,
     })
   },
   /**
