@@ -35,7 +35,7 @@
   <view class="cart-list" wx:if="{{cart.length}}">
     <view wx:for="{{cart}}" data-id="{{item.id}}" class="cart-item flex justify-between">
       <view class="cart-item-left flex align-center">
-        <image class="cart-minus" src="../../images/icons/minus_icon.png" mode="aspectFit" bindtap="removeCartItem" data-index="{{index}}"/>
+        <image class="cart-minus" src="/images/icons/minus.png" mode="aspectFit" bindtap="removeCartItem" data-index="{{index}}"/>
         <text class="small">{{item.name}}</text>
       </view>
       <view class="small">{{item.portion}}g</view>

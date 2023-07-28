@@ -351,8 +351,9 @@ Page({
     });
   },
   editRecipe(){
+    const id = this.data.id
     wx.navigateTo({
-      url: 'pages/',
+
     })
   },
   clickFavourite(){
