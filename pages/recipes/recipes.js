@@ -350,6 +350,12 @@ Page({
       reviewText: reviewText,
     });
   },
+  editRecipe(){
+    const id = this.data.id
+    wx.navigateTo({
+
+    })
+  },
   clickFavourite(){
     const id = this.data.id
     const page = this
