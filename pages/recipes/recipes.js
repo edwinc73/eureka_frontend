@@ -18,9 +18,13 @@ Page({
     portion: 100,
     stars: [1, 2, 3, 4, 5],
     selectedStars: 0,
-    protein: null,
-    carbs: null,
-    fat: null,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    mealPortion: 0,
+    showRecipePage: false,
+    showRecipe: false
+
   },
   /**
    * Lifecycle function--Called when page load
@@ -30,8 +34,15 @@ Page({
       showDetail: options.showdetail == "true",
       showReview: options.showreview == "true",
       opacityDetail: options.showdetail == "false" && "opacity: 0",
-      opacityReview: options.showreview == "false" && "opacity: 0"
-    })
+      opacityReview: options.showreview == "false" && "opacity: 0",
+      mealPortion: parseFloat(this.options.portion, 10),
+      showRecipePage: parseFloat(this.options.portion, 10) == 0
+      })
+    if(this.data.mealPortion != 0){
+      this.setData({
+        portion: this.data.mealPortion * 100
+      })
+    }
   },
 
   /**
@@ -39,6 +50,7 @@ Page({
    */
   onReady() {
     const page = this
+    const showRecipePage = page.data.showRecipePage
     wx.request({
       url: `${app.globalData.baseUrl}/recipes/${page.options.id}`,
       header: app.globalData.header,
@@ -49,7 +61,6 @@ Page({
         .trim() 
         .split('\n')
         .filter((str) => str.trim() !== '')
-        console.log(res.data)
         page.setData({
           id: recipe.id,
           instructions: instructions,
@@ -57,12 +68,12 @@ Page({
           ingredients: recipe.ingredients,
           photo: recipe.photos,
           reviews: recipe.reviews,
-          rating: Math.floor(recipe.rating),
-          carbs: Math.floor(recipe.nutritious_per_100g.carbs),
-          fat: Math.floor(recipe.nutritious_per_100g.fat),
-          sodium: Math.floor(recipe.nutritious_per_100g.sodium),
-          fiber: Math.floor(recipe.nutritious_per_100g.fiber),
-          protein: Math.floor(recipe.nutritious_per_100g.protein),
+          rating: showRecipePage ? Math.floor(recipe.rating) : Math.floor(recipe.rating),
+          carbs: showRecipePage ? Math.floor(recipe.nutritious_per_100g.carbs) : Math.floor(recipe.nutritious_per_100g.carbs * page.data.portion / 100),
+          fat: showRecipePage ? Math.floor(recipe.nutritious_per_100g.fat) : Math.floor(recipe.nutritious_per_100g.fat * page.data.portion / 100),
+          sodium: showRecipePage ? Math.floor(recipe.nutritious_per_100g.sodium) : Math.floor(recipe.nutritious_per_100g.sodium * page.data.portion / 100),
+          fiber: showRecipePage ? Math.floor(recipe.nutritious_per_100g.fiber) : Math.floor(recipe.nutritious_per_100g.fiber * page.data.portion / 100) ,
+          protein: showRecipePage ? Math.floor(recipe.nutritious_per_100g.protein) : Math.floor(recipe.nutritious_per_100g.protein * page.data.portion / 100),
           name: recipe.name,
           calories: recipe.total_calories,
           caloriesPerPortion: recipe.calories_per_100g,
@@ -150,6 +161,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
+    console.log("showRecipepage",this.data.showRecipePage)
   },
 
   /**
@@ -189,6 +201,7 @@ Page({
   },
   switchTab(e){
     const state = e.currentTarget.dataset.value
+    const showRecipePage = this.data.showRecipePage
     clearChart(chart)
     this.setData({
       showDetail: state == "detail",

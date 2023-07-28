@@ -77,7 +77,7 @@ Page({
         const dailyGoals = res.data
         const goal = res.data[res.data.length - 1]
         console.log(goal)
-        
+      
         // applying default data to the dailygoals
 
         const defaultData = {
@@ -861,14 +861,55 @@ Page({
     setDailyCharts(page)
   },
   goToRecipe(e){
+    const deletebutton = e.target.id == "delete"
+    console.log(deletebutton)
+    if(!deletebutton){
+        clearAllChart()
+        wx.pageScrollTo({
+          scrollTop: 0,
+          duration: 0
+        })
+    const id = e.currentTarget.dataset.id
+    const portion =e.currentTarget.dataset.portion
+    wx.navigateTo({
+      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false&portion=${portion}`,
+    })
+    }
+  },
+  deleteMeal(e){
     clearAllChart()
     wx.pageScrollTo({
       scrollTop: 0,
       duration: 0
     })
+    console.log(e)
     const id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+    wx.showModal({
+      title: 'Delete Meal',
+      content: 'Do you want to continue?',
+      complete: (res) => {
+        if (res.confirm) {
+          wx.request({
+            url:  `${app.globalData.baseUrl}/meals/${id}`, 
+            header: app.globalData.header,
+            method: 'DELETE',
+            data: {
+              meal: id
+            },
+            success: (res) => {
+              console.log(res)
+            },
+            complete(){
+              wx.navigateTo({
+                url: '/pages/homepage/goals?showdaily=true&showweekly=false',
+              })
+            },
+            fail: (err) => {
+              console.log(err);
+            }
+          })
+        }
+      }
     })
   },
   switchTab(e){
