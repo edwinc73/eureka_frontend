@@ -337,6 +337,11 @@ Page({
       reviewText: reviewText,
     });
   },
+  editRecipe(){
+    wx.navigateTo({
+      url: 'pages/',
+    })
+  },
   clickFavourite(){
     const id = this.data.id
     const page = this

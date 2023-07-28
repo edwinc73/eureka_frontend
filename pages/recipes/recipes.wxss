@@ -18,6 +18,10 @@
   height: 17.7px;
 }
 
+.heart-container{
+  flex-direction: column;
+  height: 56px;
+}
 
 .recipe-hr{
   background-color: #E3F0E6 !important;
