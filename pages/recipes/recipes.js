@@ -77,7 +77,8 @@ Page({
           name: recipe.name,
           calories: recipe.total_calories,
           caloriesPerPortion: recipe.calories_per_100g,
-          isFavourite: recipe.user_favourite
+          isFavourite: recipe.user_favourite,
+          isOwner:recipe.is_made_by_current_user
         });
         const { protein, carbs, fat } = page.data;
         const canvasId = 'protein';

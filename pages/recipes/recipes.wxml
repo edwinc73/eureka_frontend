@@ -8,9 +8,11 @@
         <text wx:for="{{rating}}" class="star">⭐</text>
       </view>
     </view>
-    <view class="heart-container">
-      <image wx:if="{{isFavourite}}" src="../../images/icons/heart.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
-      <image wx:else src="../../images/icons/heartstroke.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
+    <view class="recipe-icons">
+      <view class="heart-container">
+        <image wx:if="{{isFavourite}}" src="../../images/icons/heart.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
+        <image wx:else src="../../images/icons/heartstroke.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
+      </view>
     </view>
   </view>
   <hr class="recipe-hr" />
