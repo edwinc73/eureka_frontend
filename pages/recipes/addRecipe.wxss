@@ -6,10 +6,33 @@
   gap: 64rpx
 }
 
-.ingredients-list{
-  margin-top: 30rpx;
+.filter{
+  margin: 8px 0 0 0;
+  white-space: nowrap;
+  height: 30px;
 }
 
+.filter-item{
+  margin-right: 10px;
+  line-height: 30px;
+  transition: 0.3s ease-in-out;
+}
+
+.active{
+  box-sizing: border-box;
+  max-height: 30px;
+  padding: 4px 10px;
+  background-color: #E3F0E6;
+  border-radius: 1000px;
+}
+
+.filter-item:last-child{
+  margin-right: 10px;
+}
+
+.ingredients-list{
+  margin-top: 15px;
+}
 
 .item-name{
   text-transform: capitalize;
@@ -19,6 +42,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
+  transition: 0.3 ease-in-out;
 }
 
 hr{

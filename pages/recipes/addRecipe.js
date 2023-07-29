@@ -2,7 +2,10 @@ const app = getApp()
 Page({
   data: {
     ingredients:[],
-    show_window: false
+    show_window: false,
+    activeIndex: -1,
+    filterIngredients:[],
+    filterIngredientsAnimation: {}
   },
 
   /**
@@ -19,7 +22,9 @@ Page({
       header: app.globalData.header,
       success(res){
         page.setData({
-          ingredients: res.data
+          ingredients: res.data,
+          filterIngredients: res.data,
+          categories: filters(res.data)
         })
       }
     })
@@ -153,14 +158,58 @@ Page({
       header: app.globalData.header,
       success(res){
         page.setData({
-          ingredients: res.data
+          ingredients: res.data,
+          filterIngredients: res.data,
+          categories: filters(res.data)
         })
       }
     })
-  }
+  },
+  changeFilter(e){
+    const index = parseInt(e.currentTarget.dataset.index, 10)
+    const name = e.currentTarget.dataset.name
+    const animation = wx.createAnimation({
+      duration: 300, 
+      timingFunction: 'ease',
+    });
   
+    animation.opacity(0).step();
+    this.setData({
+      filterIngredientsAnimation: animation.export(),
+    });
+  
+    setTimeout(() => {
+      this.setData({
+        activeIndex: index,
+        filterIngredients: filterIngredients(name, this.data.ingredients),
+      });
+    }, 150); 
+
+    setTimeout(() => {
+      animation.opacity(1).step();
+      this.setData({
+        filterIngredientsAnimation: animation.export(),
+      });
+    }, 300);
+  }
 })
 
-// beef: { id: 1, portion: 1 },
-//       # rice: { id: 2, portion: 1 },
-//       # broccoli: { id: 3, portion: 1 }
+function filterIngredients(category, list) {
+  if(category == "all"){
+    return list
+  } else{
+    return list.filter(ingredient => ingredient.category.toUpperCase() == category.toUpperCase() )
+  }
+}
+
+function filters(ingredients) {
+  const categories =[]
+  ingredients.forEach(ingredient =>{
+    const category = ingredient.category[0].toUpperCase() + ingredient.category.split("").splice(1,ingredient.category.length).join("")
+    if(!categories.includes(category)){
+      categories.push(category)
+    }
+  })
+  console.log(categories)
+  return categories
+}

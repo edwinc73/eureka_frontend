@@ -3,8 +3,12 @@
       <image src="/images/icons/search.png" mode="aspectFit"/>
       <input type="text" value='{{query}}' bindconfirm="searchIngredient" placeholder="Search for ingredients" placeholder-style="color:#777; font-size:16px; font-family:quicksand;" />
   </view>
+  <scroll-view scroll-x="true" class="filter w-100 flex">
+    <text class="filter-item small {{activeIndex == -1 && 'active'}}" data-index="-1" data-name="all" bindtap="changeFilter" >All</text>
+    <text class="filter-item small {{activeIndex == index && 'active'}}" wx:for="{{categories}}" data-name="{{item}}" data-index="{{index}}" bindtap="changeFilter">{{item}}</text>
+  </scroll-view>
   <view class="ingredients-list w-100">
-    <view class="ingredient flex w-100" wx:for="{{ingredients}}" key="{{item.id}}">
+    <view class="ingredient flex w-100" wx:for="{{filterIngredients}}" key="{{item.id}}" key="{{item.id}}" animation="{{filterIngredientsAnimation}}">
     <view class="ingredient-info flex justify-between w-100">
       <view class="small item-name ">{{item.name}}</view>
         <view class="flex calorie-information">
