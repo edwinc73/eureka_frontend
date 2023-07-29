@@ -15,8 +15,16 @@
   z-index: 1000;
   box-sizing: border-box;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.20);
+  margin: 0 auto;
 }
 
+.no-transition{
+  transition: 0s;
+}
+
+.transition{
+  transition: width 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
 /* custom-tab-bar/index.wxss */
 
 .tab-bar-item {
@@ -24,10 +32,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
 }
 
 .tab-bar-item .tab-bar-image {
   width: 39px;
   height: 39px;
 }
+
+.tab-bar-item.show {
+  opacity: 1; 
+}
+
+.inactive{
+  width: 0;
+}
+
+.active{
+  width: 80vw;
+}
+
+
+
 
