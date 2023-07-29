@@ -2,15 +2,6 @@
   <view class="search-box w-100">
     <SearchBox bind:inputChange="handleInputChange" />
   </view>
-  <view class="filter w-100 flex">
-    <scroll-view scroll-x="true" class="filter-text flex">
-      <text class="small">Vegetarian</text>
-      <text class="small">Meatless</text>
-      <text class="small">Low calories</text>
-      <text class="small">High protein</text>
-      <text class="small">Quick recipes</text>
-    </scroll-view>
-  </view>
   <view class="search-result w-100">
     <view class="search-result-card" wx:for="{{results}}"
     bindtap="goToRecipe" data-id="{{item.id}}">
