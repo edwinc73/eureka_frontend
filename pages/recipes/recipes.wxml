@@ -25,7 +25,7 @@
 
   <!-- show details tab -->
 
-  <view wx:if="{{showDetail}}" class="w-100">
+  <view wx:if="{{showDetail}}" animation="{{showPageAnimation}}"  class="w-100">
   <form bindsubmit="addToMeal" wx:if="{{showRecipePage}}"class="w-100">
     <view class="portion flex justify-between">
       <view class="bubble recipe-portion h1">{{portion}}g</view>
@@ -83,7 +83,7 @@
     </view>
   </view>
   
-  <view wx:if="{{showRecipe}}" wx:for-index="index" class="w-100" >
+  <view wx:if="{{showRecipe}}" animation="{{showPageAnimation}}"  wx:for-index="index" class="w-100" >
     <view class="ingredients w-100">
     <view class="h1 title">Ingredients</view>
     <view class="ingredient p" wx:for="{{ingredients}}">
@@ -96,7 +96,7 @@
     </view>
   </view>
 
-  <view wx:if="{{showReview}}" class="w-100">
+  <view wx:if="{{showReview}}" animation="{{showPageAnimation}}" class="w-100">
     <form bindsubmit="submitReview">
     <view class="review-inputs-container">
       <view class="star-input flex justify-between">

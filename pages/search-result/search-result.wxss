@@ -16,7 +16,7 @@
 }
 
 .search-result{
-  margin: 15px auto;
+  margin: 8px auto;
 }
 
 .spacer{
@@ -24,11 +24,14 @@
   display: block;
 }
 
-hr{
+.search-result hr{
   background-color: #E3F0E6 !important;
-  margin: 4px 0 8px;
+  margin: 4px 0 4px;
 }
 
+.search-result-card:last-of-type hr{
+  display: none;
+}
 .text-container{
   display: flex;
   flex-direction: column;
