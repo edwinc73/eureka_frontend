@@ -24,8 +24,8 @@ Page({
     mealPortion: 0,
     showRecipePage: false,
     showRecipe: false,
-    showPageAnimation: {}
-
+    showPageAnimation: {},
+    popUp: false
   },
   /**
    * Lifecycle function--Called when page load
@@ -84,81 +84,9 @@ Page({
           isFavourite: recipe.user_favourite,
           isOwner:recipe.is_made_by_current_user
         });
-        const { protein, carbs, fat } = page.data;
-        const canvasId = 'protein';
+        console.log(page.data)
         if(page.data.popUp == false){
-          const canvas = page.selectComponent(`#${canvasId}`).init((canvas, width, height, dpr) => {
-            chart = echarts.init(canvas, null, {
-              width: width,
-              height: height,
-              devicePixelRatio: dpr,
-            });
-    
-            let option = {
-              xAxis: {
-                type: 'category',
-                data: ['Protein', 'Carbs', 'Fat'],
-                axisLine: {
-                  show: false,
-                },
-                splitLine: false,
-                axisTick: false,
-                axisLabel: {
-                  color: 'rgba(25, 16, 17, 0.5)',
-                  fontSize: 12,
-                  fontWeight: '400',
-                },
-              },
-              yAxis: {
-                axisLabel:{
-                  show: false
-                },
-                axisLine:{
-                  show: false,
-                },
-                splitLine: false,
-                axisTick: false,
-              },
-              grid: {
-                top: '20%',
-                left: '0%',
-                right: '0%',
-                bottom: '0%',
-                containLabel: true,
-              },
-              series: [
-                {
-                  type: 'bar',
-                  data: [protein, carbs, fat],
-                  showBackground: false,
-                  barWidth: '12',
-                  itemStyle: {
-                    color: function(params) {
-                      const colorList = ['#D83D4B', '#F8D477', '#575757'];
-                      return colorList[params.dataIndex];
-                    },
-                    borderRadius: 50,
-                  },
-                  label: {
-                    show: true,
-                    position: 'top',
-                    formatter: function(params) {
-                      return params.value + "g";
-                    },
-                    textStyle: {
-                      color: 'rgba(25, 16, 17, 0.5)', 
-                      fontSize: 12, 
-                      fontWeight: '400', 
-                      textBorderColor: 'transparent', 
-                    },
-                  },
-                }
-              ]
-            };
-    
-            chart.setOption(option);
-            return chart;
-          });
+          recipeChart(page)
         }
       },
     });
