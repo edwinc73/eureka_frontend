@@ -1,10 +1,6 @@
 // app.js
 App({
   onLaunch() {
-    // 展示本地存储能力
-    // const logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
     const app = this
 
     wx.login({
@@ -61,8 +57,8 @@ App({
   globalData: {
     navBarHeight: wx.getMenuButtonBoundingClientRect().height+ 9 + wx.getSystemInfoSync().statusBarHeight,
     userInfo: null,
-    // baseUrl: 'http://127.0.0.1:3000/api/v1', 
-    baseUrl: "https://eureka.wogengapp.cn/api/v1",
+    baseUrl: 'http://127.0.0.1:3000/api/v1', 
+    // baseUrl: "https://eureka.wogengapp.cn/api/v1",
     tabPages: ["pages/profile/profile","pages/favourite/favourite","pages/homepage/homepage"],
     calorieGrace: 1.1,
     popUp:false,
