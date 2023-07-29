@@ -143,13 +143,13 @@ Page({
         success(res){
           console.log(res)
           const id = res.data.recipe_id
+          app.globalData.popUp = res.data.recipe_trailblazer
           wx.uploadFile({
             url: `${app.globalData.baseUrl}/recipes/${res.data.recipe_id}/upload_img`,
             filePath: page.data.tempFiles[0].tempFilePath,
             name: 'photos',
             header: app.globalData.header,
             complete(res){
-              app.globalData.popup = res.data.recipe_trailblazer
               wx.clearStorage({ key: "cart" })
               wx.showToast({
                 title: "Recipe Added",
