@@ -9,11 +9,10 @@
       </view>
     </view>
     <view class="recipe-icons">
-      <image wx:if="{{isOwner}}" src="../../images/icons/" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
-
+      <image wx:if="{{isOwner}}" src="../../images/icons/edit.png" mode="aspectFit" class="heart edit-icon" bindtap="goToEdit"/>
       <view class="heart-container">
         <image wx:if="{{isFavourite}}" src="../../images/icons/heart.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
-        <image wx:else src="../../images/icons/heartstroke.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
+        <image wx:else src="../../images/icons/heartstroke.png" mode="aspectFit" class="heart" bindtap="clickFavourite"/>
       </view>
     </view>
   </view>
@@ -28,7 +27,7 @@
 
   <view wx:if="{{showDetail}}" class="w-100">
   <form bindsubmit="addToMeal" wx:if="{{showRecipePage}}"class="w-100">
-    <view class="portion flex justify-between">`
+    <view class="portion flex justify-between">
       <view class="bubble recipe-portion h1">{{portion}}g</view>
       <view class="bubble recipe-calories h1 text-light">{{caloriesPerPortion * portion / 100}}kcal</view>  
     </view>
@@ -88,7 +87,7 @@
     <view class="ingredients w-100">
     <view class="h1 title">Ingredients</view>
     <view class="ingredient p" wx:for="{{ingredients}}">
-    {{item.name}}
+    {{item.portion * 100}}g {{item.name}}
     </view>
   </view>
   <view class="h1 title w-100">Instructions</view>

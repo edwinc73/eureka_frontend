@@ -83,7 +83,7 @@ Page({
   },
   goToAddRecipe(){
     wx.navigateTo({
-      url: `/pages/recipes/addRecipe`,
+      url: `/pages/recipes/addRecipe?newRecipe=true`,
     })
   }
 })

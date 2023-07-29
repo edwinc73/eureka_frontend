@@ -8,21 +8,26 @@
         <scroll-view class="image-gallery" scroll-x="true" style="width: 100%">
             <view class="image-uploader recipe-image" bindtap="uploadImage"></view>
           <block wx:for="{{tempFiles}}">
-            <image src="{{item.tempFilePath}}" mode="aspectFill" class="recipe-image" />
+            <image wx:if="{{newRecipe || newImage}}" src="{{item.tempFilePath}}" mode="aspectFill" class="recipe-image" />
+            <image wx:else src="{{item}}" mode="aspectFill" class="recipe-image" />
           </block>
         </scroll-view>
     </view>
     <view class="p text-left">Name *</view>
     <view class="input-field">
-      <textarea type="text" name="name" class="input w-100" maxlength="40"></textarea>
+      <textarea wx:if="{{newRecipe}}" type="text" name="name" class="input w-100" maxlength="40"></textarea>
+      <textarea type="text" wx:else name="name" class="input w-100" maxlength="40" data-name="name" bindinput="changeInput" value="{{name}}"></textarea>
     </view>
     <view class="p">Description *</view>
     <view class="input-field">
-      <textarea type="text" name="description" class="auto-grow-textarea" auto-height maxlength="300"></textarea>
+      <textarea wx:if="{{newRecipe}}"type="text" name="description" class="auto-grow-textarea" auto-height maxlength="300"></textarea>
+      <textarea wx:else type="text" name="description" class="auto-grow-textarea" data-name="description" auto-height maxlength="300" bindinput="changeInput" value="{{description}}"></textarea>
     </view>
     <view class="p">Instruction *</view>
     <view class="input-field">
-      <textarea type="text" name="instructions" class="auto-grow-textarea" auto-height="true"  maxlength="2000"></textarea>
+      <textarea wx:if="{{newRecipe}}" type="text" name="instructions" class="auto-grow-textarea" auto-height="true"  maxlength="2000"></textarea>
+      <textarea wx:else type="text" name="instructions"
+      data-name="instructions" class="auto-grow-textarea" auto-height="true"  maxlength="2000" bindinput="changeInput" value="{{instructions}}"></textarea>
     </view>
     <view class="cart-list">
       <view wx:for="{{cart}}" class="cart-item flex w-100">
