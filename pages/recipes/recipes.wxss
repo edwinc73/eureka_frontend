@@ -54,6 +54,7 @@ slider{
   width: 45rpx;
   height: 2px;
   background-color: #E3F0E6;
+  transition: 0.3s ease-in-out;
 }
 
 .active{

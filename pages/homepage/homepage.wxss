@@ -85,6 +85,11 @@ page{
   font-size: 20px;
 }
 
+.suggestion-container hr{
+  background-color: white !important;
+  margin: 4px 0 4px;
+}
+
 .suggestion-container:last-child hr{
   display: none;
 }

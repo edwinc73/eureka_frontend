@@ -169,7 +169,7 @@ Page({
     const index = parseInt(e.currentTarget.dataset.index, 10)
     const name = e.currentTarget.dataset.name
     const animation = wx.createAnimation({
-      duration: 300, 
+      duration: 150, 
       timingFunction: 'ease',
     });
   
