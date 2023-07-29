@@ -118,8 +118,9 @@
       </view>
     </view>
   </view>
-  <view class="mask" wx:if="{{popUp != false}}"></view>
-  <view class="window" bindtap="closePopUp" wx:if="{{popUp != false}}">
+  <view class="mask {{showPopUp}}" bindtap="closePopUp" wx:if="{{popUp != false}}"></view>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.11.0/tsparticles.confetti.bundle.min.js"></script>
+  <view class="window {{showPopUp}} {{animation}}" bindtap="closePopUp" wx:if="{{popUp != false}}">
     <view class="badge-info flex">
       <view class="badge-title flex justify-between">
         <text class="h1">{{popUp.name}}</text>
