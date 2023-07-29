@@ -95,7 +95,7 @@
     <view wx:for="{{dailyGoal.meals}}" bindtap="goToRecipe" data-id="{{meal.recipe.id}}" wx:for-item="meal" class="history" data-portion="{{meal.portion}}">
       <view class="search-result-container">
       <view class="search-description">
-      <image src="{{meal.recipe.photo}}" mode="aspectFill" class="result-image"/>
+      <image src="{{meal.recipe_img}}" mode="aspectFill" class="result-image"/>
       <view class="text-container">
         <view class="p-bold">{{meal.recipe.name}}</view>
         <text class="small text-light">{{meal.total_calories}}kcal</text>
