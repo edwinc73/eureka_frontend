@@ -4,118 +4,119 @@
     <view class="tab p" data-value="daily" bindtap="switchTab">Daily<view style="{{opacityDaily}}" class="tab-indicator"></view></view>
     <view class="tab p" data-value="weekly" bindtap="switchTab">Weekly<view style="{{opacityWeekly}}" class="tab-indicator"></view></view>
   </view>
-  <scroll-view class="date-container" scroll-x="true" scroll-into-view="{{rightID}}" scroll-with-animation="true" show-scrollbar="false">
-        <view class="date-item" bindtap="selectDate" data-index="0" style="background-color: {{activeIndex == 0  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
-          <view class="text">
-            <view class="p" style="color: {{activeIndex == 0 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[0][0]}}</view>
-            <view class="h2" style="color: {{activeIndex == 0 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[0][1]}}</view>
-          </view>
-        </view>
-        <view class="date-item" bindtap="selectDate" data-index="1" style="background-color: {{activeIndex == 1  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
-          <view class="text">
-            <view class="p" style="color: {{activeIndex == 1 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[1][0]}}</view>
-            <view class="h2" style="color: {{activeIndex == 1 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[1][1]}}</view>
-          </view>
-        </view>
-        <view class="date-item" bindtap="selectDate" data-index="2" style="background-color: {{activeIndex == 2  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
-          <view class="text">
-            <view class="p" style="color: {{activeIndex == 2 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[2][0]}}</view>
-            <view class="h2" style="color: {{activeIndex == 2 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[2][1]}}</view>
-          </view>
-        </view>
-        <view class="date-item" bindtap="selectDate" data-index="3" style="background-color: {{activeIndex == 3  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
-          <view class="text">
-            <view class="p" style="color: {{activeIndex == 3 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[3][0]}}</view>
-            <view class="h2" style="color: {{activeIndex == 3 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[3][1]}}</view>
-          </view>
-        </view>
-        <view class="date-item" bindtap="selectDate" data-index="4" style="background-color: {{activeIndex == 4  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
-          <view class="text">
-            <view class="p" style="color: {{activeIndex == 4 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[4][0]}}</view>
-            <view class="h2" style="color: {{activeIndex == 4 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[4][1]}}</view>
-          </view>
-        </view>
-        <view class="date-item" bindtap="selectDate" data-index="5" style="background-color: {{activeIndex == 5  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
-          <view class="text">
-            <view class="p" style="color: {{activeIndex == 5 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[5][0]}}</view>
-            <view class="h2" style="color: {{activeIndex == 5 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[5][1]}}</view>
-          </view>
-        </view>
-        <view class="date-item" bindtap="selectDate" data-index="6" id="date6" style="background-color: {{activeIndex == 6  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
-          <view class="text">
-            <view class="p" style="color: {{activeIndex == 6 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[6][0]}}</view>
-            <view class="h2" style="color: {{activeIndex == 6 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[6][1]}}</view>
-          </view>
-        </view>
-  </scroll-view>
-  <view class="title-container w-100">Nutrient Intake Summary
 </view>
-<view class="goal-chart w-100" >
-    <view class="chart-container">
-      <view class="calorie">
-        <ec-canvas id="myCanvasBg" canvas-id="myChart-bg" class="bg-chart"></ec-canvas>
-        <ec-canvas id="myCanvas" canvas-id="myChart" class="current-calories"></ec-canvas>
+  <view class="container w-100" wx:if="{{showDaily}}" animation="{{showPageAnimation}}">
+    <scroll-view class="date-container" scroll-x="true" scroll-into-view="{{rightID}}" scroll-with-animation="true" show-scrollbar="false">
+          <view class="date-item" bindtap="selectDate" data-index="0" style="background-color: {{activeIndex == 0  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
+            <view class="text">
+              <view class="p" style="color: {{activeIndex == 0 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[0][0]}}</view>
+              <view class="h2" style="color: {{activeIndex == 0 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[0][1]}}</view>
+            </view>
+          </view>
+          <view class="date-item" bindtap="selectDate" data-index="1" style="background-color: {{activeIndex == 1  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
+            <view class="text">
+              <view class="p" style="color: {{activeIndex == 1 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[1][0]}}</view>
+              <view class="h2" style="color: {{activeIndex == 1 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[1][1]}}</view>
+            </view>
+          </view>
+          <view class="date-item" bindtap="selectDate" data-index="2" style="background-color: {{activeIndex == 2  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
+            <view class="text">
+              <view class="p" style="color: {{activeIndex == 2 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[2][0]}}</view>
+              <view class="h2" style="color: {{activeIndex == 2 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[2][1]}}</view>
+            </view>
+          </view>
+          <view class="date-item" bindtap="selectDate" data-index="3" style="background-color: {{activeIndex == 3  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
+            <view class="text">
+              <view class="p" style="color: {{activeIndex == 3 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[3][0]}}</view>
+              <view class="h2" style="color: {{activeIndex == 3 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[3][1]}}</view>
+            </view>
+          </view>
+          <view class="date-item" bindtap="selectDate" data-index="4" style="background-color: {{activeIndex == 4  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
+            <view class="text">
+              <view class="p" style="color: {{activeIndex == 4 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[4][0]}}</view>
+              <view class="h2" style="color: {{activeIndex == 4 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[4][1]}}</view>
+            </view>
+          </view>
+          <view class="date-item" bindtap="selectDate" data-index="5" style="background-color: {{activeIndex == 5  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
+            <view class="text">
+              <view class="p" style="color: {{activeIndex == 5 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[5][0]}}</view>
+              <view class="h2" style="color: {{activeIndex == 5 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[5][1]}}</view>
+            </view>
+          </view>
+          <view class="date-item" bindtap="selectDate" data-index="6" id="date6" style="background-color: {{activeIndex == 6  ? 'rgba(82, 190, 140, 1)' : 'rgba(227, 240, 230, 1)'}}">
+            <view class="text">
+              <view class="p" style="color: {{activeIndex == 6 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[6][0]}}</view>
+              <view class="h2" style="color: {{activeIndex == 6 ? '#fff' : 'rgba(25, 16, 17, 1)'}}">{{dateRange[6][1]}}</view>
+            </view>
+          </view>
+    </scroll-view>
+    <view class="title-container w-100">Nutrient Intake Summary</view>
+  <view class="goal-chart w-100" >
+      <view class="chart-container">
+        <view class="calorie">
+          <ec-canvas id="myCanvasBg" canvas-id="myChart-bg" class="bg-chart"></ec-canvas>
+          <ec-canvas id="myCanvas" canvas-id="myChart" class="current-calories"></ec-canvas>
+        </view>
+        <view class="calorie-value">
+          <text class=".p-bold">{{dailyGoal.current_calorie}} </text>
+          <text class="small text-light">kcal</text>
+          <view class="small text-light">out of {{dailyGoal.calorie_goal}}</view>
+        </view>
       </view>
-      <view class="calorie-value">
-        <text class=".p-bold">{{dailyGoal.current_calorie}} </text>
-        <text class="small text-light">kcal</text>
-        <view class="small text-light">out of {{dailyGoal.calorie_goal}}</view>
+      <view class="flex justify-between nutrient-charts">
+        <view class="nutrient-container">
+          <view class="nutrient">
+            <ec-canvas id="protein" canvas-id="protein" class="nutrient-bg"></ec-canvas>
+            <ec-canvas id="protein_bg" canvas-id="protein_bg" class="nutrient-chart"></ec-canvas>
+          </view>
+          <view class="nutrient-label small text-light">Protein</view>
+          <view class="nutrient-value h3 text-light">{{dailyGoal.current_protein}}g</view>
+        </view> 
+        <view class="nutrient-container">
+          <view class="nutrient">
+            <ec-canvas id="carbs" canvas-id="carbs" class="nutrient-bg"></ec-canvas>
+            <ec-canvas id="carbs_bg" canvas-id="carbs_bg" class="nutrient-chart"></ec-canvas>
+          </view>
+          <view class="nutrient-label small text-light">Carbs</view>
+          <view class="nutrient-value h3 text-light">{{dailyGoal.current_carbs}}g</view>
+        </view>
+        <view class="nutrient-container">
+          <view class="nutrient">
+            <ec-canvas id="fat" canvas-id="fat" class="nutrient-bg"></ec-canvas>
+            <ec-canvas id="fat_bg" canvas-id="fat_bg" class="nutrient-chart"></ec-canvas>
+          </view>
+          <view class="nutrient-label small text-light">Fat</view>
+          <view class="nutrient-value h3 text-light">{{dailyGoal.current_fat}}g</view>
+        </view>
       </view>
     </view>
-    <view class="flex justify-between nutrient-charts">
-      <view class="nutrient-container">
-        <view class="nutrient">
-          <ec-canvas id="protein" canvas-id="protein" class="nutrient-bg"></ec-canvas>
-          <ec-canvas id="protein_bg" canvas-id="protein_bg" class="nutrient-chart"></ec-canvas>
-        </view>
-        <view class="nutrient-label small text-light">Protein</view>
-        <view class="nutrient-value h3 text-light">{{dailyGoal.current_protein}}g</view>
-      </view> 
-      <view class="nutrient-container">
-        <view class="nutrient">
-          <ec-canvas id="carbs" canvas-id="carbs" class="nutrient-bg"></ec-canvas>
-          <ec-canvas id="carbs_bg" canvas-id="carbs_bg" class="nutrient-chart"></ec-canvas>
-        </view>
-        <view class="nutrient-label small text-light">Carbs</view>
-        <view class="nutrient-value h3 text-light">{{dailyGoal.current_carbs}}g</view>
-      </view>
-      <view class="nutrient-container">
-        <view class="nutrient">
-          <ec-canvas id="fat" canvas-id="fat" class="nutrient-bg"></ec-canvas>
-          <ec-canvas id="fat_bg" canvas-id="fat_bg" class="nutrient-chart"></ec-canvas>
-        </view>
-        <view class="nutrient-label small text-light">Fat</view>
-        <view class="nutrient-value h3 text-light">{{dailyGoal.current_fat}}g</view>
-      </view>
-    </view>
-  </view>
-  <view class="title-container w-100" style="margin:20px 0 0">History</view>
+    <view class="title-container w-100" style="margin:20px 0 0">History</view>
     <view class="small-text text-light" wx:if="{{dailyGoal.meals.length < 1}}" >No meals added</view>
-  <view class="w-100 history">
-    <view wx:for="{{dailyGoal.meals}}" bindtap="goToRecipe" data-id="{{meal.recipe.id}}" wx:for-item="meal" class="history" data-portion="{{meal.portion}}">
-      <view class="search-result-container">
-      <view class="search-description">
-      <image src="{{meal.recipe.photo}}" mode="aspectFill" class="result-image"/>
-      <view class="text-container">
-        <view class="p-bold">{{meal.recipe.name}}</view>
-        <text class="small text-light">{{meal.total_calories}}kcal</text>
-      </view>
-      </view>
-      <view class="icons flex justify-between">
-        <image src="/images/icons/delete.png"  mode="aspectFit" class="delete-icon" bindtap="deleteMeal" data-id="{{meal.id}}" data-index="{{index}}" id="delete" />
-        <image src="../../images/icons/goto.png" mode="aspectFit" class="go-to-icon" />
-      </view>
+    <view class="w-100 history">
+        <view wx:for="{{dailyGoal.meals}}" bindtap="goToRecipe" data-id="{{meal.recipe.id}}" wx:for-item="meal" class="history" data-portion="{{meal.portion}}">
+          <view class="search-result-container">
+            <view class="search-description">
+              <image src="{{meal.recipe.photo}}" mode="aspectFill" class="result-image"/>
+              <view class="text-container">
+                <view class="p-bold">{{meal.recipe.name}}</view>
+                <text class="small text-light">{{meal.total_calories}}kcal</text>
+              </view>
+            </view>
+            <view class="icons flex justify-between">
+            <image src="/images/icons/delete.png"  mode="aspectFit" class="delete-icon" bindtap="deleteMeal" data-id="{{meal.id}}" data-index="{{index}}" id="delete" />
+            <image src="../../images/icons/goto.png" mode="aspectFit" class="go-to-icon" />
+          </view>
+        </view>
+          <hr />
+        </view>
     </view>
-      <hr />
     </view>
-  </view>
-</view>
-<view class="container" wx:if="{{showWeekly}}">
+  <view class="container" wx:if="{{showWeekly}}">
   <view class="tabs-container flex align-center w-100">
     <view class="tab p" data-value="daily" bindtap="switchTab">Daily<view style="{{opacityDaily}}" class="tab-indicator"></view></view>
     <view class="tab p" data-value="weekly" bindtap="switchTab">Weekly<view style="{{opacityWeekly}}" class="tab-indicator"></view></view>
   </view>
-    <view class="weekly-chart">
+    <view class="weekly-chart" animation="{{showPageAnimation}}">
         <view class="weekly-averages">
           <view class="weekly-calories">
           {{average_calories}}
