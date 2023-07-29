@@ -37,7 +37,8 @@ Page({
       opacityDetail: options.showdetail == "false" && "opacity: 0",
       opacityReview: options.showreview == "false" && "opacity: 0",
       mealPortion: parseFloat(this.options.portion, 10),
-      showRecipePage: parseFloat(this.options.portion, 10) == 0
+      showRecipePage: parseFloat(this.options.portion, 10) == 0,
+      popUp:app.globalData.popUp 
       })
     if(this.data.mealPortion != 0){
       this.setData({

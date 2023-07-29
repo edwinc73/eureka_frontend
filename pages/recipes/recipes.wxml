@@ -119,6 +119,7 @@
     </view>
   </view>
     <view class="spacer"></view>
+<view class="pop-up" wx:if="{{popUp}}" bindtap="closePopUp"></view>
 </view>
 <CustomNav />
 <BottomMask />
