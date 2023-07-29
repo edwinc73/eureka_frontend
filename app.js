@@ -65,6 +65,6 @@ App({
     // baseUrl: "https://eureka.wogengapp.cn/api/v1",
     tabPages: ["pages/profile/profile","pages/favourite/favourite","pages/homepage/homepage"],
     calorieGrace: 1.1,
-    popUp: false
+    popUp:false
   }
 })
