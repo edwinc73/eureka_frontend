@@ -6,6 +6,7 @@
     <view class="search-result-card" wx:for="{{results}}"
     bindtap="goToRecipe" data-id="{{item.id}}" data-portion="0" >
       <SearchResult data="{{item}}" />
+      <hr />
     </view>
     <button bindtap="goToAddRecipe" class="floating p">Add My Recipe</button>
   </view>

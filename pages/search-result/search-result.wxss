@@ -16,12 +16,17 @@
 }
 
 .search-result{
-  margin: 8px auto;
+  margin: 15px auto;
 }
 
 .spacer{
   height: 110px;
   display: block;
+}
+
+hr{
+  background-color: #E3F0E6 !important;
+  margin: 4px 0 8px;
 }
 
 .text-container{
