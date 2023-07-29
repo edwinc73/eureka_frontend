@@ -125,3 +125,13 @@
   text-align: center;
   width: 100%;
 }
+
+.empty{
+  text-align: center;
+  margin: 10px auto 0;
+  width: 100%;
+}
+.oops-link{
+  padding: 10px;
+  text-decoration: underline;
+}
