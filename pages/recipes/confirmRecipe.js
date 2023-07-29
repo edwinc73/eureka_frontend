@@ -9,6 +9,7 @@ Page({
   data: {
     tempFiles:[],
     showLoading: false,
+    newImage: false,
   },
 
   /**
@@ -16,6 +17,9 @@ Page({
    */
   onLoad(options) {
     const page = this
+    page.setData({
+      newRecipe: options.newRecipe == "true"
+    })
     wx.getStorage({
       key: "cart",
       success(res){
@@ -24,6 +28,22 @@ Page({
         })
       }
     })
+
+    if(!page.data.newRecipe){
+      wx.getStorage({
+        key:"recipe details",
+        success(res){
+          page.setData({
+            recipeDetail: res.data,
+            name : res.data.name,
+            description: res.data.description,
+            instructions: res.data.instructions,
+            tempFiles: [res.data.photo[0]],
+            id: res.data.id
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -83,6 +103,7 @@ Page({
       camera: 'back',
       success(res) {
         page.setData({
+          newImage: true,
           tempFiles: res.tempFiles
         })
       }
@@ -90,6 +111,7 @@ Page({
   },
   submitRecipe(e){
     const page = this
+    const newRecipe = page.data.newRecipe
     const recipe = e.detail.value
     const ingredientsData = this.data.cart
     const reformattedData = {}
@@ -108,7 +130,7 @@ Page({
         duration: 2000,
         title: 'Missing input',
       })
-    } else{
+    } else if (newRecipe){
       page.setData({ showLoading: true })
       wx.request({
         url: `${app.globalData.baseUrl}/recipes`,
@@ -138,6 +160,28 @@ Page({
           })
         }
       })
+    } else {
+      const recipe ={
+        name: this.data.name,
+        instructions: this.data.instructions,
+        description: this.data.description
+      }
+      wx.request({
+        url: `${app.globalData.baseUrl}/recipes/${page.data.id}`,
+        header: app.globalData.header,
+        data:{ recipe },
+        success(res){
+          console.log(page.data.id)
+          console.log(res)
+        }
+      })
     }
+  },
+  changeInput(e){
+    const value = e.detail.value
+    const input = e.currentTarget.dataset.name
+    this.setData({
+      [input] : value
+    })
   }
 })

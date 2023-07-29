@@ -33,6 +33,7 @@
     <view class="add p" bindtap="goToConfirm">Add</view>
   </view>
   <view class="cart-list" wx:if="{{cart.length}}">
+    <view wx:if="{{!newRecipe}}" class="text-red text-small">Delete Recipe</view>
     <view wx:for="{{cart}}" data-id="{{item.id}}" class="cart-item flex justify-between">
       <view class="cart-item-left flex align-center">
         <image class="cart-minus" src="/images/icons/minus.png" mode="aspectFit" bindtap="removeCartItem" data-index="{{index}}"/>

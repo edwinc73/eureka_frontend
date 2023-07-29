@@ -1,9 +1,5 @@
 const app = getApp()
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
     ingredients:[],
     show_window: false
@@ -14,6 +10,10 @@ Page({
    */
   onLoad(options) {
     const page = this
+    page.setData({
+      newRecipe: options.newRecipe == "true"
+    })
+    console.log(options)
     wx.request({
       url: `${app.globalData.baseUrl}/ingredients?query=`,
       header: app.globalData.header,
@@ -141,7 +141,7 @@ Page({
         data: page.data.cart
       })
       wx.navigateTo({
-        url: '/pages/recipes/confirmRecipe',
+        url: `/pages/recipes/confirmRecipe?newRecipe=${page.data.newRecipe}`,
       })
     }
   },

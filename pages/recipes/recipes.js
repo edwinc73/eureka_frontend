@@ -61,7 +61,9 @@ Page({
         .trim() 
         .split('\n')
         .filter((str) => str.trim() !== '')
+        console.log(res)
         page.setData({
+          unedittedInstructions: recipe.instructions,
           id: recipe.id,
           instructions: instructions,
           description: recipe.description,
@@ -77,7 +79,8 @@ Page({
           name: recipe.name,
           calories: recipe.total_calories,
           caloriesPerPortion: recipe.calories_per_100g,
-          isFavourite: recipe.user_favourite
+          isFavourite: recipe.user_favourite,
+          isOwner:recipe.is_made_by_current_user
         });
         const { protein, carbs, fat } = page.data;
         const canvasId = 'protein';
@@ -168,8 +171,6 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide() {
-    chart.dispose(); 
-    chart = null; 
   },
 
   /**
@@ -385,6 +386,31 @@ Page({
     }
     page.setData({
       isFavourite: !page.data.isFavourite,
+    })
+  },
+  goToEdit(){
+    const page = this
+    clearChart(chart)
+    const ingredients = this.data.ingredients
+    ingredients.forEach(ingredient => {
+      ingredient.portion = ingredient.portion * 100
+    })
+    wx.setStorage({
+      key: "cart",
+      data: ingredients
+    })
+    wx.setStorage({
+      key: "recipe details",
+      data: {
+        instructions: page.data.unedittedInstructions,
+        description: page.data.description,
+        photo: page.data.photo,
+        name: page.data.name,
+        id: page.data.id
+      }
+    })
+    wx.navigateTo({
+      url: '/pages/recipes/addRecipe?newRecipe=false',
     })
   }
 })

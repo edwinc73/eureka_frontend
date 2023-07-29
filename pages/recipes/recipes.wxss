@@ -14,13 +14,18 @@
 }
 
 .heart{
-  width: 21px;
-  height: 17.7px;
+  width: 23px;
+  height: 19px;
+}
+
+.edit-icon{
+  margin-bottom: 10px;
 }
 
 .heart-container{
   flex-direction: column;
-  height: 56px;
+  align-items: center;
+  justify-content: center;
 }
 
 .recipe-hr{
@@ -60,7 +65,7 @@ slider{
 }
 
 .bubble{
-  margin: 15px 0 5px;
+  margin: 0 0 5px;
   width: calc(100% - 30px - 30px);
   height: 60px;
   display: flex;
