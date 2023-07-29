@@ -10,6 +10,7 @@ Page({
     avatarUrl: defaultAvatarUrl,
     maleActive: "",
     femaleActive: "",
+    gender: "",
     firstPage: true,
     text: "What's your name?",
     text2: "Great, please tell me more.",
@@ -123,6 +124,7 @@ Page({
   },
   goToNext(){
     const {birthday, avatarUrl, nickname, gender,today} = this.data
+    console.log(gender)
     if(birthday == today || avatarUrl == defaultAvatarUrl || nickname == "" || gender == ""){
       wx.showToast({
         icon: "error",
