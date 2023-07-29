@@ -154,7 +154,7 @@ Page({
                 title: "Recipe Added",
               })
               wx.redirectTo({
-                url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`
+                url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false&portion=0`
               })
             }
           })
