@@ -5,7 +5,7 @@ page{
 } 
 
 .banner{
-  background: url("http://eurekaaa.oss-cn-shanghai.aliyuncs.com/3ry6v35yo3yuy3vlq9bgb1twq4to?Expires=1690649301&OSSAccessKeyId=LTAI5tMYCWgzFBVxyF48cvyG&Signature=Hqf5FvjZLqOXdacbsXtgKNZJKPc%3D&response-content-disposition=inline%3B+filename%3D%22StsbpHirnDqia19e6e01bb0935a1d5057962ba305950.jpg%22%3B+filename%2A%3DUTF-8%27%27StsbpHirnDqia19e6e01bb0935a1d5057962ba305950.jpg&response-content-type=image%2Fjpeg");
+  background: url("https://eurekaaa.oss-cn-shanghai.aliyuncs.com/Wechatmp.png");
   width: 100%;
   background-size: cover;
   background-position-y: -70px;

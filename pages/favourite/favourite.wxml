@@ -1,5 +1,10 @@
 <!--pages/favourite/favourite.wxml-->
 <view class="container">
+    <view class="spacer"></view>
+    <view class="text-small text-light empty" wx:if="{{recipes.length == 0}}">
+      Oops, no favourites yet.
+      <view class="oops-link" bindtap="goToSuggestions">Browse suggestions</view>
+    </view>
   <view class="card-grid">
     <view class="fav-card" wx:for="{{recipes}}" wx:for-item="recipe" bindtap="goToRecipe" wx:key="key" data-id="{{recipe.id}}">
       <image src="{{recipe.photos}}" class="img-lg" mode="aspectFill"/>

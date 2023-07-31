@@ -13,6 +13,13 @@
   margin-left: 5px;
 }
 
-.card-grid{
-  margin-top: 110px;
+.empty{
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.oops-link{
+  padding: 10px;
+  text-decoration: underline;
 }

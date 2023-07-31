@@ -30,6 +30,10 @@
   </view>
   <view class="achievements w-100">
     <text class="p">Achievements</text>
+    <view class="text-small text-light empty" wx:if="{{badges.length == 0}}">
+      Oops, no yet yet.
+      <view class="oops-link" bindtap="goToAddRecipe">Hint: Add your own recipe!</view>
+    </view>
     <view class="badge-grid">
       <view class="badge flex" wx:for="{{badges}}" wx:for-item="badge" wx:for-index="index" data-index="{{index}}" bindtap="click" wx:key="key">
         <image class="badge-img" src="{{badge.image}}" mode="aspectFill" />

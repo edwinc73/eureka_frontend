@@ -88,5 +88,10 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  goToSuggestions(){
+    wx.navigateTo({
+      url: '/pages/homepage/suggestions',
+    })
   }
 })
