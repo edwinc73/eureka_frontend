@@ -25,7 +25,10 @@ Page({
     showRecipePage: false,
     showRecipe: false,
     showPageAnimation: {},
-    popUp: false
+    popUp: false,
+    showPopUp: "inactive",
+    animation: "starting-animation",
+    confettiAnimation: null,
   },
   /**
    * Lifecycle function--Called when page load
@@ -96,6 +99,10 @@ Page({
    */
   onShow() {
     console.log("showRecipepage",this.data.showRecipePage)
+    this.setData({
+      showPopUp: "active",
+      animation: "ending-animation"
+    })
   },
 
   /**
@@ -294,11 +301,19 @@ Page({
     })
   },
   closePopUp(e){
-    recipeChart(this)
     // turn off
-    this.setData({popUp: false})
-    app.globalData.popUp = false
-  }
+    this.setData({
+      animation: "starting-animation",
+      showPopUp: "inactive"
+    })
+    setTimeout(() => {
+      this.setData({
+        popUp: false,
+      })
+      app.globalData.popUp = false
+      recipeChart(this)
+    }, 1800);
+  },
 })
 
 function recipeChart (page){
