@@ -1,5 +1,4 @@
 import * as echarts from '../../ec-canvas/echarts';
-import { tsParticles } from "tsparticles-engine";
 
 const app = getApp()
 
@@ -28,7 +27,8 @@ Page({
     showPageAnimation: {},
     popUp: false,
     showPopUp: "inactive",
-    animation: "starting-animation"
+    animation: "starting-animation",
+    confettiAnimation: null,
   },
   /**
    * Lifecycle function--Called when page load
@@ -313,7 +313,7 @@ Page({
       app.globalData.popUp = false
       recipeChart(this)
     }, 1800);
-  }
+  },
 })
 
 function recipeChart (page){
