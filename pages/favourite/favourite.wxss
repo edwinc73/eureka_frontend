@@ -1,6 +1,6 @@
 /* pages/favourite/favourite.wxss */
 .fav-info{
-  align-items: top;
+  align-items: center;
 }
 
 .recipe-info{

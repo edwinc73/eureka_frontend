@@ -13,7 +13,7 @@
     <view class="recipe-icons">
       <image wx:if="{{isOwner}}" src="../../images/icons/edit.png" mode="aspectFit" class="heart edit-icon" bindtap="goToEdit"/>
       <view class="heart-container">
-        <image wx:if="{{isFavourite}}" src="../../images/icons/heart.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
+        <image wx:if="{{isFavourite}}" src="../../images/icons/heart.png" mode="aspectFit" class="heart" bindtap="clickFavourite"/>
         <image wx:else src="../../images/icons/heartstroke.png" mode="aspectFit" class="heart" bindtap="clickFavourite"/>
       </view>
     </view>
