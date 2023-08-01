@@ -12,6 +12,9 @@ Component ({
       wx.navigateTo({
         url: `/pages/search-result/search-result?query=${query}`,
       });
+    },
+    test(e){
+      console.log(e)
     }
   }
 })
