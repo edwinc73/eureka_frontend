@@ -43,14 +43,14 @@ App({
     wx.loadFontFace({
       family:"quicksand",
       global:true,
-      source: 'url("/pages/index/Quicksand.ttf")',
+      source: 'url("https://eurekaaa.oss-cn-shanghai.aliyuncs.com/Quicksand.ttf")',
       desc: {
         style: "normal",
         weight: "normal",
         variant: "normal"
       },
       complete: (msg) => {
-        // console.log(msg)
+        console.log(msg)
       }
     })
   },
