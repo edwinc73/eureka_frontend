@@ -63,3 +63,8 @@ hr{
   color: #191011;
   opacity: 60%;
 }
+
+.error{
+  text-align: center;
+  color: pink;
+}
