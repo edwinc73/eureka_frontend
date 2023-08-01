@@ -80,3 +80,11 @@
   z-index: 1000;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.15);
 }
+
+.error{
+   margin-top: 15px;
+  text-align: center;
+}
+.cto{
+  margin-top: 5px;
+}
