@@ -16,4 +16,5 @@ image{
 input{
   margin-left: 10px;
   z-index: 2;
+  width: 100%;
 }
