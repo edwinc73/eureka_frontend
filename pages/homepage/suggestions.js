@@ -76,7 +76,7 @@ Page({
   },
   goToRecipe(e){
     wx.pageScrollTo({
-      scrollTop: 0,
+      scrollTop: 1,
       duration: 0
     })
     const id = e.currentTarget.dataset.id
