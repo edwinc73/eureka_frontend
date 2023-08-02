@@ -10,7 +10,8 @@
 }
 
 .star{
-  font-size: 12px;
+  height: 15px;
+  width: 15px;
 }
 
 .heart{
@@ -183,6 +184,11 @@ slider{
   padding: 15px;
   margin: 0 0 15px;
   box-sizing: border-box;
+}
+
+.info-star-container{
+  margin-top: 3px;
+  gap: 4px
 }
 
 .star-container{

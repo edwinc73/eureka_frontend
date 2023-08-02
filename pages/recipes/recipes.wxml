@@ -5,13 +5,15 @@
       <image src="{{photo}}" mode="aspectFill" class="recipe-image" />
       <view>
         <view class="h2">{{name}}</view>
-        <text wx:for="{{rating}}" class="star">⭐</text>
+        <view class="info-star-container flex">
+          <image class="star" wx:for="{{rating}}" src="../../images/icons/star_active.png" mode="aspectFit"/>
+        </view>
       </view>
     </view>
     <view class="recipe-icons">
       <image wx:if="{{isOwner}}" src="../../images/icons/edit.png" mode="aspectFit" class="heart edit-icon" bindtap="goToEdit"/>
       <view class="heart-container">
-        <image wx:if="{{isFavourite}}" src="../../images/icons/heart.png" mode="aspectFill" class="heart" bindtap="clickFavourite"/>
+        <image wx:if="{{isFavourite}}" src="../../images/icons/heart.png" mode="aspectFit" class="heart" bindtap="clickFavourite"/>
         <image wx:else src="../../images/icons/heartstroke.png" mode="aspectFit" class="heart" bindtap="clickFavourite"/>
       </view>
     </view>
@@ -101,7 +103,7 @@
     <view class="review-inputs-container">
       <view class="star-input flex justify-between">
       <view class="star-container flex">
-        <view class="star" wx:for="{{stars}}" wx:key="{{index}}" data-index="{{index}}" bindtap="handleStarClick">
+        <view wx:for="{{stars}}" wx:key="{{index}}" data-index="{{index}}" bindtap="handleStarClick">
         <image wx:if="{{selectedStars >= index + 1}}"src="../../images/icons/star_active.png" mode="aspectFill"/>
         <image wx:else src="../../images/icons/star_inactive.png" mode="aspectFill"/>
         </view>

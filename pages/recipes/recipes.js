@@ -336,7 +336,7 @@ function recipeChart (page){
         axisTick: false,
         axisLabel: {
           color: 'rgba(25, 16, 17, 0.5)',
-          fontSize: 12,
+          fontSize: 10,
           fontWeight: '400',
         },
       },
