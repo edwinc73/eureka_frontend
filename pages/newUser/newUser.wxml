@@ -30,7 +30,7 @@
       </view>
     </view>
     <button class="floating p" bindtap="goToNext" wx:if="{{firstPage}}">Next</button>
-    <view class="inputs page2">
+    <view class="inputs page2" wx:if="{{!firstPage}}">
       <view class="input w-100 page2-input" style="opacity: {{firstPage ? 0 : 1}}">
         <view class="flex">
           <view class="p label">Height:</view>
