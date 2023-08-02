@@ -86,7 +86,7 @@ view, .logo{
   border-radius: 50%;
   font-size: 30px;
   color: #191011;
-  font-family: "quicksand";
+  font-family: "quicksand",Helvetica;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,7 +1,7 @@
 /**app.wxss**/
 
 page{
-  font-family: "quicksand";
+  font-family: "quicksand","helvetica";
 }
 
 .container {
@@ -20,7 +20,7 @@ page{
 
 /* typography */
 .h1 .h2 .p {
-  font-family: "quicksand";
+  font-family: "quicksand","helvetica";
 }
 
 .h1{

@@ -1,7 +1,7 @@
 <view class="container w-100">
   <view class="search-box w-100">
       <image src="/images/icons/search.png" mode="aspectFit"/>
-      <input type="text" value='{{query}}' bindconfirm="searchIngredient" placeholder="Search for ingredients" placeholder-style="color:#777; font-size:16px; font-family:quicksand;" />
+      <input type="text" value='{{query}}' bindconfirm="searchIngredient" placeholder="Search for ingredients" placeholder-style="color:#777; font-size:16px; font-family:quicksand, helvetica;" />
   </view>
   <scroll-view scroll-x="true" show-scrollbar="{{false}}" class="filter w-100 flex">
     <text class="filter-item small {{activeIndex == -1 && 'active'}}" data-index="-1" data-name="all" bindtap="changeFilter" >All</text>

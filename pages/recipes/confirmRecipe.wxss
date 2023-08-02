@@ -27,7 +27,7 @@ textarea[name="name"]{
 }
 
 textarea[name="description"],textarea[name="instructions"]{
-  font-family: "quicksand";
+  font-family: "quicksand",Helvetica;
   width: 100%;
   margin: -5px;
 }

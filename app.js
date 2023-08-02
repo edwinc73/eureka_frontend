@@ -35,10 +35,7 @@ App({
         })
       }
     })
-
-
-    const system = wx.getSystemInfoSync()
-
+    
     // load font
     wx.loadFontFace({
       family:"quicksand",
@@ -48,6 +45,9 @@ App({
         style: "normal",
         weight: "normal",
         variant: "normal"
+      },
+      fail(msg){
+        console.log(msg)
       },
       complete: (msg) => {
         console.log(msg)
