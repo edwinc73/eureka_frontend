@@ -81,7 +81,7 @@ Page({
     })
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false`,
+      url: `/pages/recipes/recipes?id=${id}&showdetail=true&showreview=false&portion=0`,
     })
   }
 })
