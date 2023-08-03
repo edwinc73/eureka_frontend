@@ -13,25 +13,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    const page = this
-    wx.request({
-      url: `${app.globalData.baseUrl}/profile`,
-      header: app.globalData.header,
-      method: 'GET',
-      success: (res) => {
-        page.setData({
-          username: res.data.username,
-          age: res.data.age,
-          height: res.data.height,
-          current_weight: res.data.weight,
-          goal_weight: res.data.goal_weight,
-          bmi: (res.data.weight/ [(res.data.height/100) * (res.data.height/100)]).toFixed(1),
-          badges: res.data.badges == null ? [] : res.data.badges,
-          avatar: res.data.image
-        })
-        console.log(page.data.badges)
-      }
-    })
   },
 
   click(e) {
@@ -54,12 +35,32 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
+    const page = this
     if (typeof this.getTabBar === 'function' &&
     this.getTabBar()) {
       this.getTabBar().setData({
         selected: 2
       })
     }
+
+    wx.request({
+      url: `${app.globalData.baseUrl}/profile`,
+      header: app.globalData.header,
+      method: 'GET',
+      success: (res) => {
+        page.setData({
+          username: res.data.username,
+          age: res.data.age,
+          height: res.data.height,
+          current_weight: res.data.weight,
+          goal_weight: res.data.goal_weight,
+          bmi: (res.data.weight/ [(res.data.height/100) * (res.data.height/100)]).toFixed(1),
+          badges: res.data.badges == null ? [] : res.data.badges,
+          avatar: res.data.image
+        })
+        console.log(page.data.badges)
+      }
+    })
   },
 
   /**
