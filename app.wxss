@@ -12,6 +12,7 @@ page{
   justify-content: space-between;
   padding: 0 15px;
   box-sizing: border-box;
+  width: 100%;
 } 
 
 .w-100{

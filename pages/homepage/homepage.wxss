@@ -2,6 +2,7 @@
 page{
   font-family: "quicksand",Helvetica ;
   background: #fff;
+  overflow-x: hidden;
 } 
 
 .banner{
@@ -19,6 +20,8 @@ page{
 
 .banner-container{  
   height: 200px;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
 }
 
