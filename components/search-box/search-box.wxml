@@ -1,4 +1,4 @@
 <view class="search-box">
   <image src="/images/icons/search.png" mode="aspectFit"/>
-  <input type="text" value='{{query}}' bindconfirm="jumpPage" placeholder="{{placeholder}}" placeholder-style="color:#777; font-size:16px; font-family:quicksand" bindtap="test"/>
+  <input type="text" value='{{query}}' bindconfirm="jumpPage" placeholder="{{placeholder}}" placeholder-style="color:#777; font-size:16px; font-family:quicksand, helvetica" bindtap="test"/>
 </view>

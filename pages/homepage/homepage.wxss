@@ -1,6 +1,6 @@
 /* pages/homepage/homepage.wxss */
 page{
-  font-family: "quicksand";
+  font-family: "quicksand",Helvetica ;
   background: #fff;
 } 
 

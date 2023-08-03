@@ -31,7 +31,7 @@
   <view class="achievements w-100">
     <text class="p">Achievements</text>
     <view class="text-small text-light empty" wx:if="{{badges.length == 0}}">
-      Oops, no yet yet.
+      Oops, no achievements yet.
       <view class="oops-link" bindtap="goToAddRecipe">Hint: Add your own recipe!</view>
     </view>
     <view class="badge-grid">
