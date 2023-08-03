@@ -139,6 +139,7 @@ Page({
 
   },
   switchTab(e){
+    const page = this
     const state = e.currentTarget.dataset.value
     const animation = wx.createAnimation({
       duration: 300, 
@@ -217,8 +218,8 @@ Page({
           }
         },
         success(res){
-          wx.redirectTo({
-            url: `/pages/recipes/recipes?id=${id}&showdetail=false&showreview=true`
+          wx.navigateTo({
+            url: `/pages/recipes/recipes?id=${id}&showdetail=false&showreview=true&portion=0`
           })
         }
       })

@@ -5,7 +5,7 @@ page{
 } 
 
 .banner{
-  background: url("https://eurekaaa.oss-cn-shanghai.aliyuncs.com/72m0ozm43g2lkh2ozncwvdv1b8zx");
+  background: url("https://eurekaaa.oss-cn-shanghai.aliyuncs.com/k4xnv47rnwkso987mr3z7uqddlp0");
   width: 100%;
   background-size: cover;
   background-position-y: -70px;
@@ -16,6 +16,7 @@ page{
   display: flex;
   align-items:flex-end;
 }
+
 .banner-container{  
   height: 200px;
   display: flex;
