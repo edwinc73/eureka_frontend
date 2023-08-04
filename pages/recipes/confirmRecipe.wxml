@@ -2,7 +2,7 @@
   <form class="post w-100" bindsubmit="submitRecipe">
     <view class="images-container">
       <view class="flex justify-between align-center">
-        <view class="p text-left">Images *</view>
+        <view class="p text-left">Image *</view>
         <view class="small text-light">{{tempFiles.length}}/1</view>
       </view>
         <scroll-view class="image-gallery" scroll-x="true" style="width: 100%">
